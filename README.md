@@ -1,29 +1,8 @@
-# README #
+# CurveManager #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Herramienta para poder utilizar el sistema de curvas/bootstrap de QuantLib junto con JSON
 
-### What is this repository for? ###
+## Compilacion ##
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+    cmake .. -DCMAKE_PREFIX_PATH='C:\Users\bloomberg\Desktop\Desarrollo\builds' -DCMAKE_INSTALL_PREFIX='C:\Users\bloomberg\Desktop\Desarrollo\builds\curvemanager'
+    cmake --build . --config Release --target install
