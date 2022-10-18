@@ -1,27 +1,49 @@
-#pragma once
+
 #include <curvemanager.hpp>
 #include <parser.hpp>
+#include <schemas/termstructures/rateindexschema.hpp>
+#include <schemas/termstructures/yieldtermstructureschema.hpp>
 
 namespace CurveManager {
-	
-	CurveBuilder::CurveBuilder(const json& data) : data_(data) {
+		
+	CurveBuilder::CurveBuilder(const json& data, MarketStore& marketStore): data_(data), marketStore_(marketStore) {
 		if (!data_.empty())
-			preprocessData(data_);
+			preprocessData();
 		buildAllCurves();
 	};
 
-	void CurveBuilder::preprocessData(const json& data) {
-		data_ = data;
-		curveConfigs_.clear();
-		indexConfigs_.clear();
-		for (const auto& curve : data_.at("CURVES")) {
+	void CurveBuilder::preprocessData() {		
+		Schema<YieldTermStructure> curveSchema;
+		for (auto& curve : data_.at("CURVES")) {
+			try
+			{
+				curveSchema.validate(curve);
+			}
+			catch (const std::exception& e)
+			{
+				std::string error= e.what();
+				throw std::runtime_error(error);
+			}			
+			curveSchema.setDefaultValues(curve);
 			const std::string& name = curve.at("NAME");
 			curveConfigs_[name] = curve;
 			RelinkableHandle<YieldTermStructure> handle;
 			marketStore_.addCurveHandle(name, handle);
 		}
-		for (const auto& index : data_.at("INDEX")) {
-			const std::string& name = index.at("NAME");
+		Schema<IborIndex> indexSchema;
+		for (auto& index : data_.at("INDICES")) {
+			try
+			{
+				indexSchema.validate(index);
+			}
+			catch (const std::exception& e)
+			{
+				std::string error = e.what();
+				throw std::runtime_error(error);
+			}
+			indexSchema.setDefaultValues(index);
+
+			const std::string& name = index.at("NAME");			
 			indexConfigs_[name] = index;
 			buildIndex(name);
 		}
@@ -34,36 +56,63 @@ namespace CurveManager {
 			buildPiecewiseCurve(name, curve);
 	};
 
-	void CurveBuilder::buildCurve(const std::string& curveName, const json& curveParams) {
-		const std::string& curveType = curveParams.at("TYPE");
-		if (curveType == "DISCOUNTCURVE") {
-			buildDiscountCurve(curveName, curveParams);
-		}
-		else if (curveType == "PIECEWISECURVE") {
-			buildPiecewiseCurve(curveName, curveParams);
-		}				
-	}
-
-	void CurveBuilder::buildPiecewiseCurve(const std::string& curveName, const json& curveParams) {
-		if (!marketStore_.hasCurve(curveName)) {
-			auto helpers = buildRateHelpers(curveParams.at("RATEHELPERS"), curveName);
-
-			DayCounter dayCounter = parse<DayCounter>(curveParams.at("DAYCOUNTER"));
+	void CurveBuilder::buildCurve(const std::string& curveName, const json& curveParams) {		
+		if (!marketStore_.hasCurve(curveName)) {	
+			const std::string& curveType = curveParams.at("TYPE");
+			boost::shared_ptr<YieldTermStructure> curvePtr;
+			if (curveType == "DISCOUNT") {
+				curvePtr = buildDiscountCurve(curveName, curveParams);
+			}
+			else if (curveType == "PIECEWISE") {
+				curvePtr = buildPiecewiseCurve(curveName, curveParams);
+			}
+			else if (curveType == "FLATFORWARD") {
+				curvePtr = buildFlatForwardCurve(curveName, curveParams);
+			}
 			bool enableExtrapolation = curveParams.at("ENABLEEXTRAPOLATION");
-
-			Date qlRefDate = Settings::instance().evaluationDate();
-			boost::shared_ptr<YieldTermStructure> curvePtr(new LogLinearPiecewiseCurve(qlRefDate, helpers, dayCounter));
 			if (enableExtrapolation)
 				curvePtr->enableExtrapolation();
-
 			RelinkableHandle<YieldTermStructure>& handle = marketStore_.getCurveHandle(curveName);
 			handle.linkTo(curvePtr);
 
 			curvePtr->unregisterWith(Settings::instance().evaluationDate());
 			marketStore_.addCurve(curveName, curvePtr);
 		}
+	}
+
+	boost::shared_ptr<YieldTermStructure> CurveBuilder::buildPiecewiseCurve(const std::string& curveName, const json& curveParams) {		
+		auto helpers = buildRateHelpers(curveParams.at("RATEHELPERS"), curveName);
+		DayCounter dayCounter = parse<DayCounter>(curveParams.at("DAYCOUNTER"));			
+		Date qlRefDate = Settings::instance().evaluationDate();
+		boost::shared_ptr<YieldTermStructure> curvePtr(new LogLinearPiecewiseCurve(qlRefDate, helpers, dayCounter));
+		return curvePtr;		
 	};
 	
+	boost::shared_ptr<YieldTermStructure> CurveBuilder::buildDiscountCurve(const std::string& curveName, const json& curveParams) {
+		const json& nodes = curveParams.at("NODES");
+		std::vector<Date> dates;
+		std::vector<double> dfs;
+		for (auto& [k, v] : nodes.items()) {
+			dates.push_back(parse<Date>(k));
+			dfs.push_back(v);
+		}
+		DayCounter dayCounter = parse<DayCounter>(curveParams.at("DAYCOUNTER"));
+		boost::shared_ptr<YieldTermStructure> curvePtr(new DiscountCurve(dates, dfs, dayCounter));
+		return curvePtr;
+	};
+
+	
+	boost::shared_ptr<YieldTermStructure> CurveBuilder::buildFlatForwardCurve(const std::string& curveName, const json& curveParams) {
+		DayCounter dayCounter = parse<DayCounter>(curveParams.at("DAYCOUNTER"));
+		Compounding compounding = parse<Compounding>(curveParams.at("COMPOUNDING"));
+		Frequency frequency = parse<Frequency>(curveParams.at("FREQUENCY"));
+		double rate = curveParams.at("RATE");
+		Date qlRefDate = Settings::instance().evaluationDate();
+		boost::shared_ptr<YieldTermStructure> curvePtr(new FlatForward(qlRefDate, rate, dayCounter, compounding, frequency));
+		return curvePtr;
+	};
+	
+
 	void CurveBuilder::updateQuotes(const json& prices) {
 		for (const auto& [ticker, price] : prices.items())
 			if (!marketStore_.hasQuote(ticker)) throw std::runtime_error("No quote found for " + ticker);
@@ -157,7 +206,7 @@ namespace CurveManager {
 
 	boost::shared_ptr<IborIndex> CurveBuilder::buildIndex(const std::string& name) {
 		if (!marketStore_.hasIndex(name))
-		{
+		{			
 			const json& config = indexConfigs_.at(name);
 			const std::string& type = config.at("TYPE");
 			Period tenor = parse<Period>(config.at("TENOR"));
@@ -187,4 +236,6 @@ namespace CurveManager {
 		}
 		return marketStore_.getIndex(name);
 	};
+
+	
 }

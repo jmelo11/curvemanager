@@ -40,7 +40,6 @@ namespace CurveManager
 	{
 		auto static initialize(const json& params, F0& priceGetter)
 		{
-
 			SETVAR(params, DayCounter, DAYCOUNTER);
 			SETVAR(params, Calendar, CALENDAR);
 

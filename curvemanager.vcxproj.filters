@@ -15,7 +15,7 @@
     <ClInclude Include="include\marketstore.hpp">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\standalonemethods.hpp">
+    <ClInclude Include="include\curvemethods.hpp">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\jsontoobject.hpp">

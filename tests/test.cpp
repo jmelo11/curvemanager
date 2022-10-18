@@ -1,4 +1,16 @@
 #include "pch.h"
-#include <nlohmann/json-schema.hpp>
+#include <curvemanager.hpp>
 
-TEST() {}
+using namespace CurveManager;
+
+
+TEST(DiscountCurve, CurveManager) {
+	json curveData = {};
+	MarketStore store;
+	CurveBuilder build(curveData, store);
+	auto curve = store.getCurve("SOFR");
+		
+}
+TEST(FlatForwardCurve, CurveManager) {}
+TEST(PiecewiseCurve, CurveManager) {}
+TEST(MultiCurve, CurveManager) {}
