@@ -4,8 +4,8 @@
 #include <map>
 #include <stdexcept>
 
-#include <marketstore.hpp>
-#include <jsontoobject.hpp>
+#include <curvemanager/marketstore.hpp>
+#include <curvemanager/jsontoobject.hpp>
 
 namespace CurveManager {
 	
@@ -13,10 +13,11 @@ namespace CurveManager {
 	public:
 		CurveBuilder(const json& data, MarketStore& marketStore);
 		
+		void build();
+		
 		void updateQuotes(const json& prices);
-							
+				
 	private:
-		void buildAllCurves();
 		
 		void preprocessData();
 
@@ -29,7 +30,6 @@ namespace CurveManager {
 
 		boost::shared_ptr<IborIndex> buildIndex(const std::string& name);
 
-		/* this method gets the config for each curve*/
 		json data_;
 		MarketStore& marketStore_;
 		std::unordered_map<std::string, json> curveConfigs_;

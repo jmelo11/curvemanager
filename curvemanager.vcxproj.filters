@@ -9,25 +9,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\curvemanager.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\marketstore.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\curvemethods.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\jsontoobject.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\curvemanager.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\marketstore.cpp">
       <Filter>src</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\curvemanager\curvemanager.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\curvemanager\jsontoobject.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\curvemanager\marketstore.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

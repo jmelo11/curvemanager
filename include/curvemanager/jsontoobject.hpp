@@ -1,16 +1,15 @@
 #pragma once
 
-#include <parser.hpp>
-#include <schemas/termstructures/bootstrapcurveschema.hpp>
-#include <schemas/ratehelpers/depositratehelperschema.hpp>
-#include <schemas/ratehelpers/bondratehelperschema.hpp>
-#include <schemas/ratehelpers/fxswapratehelperschema.hpp>
-#include <schemas/ratehelpers/swapratehelperschema.hpp>
-#include <schemas/ratehelpers/oisratehelperschema.hpp>
-#include <schemas/ratehelpers/tenorbasisratehelperschema.hpp>
-#include <schemas/ratehelpers/fixfloatxccyratehelperschema.hpp>
-#include <schemas/ratehelpers/xccybasisratehelperschema.hpp>
+#include <qlp/parser.hpp>
 
+#include <qlp/schemas/ratehelpers/bondratehelperschema.hpp>
+#include <qlp/schemas/ratehelpers/depositratehelperschema.hpp>
+#include <qlp/schemas/ratehelpers/oisratehelperschema.hpp>
+#include <qlp/schemas/ratehelpers/swapratehelperschema.hpp>
+#include <qlp/schemas/ratehelpers/fixfloatxccyratehelperschema.hpp>
+#include <qlp/schemas/ratehelpers/fxswapratehelperschema.hpp>
+#include <qlp/schemas/ratehelpers/tenorbasisratehelperschema.hpp>
+#include <qlp/schemas/ratehelpers/xccybasisratehelperschema.hpp>
 
 #define SETVAR(dict, dataType, name) dataType name = parse<dataType>(dict.at(#name))
 
@@ -19,6 +18,7 @@ namespace CurveManager
 	using namespace QuantLib;
 	using namespace QuantExt;
 	using namespace QuantLibParser;
+	using json = nlohmann::json;
 	
 	static bool has(const json& j, const std::string& key)
 	{
@@ -43,8 +43,8 @@ namespace CurveManager
 			SETVAR(params, DayCounter, DAYCOUNTER);
 			SETVAR(params, Calendar, CALENDAR);
 
-			SETVAR(params, int, FIXINGDAYS);
-			SETVAR(params, bool, ENDOFMONTH);
+			double FIXINGDAYS = params.at("FIXINGDAYS");
+			bool ENDOFMONTH = params.at("ENDOFMONTH");
 			SETVAR(params, BusinessDayConvention, CONVENTION);
 
 			// non-defaults
@@ -63,10 +63,9 @@ namespace CurveManager
 		{
 
 			SETVAR(params, Calendar, CALENDAR);
-
-			SETVAR(params, int, FIXINGDAYS);
-			SETVAR(params, bool, ENDOFMONTH);
-			SETVAR(params, bool, BASECURRENCYCOLLATERAL);
+			double FIXINGDAYS = params.at("FIXINGDAYS");
+			bool ENDOFMONTH = params.at("ENDOFMONTH");
+			bool BASECURRENCYCOLLATERAL = params.at("BASECURRENCYCOLLATERAL");
 
 			SETVAR(params, BusinessDayConvention, CONVENTION);
 
@@ -113,12 +112,10 @@ namespace CurveManager
 			SETVAR(params, DayCounter, COUPONDAYCOUNTER);
 			SETVAR(params, DayCounter, IRRDAYCOUNTER);
 
-			SETVAR(params, bool, ENDOFMONTH);
-			SETVAR(params, int, FIXINGDAYS);
-
-			SETVAR(params, int, SETTLEMENTDAYS);
-			SETVAR(params, double, FACEAMOUNT);
-			SETVAR(params, double, COUPON);
+			bool ENDOFMONTH = params.at("ENDOFMONTH");
+			double SETTLEMENTDAYS = params.at("SETTLEMENTDAYS");
+			double FACEAMOUNT = params.at("FACEAMOUNT");
+			double COUPON = params.at("COUPON");
 
 			Date STARTDATE;
 			if (has(params, "STARTDATE")) {
@@ -161,11 +158,13 @@ namespace CurveManager
 			SETVAR(params, Calendar, CALENDAR);
 			SETVAR(params, BusinessDayConvention, CONVENTION);
 
-			SETVAR(params, bool, ENDOFMONTH);
 			SETVAR(params, Frequency, FREQUENCY);
-			SETVAR(params, double, SPREAD);
 
-			SETVAR(params, int, SETTLEMENTDAYS);
+			bool ENDOFMONTH = params.at("ENDOFMONTH");
+			double SPREAD = params.at("SPREAD");
+			int SETTLEMENTDAYS = params.at("SETTLEMENTDAYS");
+	
+
 			SETVAR(params, Period, FWDSTART);
 			SETVAR(params, Period, TENOR);
 
@@ -192,15 +191,16 @@ namespace CurveManager
 			SETVAR(params, Calendar, CALENDAR);
 			SETVAR(params, BusinessDayConvention, CONVENTION);
 
-			SETVAR(params, bool, ENDOFMONTH);
 			SETVAR(params, Frequency, FREQUENCY);
-			SETVAR(params, double, SPREAD);
+			
+			bool ENDOFMONTH = params.at("ENDOFMONTH");
+			double SPREAD = params.at("SPREAD");
+			int SETTLEMENTDAYS = params.at("SETTLEMENTDAYS");
+			int PAYMENTLAG = params.at("PAYMENTLAG");
+			bool TELESCOPICVALUEDATES = params.at("TELESCOPICVALUEDATES");
 
-			SETVAR(params, int, SETTLEMENTDAYS); // 2
 			SETVAR(params, Period, FWDSTART);;
 
-			SETVAR(params, int, PAYMENTLAG); // 2
-			SETVAR(params, bool, TELESCOPICVALUEDATES);
 			SETVAR(params, Period, TENOR);
 
 			RelinkableHandle<YieldTermStructure> DISCOUNTINGCURVE = has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) : RelinkableHandle<YieldTermStructure>();
@@ -223,11 +223,13 @@ namespace CurveManager
 			SETVAR(params, Calendar, CALENDAR);
 			SETVAR(params, BusinessDayConvention, CONVENTION);
 
-			SETVAR(params, bool, ENDOFMONTH);
 			SETVAR(params, Frequency, FREQUENCY);
-			SETVAR(params, int, SETTLEMENTDAYS);
+			
+			bool ENDOFMONTH = params.at("ENDOFMONTH");
+			double SPREAD = params.at("SPREAD");
+			int SETTLEMENTDAYS = params.at("SETTLEMENTDAYS");
+			
 
-			SETVAR(params, double, SPREAD);
 			SETVAR(params, Period, TENOR);
 			SETVAR(params, Currency, CURRENCY);
 
@@ -248,7 +250,8 @@ namespace CurveManager
 		{
 
 			SETVAR(params, Period, TENOR);
-			SETVAR(params, bool, SPREADONSHORT);
+
+			bool SPREADONSHORT = params.at("SPREADONSHORT");
 
 			RelinkableHandle<YieldTermStructure> DISCOUNTINGCURVE = has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) : RelinkableHandle<YieldTermStructure>();
 
@@ -286,12 +289,11 @@ namespace CurveManager
 
 			SETVAR(params, Calendar, CALENDAR);
 			SETVAR(params, BusinessDayConvention, CONVENTION);
-
-			SETVAR(params, bool, ENDOFMONTH);
-			SETVAR(params, bool, FLATISDOMESTIC);
-			SETVAR(params, int, SETTLEMENTDAYS);
 			SETVAR(params, Period, TENOR);
 
+			bool ENDOFMONTH = params.at("ENDOFMONTH");
+			bool FLATISDOMESTIC = params.at("FLATISDOMESTIC");
+			int SETTLEMENTDAYS = params.at("SETTLEMENTDAYS");
 
 			auto SPREAD = priceGetter(params.at("SPREAD"), params.at("SPREADTICKER"));
 
@@ -312,7 +314,11 @@ namespace CurveManager
 	};
 
 	template<typename T, typename ...Fs>
-	auto JsonToObjectWrapper(const json& params, Fs&... getters) {		
-		return JsonToObject<T, Fs...>::initialize(params, getters...);
+	auto JsonToObjectWrapper(const json& params, Fs&... getters) {	
+		json givenParams = params;
+		Schema<T> schema;
+		schema.validate(givenParams);
+		schema.setDefaultValues(givenParams);
+		return JsonToObject<T, Fs...>::initialize(givenParams, getters...);
 	}
 }

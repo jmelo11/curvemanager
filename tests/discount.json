@@ -1,0 +1,36 @@
+{
+  "REFDATE": "28082022",
+  "CURVES": [
+    {
+      "TYPE": "DISCOUNT",
+      "NAME": "SOFR",
+      "DAYCOUNTER": "ACT360",
+      "ENABLEEXTRAPOLATION": true,
+      "NODES": [
+        {
+          "DATE": "28082022",
+          "VALUE": 1
+        },
+        {
+          "DATE": "28082023",
+          "VALUE": 0.99
+        },
+        {
+          "DATE": "28082024",
+          "VALUE": 0.98
+        }
+      ]
+    }
+  ],
+  "INDICES": [
+    {
+      "NAME": "SOFR",
+      "TYPE": "OVERNIGHT",
+      "TENOR": "1D",
+      "DAYCOUNTER": "ACT360",
+      "CURRENCY": "USD",
+      "FIXINGDAYS": 0.0,
+      "CALENDAR": "USA"
+    }
+  ]
+}

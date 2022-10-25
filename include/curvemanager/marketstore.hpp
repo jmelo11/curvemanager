@@ -1,4 +1,5 @@
 #pragma once
+
 #include <map>
 #include <string>
 #include <unordered_map>
@@ -6,13 +7,13 @@
 #include <ql/quote.hpp>
 #include <ql/handle.hpp>
 #include <ql/termstructures/yieldtermstructure.hpp>
-#include <ql/termstructures/yield/piecewiseyieldcurve.hpp>
 #include <ql/indexes/iborindex.hpp>
+#include <nlohmann/json.hpp>
 
 namespace CurveManager {
 	using namespace QuantLib;
-	using LogLinearPiecewiseCurve = PiecewiseYieldCurve<Discount, LogLinear>;
-
+	using json = nlohmann::json;
+	
 	class MarketStore {
 
 	public:
@@ -39,6 +40,8 @@ namespace CurveManager {
 
 		std::vector<std::string> allCurves() const;
 		std::vector<std::string> allIndices() const;
+
+		json results(const std::vector<std::string>& dates) const;
 
 	private:
 

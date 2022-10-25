@@ -1,46 +1,37 @@
+#include <curvemanager/curvemanager.hpp>
+#include <qlp/parser.hpp>
+#include <qlp/schemas/termstructures/rateindexschema.hpp>
+#include <qlp/schemas/termstructures/yieldtermstructureschema.hpp>
+#include <qlp/schemas/requests/curvebuilderrequest.hpp>
+#include <qlp/schemas/requests/updatequoterequest.hpp>
 
-#include <curvemanager.hpp>
-#include <parser.hpp>
-#include <schemas/termstructures/rateindexschema.hpp>
-#include <schemas/termstructures/yieldtermstructureschema.hpp>
+#include <ql/termstructures/yield/piecewiseyieldcurve.hpp>
+#include <ql/termstructures/yield/discountcurve.hpp>
+#include <ql/termstructures/yield/flatforward.hpp>
 
 namespace CurveManager {
 		
 	CurveBuilder::CurveBuilder(const json& data, MarketStore& marketStore): data_(data), marketStore_(marketStore) {
+		Schema<CurveBuilderRequest> schema;
+		schema.validate(data);
 		if (!data_.empty())
 			preprocessData();
-		buildAllCurves();
 	};
 
 	void CurveBuilder::preprocessData() {		
 		Schema<YieldTermStructure> curveSchema;
 		for (auto& curve : data_.at("CURVES")) {
-			try
-			{
-				curveSchema.validate(curve);
-			}
-			catch (const std::exception& e)
-			{
-				std::string error= e.what();
-				throw std::runtime_error(error);
-			}			
+			
+			curveSchema.validate(curve);
 			curveSchema.setDefaultValues(curve);
 			const std::string& name = curve.at("NAME");
 			curveConfigs_[name] = curve;
 			RelinkableHandle<YieldTermStructure> handle;
 			marketStore_.addCurveHandle(name, handle);
 		}
-		Schema<IborIndex> indexSchema;
+		Schema<InterestRateIndex> indexSchema;
 		for (auto& index : data_.at("INDICES")) {
-			try
-			{
-				indexSchema.validate(index);
-			}
-			catch (const std::exception& e)
-			{
-				std::string error = e.what();
-				throw std::runtime_error(error);
-			}
+			indexSchema.validate(index);
 			indexSchema.setDefaultValues(index);
 
 			const std::string& name = index.at("NAME");			
@@ -49,11 +40,11 @@ namespace CurveManager {
 		}
 	}
 
-	void CurveBuilder::buildAllCurves() {
+	void CurveBuilder::build() {
 		const std::string& refDate = data_.at("REFDATE");
 		Settings::instance().evaluationDate() = parse<Date>(refDate);
 		for (const auto& [name, curve] : curveConfigs_)
-			buildPiecewiseCurve(name, curve);
+			buildCurve(name, curve);
 	};
 
 	void CurveBuilder::buildCurve(const std::string& curveName, const json& curveParams) {		
@@ -80,11 +71,12 @@ namespace CurveManager {
 		}
 	}
 
-	boost::shared_ptr<YieldTermStructure> CurveBuilder::buildPiecewiseCurve(const std::string& curveName, const json& curveParams) {		
+	boost::shared_ptr<YieldTermStructure> CurveBuilder::buildPiecewiseCurve(const std::string& curveName, const json& curveParams) {
+
 		auto helpers = buildRateHelpers(curveParams.at("RATEHELPERS"), curveName);
 		DayCounter dayCounter = parse<DayCounter>(curveParams.at("DAYCOUNTER"));			
 		Date qlRefDate = Settings::instance().evaluationDate();
-		boost::shared_ptr<YieldTermStructure> curvePtr(new LogLinearPiecewiseCurve(qlRefDate, helpers, dayCounter));
+		boost::shared_ptr<YieldTermStructure> curvePtr(new PiecewiseYieldCurve<Discount, LogLinear>(qlRefDate, helpers, dayCounter));
 		return curvePtr;		
 	};
 	
@@ -92,28 +84,28 @@ namespace CurveManager {
 		const json& nodes = curveParams.at("NODES");
 		std::vector<Date> dates;
 		std::vector<double> dfs;
-		for (auto& [k, v] : nodes.items()) {
-			dates.push_back(parse<Date>(k));
-			dfs.push_back(v);
+		for (const auto& node : nodes) {
+			dates.push_back(parse<Date>(node.at("DATE")));
+			dfs.push_back(node.at("VALUE"));
 		}
 		DayCounter dayCounter = parse<DayCounter>(curveParams.at("DAYCOUNTER"));
 		boost::shared_ptr<YieldTermStructure> curvePtr(new DiscountCurve(dates, dfs, dayCounter));
 		return curvePtr;
 	};
-
 	
 	boost::shared_ptr<YieldTermStructure> CurveBuilder::buildFlatForwardCurve(const std::string& curveName, const json& curveParams) {
 		DayCounter dayCounter = parse<DayCounter>(curveParams.at("DAYCOUNTER"));
 		Compounding compounding = parse<Compounding>(curveParams.at("COMPOUNDING"));
 		Frequency frequency = parse<Frequency>(curveParams.at("FREQUENCY"));
 		double rate = curveParams.at("RATE");
-		Date qlRefDate = Settings::instance().evaluationDate();
-		boost::shared_ptr<YieldTermStructure> curvePtr(new FlatForward(qlRefDate, rate, dayCounter, compounding, frequency));
+		Date qlRefDate = Settings::instance().evaluationDate();		
+		boost::shared_ptr<YieldTermStructure> curvePtr(new FlatForward(qlRefDate, rate, dayCounter, compounding, frequency));		
 		return curvePtr;
 	};
 	
-
 	void CurveBuilder::updateQuotes(const json& prices) {
+		Schema<UpdateQuoteRequest> schema;
+		schema.validate(prices);
 		for (const auto& [ticker, price] : prices.items())
 			if (!marketStore_.hasQuote(ticker)) throw std::runtime_error("No quote found for " + ticker);
 
@@ -237,5 +229,4 @@ namespace CurveManager {
 		return marketStore_.getIndex(name);
 	};
 
-	
 }

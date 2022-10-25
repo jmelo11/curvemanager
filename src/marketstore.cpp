@@ -1,7 +1,10 @@
-#pragma once
-#include <marketstore.hpp>
+
+#include <curvemanager/marketstore.hpp>
+#include <ql/termstructures/yield/piecewiseyieldcurve.hpp>
+#include <qlp/parser.hpp>
 
 namespace CurveManager {
+	
 
 	MarketStore::MarketStore() {};
 
@@ -70,8 +73,9 @@ namespace CurveManager {
 	}
 	
 	void MarketStore::freeze() {
+
 		for (const auto& [name, curve] : curveMap_) {
-			auto ptr = boost::dynamic_pointer_cast<LogLinearPiecewiseCurve>(curve);
+			auto ptr = boost::dynamic_pointer_cast<PiecewiseYieldCurve<Discount, LogLinear>>(curve);
 			if (ptr)
 				ptr->freeze();
 		}
@@ -80,7 +84,7 @@ namespace CurveManager {
 
 	void MarketStore::unfreeze() {
 		for (const auto& [name, curve] : curveMap_) {
-			auto ptr = boost::dynamic_pointer_cast<LogLinearPiecewiseCurve>(curve);
+			auto ptr = boost::dynamic_pointer_cast<PiecewiseYieldCurve<Discount, LogLinear>>(curve);
 			if (ptr)
 				ptr->unfreeze();
 		}
@@ -98,6 +102,26 @@ namespace CurveManager {
 		for (const auto& [name, index] : indexMap_)
 			names.push_back(name);
 		return names;
+	}
+
+	json MarketStore::results(const std::vector<std::string>& dates) const {
+		std::vector<Date> qlDates;
+		json data;
+		for (const auto& date : dates)
+			qlDates.push_back(QuantLibParser::parse<Date>(date));
+		
+		auto curves = allCurves();
+		for (const auto& curve : curves) {
+			auto qlCurve = getCurve(curve);
+			std::vector<double> values;
+			for (const auto& date : qlDates) {
+				values.push_back(qlCurve->discount(date));
+			}
+
+			data[curve]["DATES"] = dates;
+			data[curve]["VALUES"] = values;
+		}
+		return data;
 	}
 }
 

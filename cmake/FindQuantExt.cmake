@@ -1,0 +1,5 @@
+find_library(QLE_LIBRARY NAMES QuantExt)
+find_path(QLE_INCLUDE_DIR NAMES qle)
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(QuantExt DEFAULT_MSG QLE_LIBRARY QLE_INCLUDE_DIR)

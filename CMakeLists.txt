@@ -5,29 +5,54 @@ project(curvemanager VERSION 1.0 LANGUAGES CXX)
 include(GNUInstallDirs) #despues de definir el proyecto
 
 #target is curvemanager, and use include a src folders
-add_library(curvemanager STATIC include src)
+
+file(GLOB SOURCES "src/*.cpp" 
+                  "src/utils/*.cpp")
+
+file(GLOB INCLUDES "include/*.hpp" "include/curvemanager/*.hpp")
+
+if (MSVC)
+        add_library(curvemanager STATIC ${INCLUDES} ${SOURCES})
+else()
+        add_library(curvemanager STATIC ${INCLUDES} ${SOURCES})
+endif (MSVC)
 
 #bc using <> instead of ""
-target_include_directories(curvemanager PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src/schemas)
+target_include_directories(curvemanager PUBLIC  
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>  
+    $<INSTALL_INTERFACE:include>
+)
+get_directory_property(_vars_before VARIABLES)
 
 
-set(Boost_INCLUDE_DIR "C:/Users/bloomberg/Desktop/Desarrollo/builds/boost")
+include("cmake/FindQuantExt.cmake")
 find_package(Boost REQUIRED)
-find_package(nlohmann_json REQUIRED)
-find_package(QuantLibParser REQUIRED)
 find_package(QuantLib REQUIRED)
+find_package(QuantLibParser REQUIRED)
+find_package(nlohmann_json REQUIRED)
 find_package(nlohmann_json_schema_validator REQUIRED)
-
-# add quantext
-target_include_directories(curvemanager PUBLIC "$ENV{QLE_PATH}/include")
-target_link_libraries(curvemanager PUBLIC "$ENV{QLE_PATH}/lib/QuantExt-x64-mt.lib")
 
 # link libraries
 target_link_libraries(curvemanager PUBLIC QuantLib::QuantLib)
 target_link_libraries(curvemanager PUBLIC Boost::boost)
 target_link_libraries(curvemanager PUBLIC nlohmann_json::nlohmann_json)
-target_link_libraries(curvemanager PUBLIC QuantLibParser::QuantLibParser)
 target_link_libraries(curvemanager PUBLIC nlohmann_json_schema_validator)
+target_link_libraries(curvemanager PUBLIC QuantLibParser::QuantLibParser)
+
+target_include_directories(curvemanager PUBLIC ${CMAKE_INCLUDE_PATH})
+get_directory_property(_vars VARIABLES)
+
+list(REMOVE_ITEM _vars _vars_before ${_vars_before})
+foreach(_var IN LISTS _vars)
+    message(STATUS "${_var} = ${${_var}}")
+endforeach()
+
+
+get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+foreach(dir ${dirs})
+  message(STATUS "dir='${dir}'")
+endforeach()
+
 
 #install paths
 include(CMakePackageConfigHelpers)

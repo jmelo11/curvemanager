@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLib\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantExt\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\boost;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLibParser\include;$(SolutionDir)include;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json_schema_validator\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLib\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantExt\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\boost;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLibParser\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json_schema_validator\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\bloomberg\Desktop\Desarrollo\builds\boost\lib;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLib\lib;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantExt\lib;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLibParser\lib;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json_schema_validator\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>$(VC_SourcePath);$(SolutionDir)src</SourcePath>
   </PropertyGroup>
@@ -115,6 +115,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,14 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\curvemanager.hpp" />
-    <ClInclude Include="include\marketstore.hpp" />
-    <ClInclude Include="include\curvemethods.hpp" />
-    <ClInclude Include="include\jsontoobject.hpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\curvemanager.cpp" />
     <ClCompile Include="src\marketstore.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\curvemanager\curvemanager.hpp" />
+    <ClInclude Include="include\curvemanager\jsontoobject.hpp" />
+    <ClInclude Include="include\curvemanager\marketstore.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -56,3 +56,5 @@ Thumbs.db
 /x64/Release
 /x64/Debug
 /tests/x64
+/build
+/python/notebooks

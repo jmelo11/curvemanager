@@ -1,0 +1,25 @@
+{
+  "REFDATE": "28082022",
+  "CURVES": [
+    {
+      "TYPE": "FLATFORWARD",
+      "NAME": "SOFR",
+      "DAYCOUNTER": "ACT360",
+      "RATE": 0.03,
+      "COMPOUNDING": "SIMPLE",
+      "FREQUENCY": "ANNUAL",
+      "ENABLEEXTRAPOLATION": true
+    }
+  ],
+  "INDICES": [
+    {
+      "NAME": "SOFR",
+      "TYPE": "OVERNIGHT",
+      "TENOR": "1D",
+      "DAYCOUNTER": "ACT360",
+      "CURRENCY": "USD",
+      "FIXINGDAYS": 0.0,
+      "CALENDAR": "USA"
+    }
+  ]
+}

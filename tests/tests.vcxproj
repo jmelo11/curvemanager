@@ -33,7 +33,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLib\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantExt\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\boost;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLibParser\include;$(SolutionDir)include;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json_schema_validator\include;C:\Users\bloomberg\Desktop\Desarrollo\bankingItau\libs\curvemanager\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLib\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantExt\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\boost;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLibParser\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json\include;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json_schema_validator\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\bloomberg\Desktop\Desarrollo\builds\boost\lib;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLib\lib;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantExt\lib;C:\Users\bloomberg\Desktop\Desarrollo\builds\QuantLibParser\lib;C:\Users\bloomberg\Desktop\Desarrollo\builds\nlohmann_json_schema_validator\lib;C:\Users\bloomberg\Desktop\Desarrollo\bankingItau\libs\curvemanager\$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -51,11 +51,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="testhelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="discount.json" />
+    <None Include="flatforward.json" />
     <None Include="packages.config" />
-    <None Include="sofr.json" />
+    <None Include="piecewise.json" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -86,11 +87,13 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>QuantLib-x64-mt.lib;QuantExt-x64-mt.lib;curvemanager.lib;nlohmann_json_schema_validator.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>QuantLib-x64-mt-gd.lib;QuantExt-x64-mt-gd.lib;curvemanager.lib;nlohmann_json_schema_validator.lib;quantlibparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

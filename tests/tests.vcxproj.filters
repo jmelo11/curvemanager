@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="pch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="discount.json">
+      <Filter>json</Filter>
+    </None>
+    <None Include="flatforward.json">
+      <Filter>json</Filter>
+    </None>
+    <None Include="piecewise.json">
+      <Filter>json</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="json">
+      <UniqueIdentifier>{87b1412c-f421-4f82-a0f1-7d923af5eb88}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
