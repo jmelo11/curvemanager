@@ -1,11 +1,7 @@
-
 #include <curvemanager/marketstore.hpp>
-#include <ql/termstructures/yield/piecewiseyieldcurve.hpp>
-#include <qlp/parser.hpp>
 
 namespace CurveManager {
 	
-
 	MarketStore::MarketStore() {};
 
 	boost::shared_ptr<YieldTermStructure> MarketStore::getCurve(const std::string& name) const {

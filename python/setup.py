@@ -10,29 +10,30 @@ BASE_DIR = Path(__file__).absolute().parent.resolve()
 
 if os.name == "nt":
     LIB_DIR = Path('C:/Users/bloomberg/Desktop/Desarrollo/builds')
-    folders = ['QuantLib','QuantExt','curvemanager','quantlibparser','nlohmann_json_schema_validator', 'json', 'pybind11', 'pybind11_json']
-    include_dirs = [str(LIB_DIR / folder + '/include') for folder in folders]
-    library_dirs = [str(LIB_DIR / folder + '/lib') for folder in folders]
-    libraries  = ['QuantLib-x64-mt.lib','QuantExt-x64-mt.lib','curvemanager.lib','quantlibparser.lib','nlohmann_json_schema_validator.lib']
+    folders = ['QuantLib','QuantExt','curvemanager','quantlibparser','nlohmann_json_schema_validator', 'nlohmann_json', 'pybind11', 'pybind11_json']
+    include_dirs = [str(LIB_DIR / folder / 'include') for folder in folders]
+    include_dirs.append(str(LIB_DIR / 'boost'))
+    library_dirs = [str(LIB_DIR / folder / 'lib') for folder in folders]
+    libraries  = ['QuantLib-x64-mt','QuantExt-x64-mt','curvemanager','quantlibparser','nlohmann_json_schema_validator']
 else:
-    LIB_DIR = Path('usr/local')
+    LIB_DIR = Path('/usr/local')
     include_dirs = [str(LIB_DIR / 'include')]
     library_dirs = [str(LIB_DIR / 'lib')]
-    libraries  = ['QuantLib.lib','QuantExt.lib','curvemanager.lib','quantlibparser.lib','nlohmann_json_schema_validator.lib']
-
+    libraries  = ['QuantLib','QuantExt','curvemanager','QuantLibParser','nlohmann_json_schema_validator']
 
 ext_modules = [
-    Pybind11Extension("curvemanager",
+    Pybind11Extension("curvemanagerpython",
         ["module.cpp"],
         include_dirs=include_dirs,
         library_dirs=library_dirs,
         libraries=libraries,
-        define_macros = [('VERSION_INFO', __version__)]       
+        define_macros = [('VERSION_INFO', __version__)],
+        compiler_args=['-std=c++20'],        
         ),
 ]
 
 setup(
-    name="curvemanager",
+    name="curvemanagerpython",
     version=__version__,
     author="Itau",
     author_email="jose.melo@itau.cl",

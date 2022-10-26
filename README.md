@@ -8,5 +8,5 @@ Ejemplo de instalacion con cmake:
 
     mkdir build 
     cd build
-    cmake .. -DCMAKE_PREFIX_PATH='C:\Users\bloomberg\Desktop\Desarrollo\builds' -DCMAKE_INSTALL_PREFIX='C:\Users\bloomberg\Desktop\Desarrollo\builds\curvemanager' -DBoost_INCLUDE_DIR="C:/Users/bloomberg/Desktop/Desarrollo/builds/boost"
+    cmake .. -DCMAKE_PREFIX_PATH='C:\Users\bloomberg\Desktop\Desarrollo\builds' -DCMAKE_INSTALL_PREFIX='C:\Users\bloomberg\Desktop\Desarrollo\builds\curvemanager' -DBoost_INCLUDE_DIR="C:/Users/bloomberg/Desktop/Desarrollo/builds/boost" -DCMAKE_CXX_STANDARD=20 
     cmake --build . --config Release --target install

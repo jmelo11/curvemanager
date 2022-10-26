@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef CURVEMANAGER_HPP
+#define CURVEMANAGER_HPP
+
 #include <iostream>
 #include <map>
 #include <stdexcept>
@@ -38,4 +41,4 @@ namespace CurveManager {
 
 }
 
-
+#endif // CURVEMANAGER_HPP

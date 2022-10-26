@@ -1,5 +1,4 @@
 #include <curvemanager/curvemanager.hpp>
-#include <qlp/parser.hpp>
 #include <qlp/schemas/termstructures/rateindexschema.hpp>
 #include <qlp/schemas/termstructures/yieldtermstructureschema.hpp>
 #include <qlp/schemas/requests/curvebuilderrequest.hpp>

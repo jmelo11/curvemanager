@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef MARKETSTORE_HPP
+#define MARKETSTORE_HPP
+
 #include <map>
 #include <string>
 #include <unordered_map>
@@ -9,6 +12,9 @@
 #include <ql/termstructures/yieldtermstructure.hpp>
 #include <ql/indexes/iborindex.hpp>
 #include <nlohmann/json.hpp>
+#include <ql/termstructures/yield/piecewiseyieldcurve.hpp>
+
+#include <qlp/parser.hpp>
 
 namespace CurveManager {
 	using namespace QuantLib;
@@ -52,3 +58,5 @@ namespace CurveManager {
 	};
 
 }
+
+#endif // !MARKETSTORE_HPP

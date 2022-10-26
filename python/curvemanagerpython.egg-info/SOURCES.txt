@@ -1,0 +1,9 @@
+MANIFEST.in
+module.cpp
+pyproject.toml
+setup.py
+curvemanagerpython.egg-info/PKG-INFO
+curvemanagerpython.egg-info/SOURCES.txt
+curvemanagerpython.egg-info/dependency_links.txt
+curvemanagerpython.egg-info/not-zip-safe
+curvemanagerpython.egg-info/top_level.txt

@@ -14,7 +14,7 @@ file(GLOB INCLUDES "include/*.hpp" "include/curvemanager/*.hpp")
 if (MSVC)
         add_library(curvemanager STATIC ${INCLUDES} ${SOURCES})
 else()
-        add_library(curvemanager STATIC ${INCLUDES} ${SOURCES})
+        add_library(curvemanager SHARED ${INCLUDES} ${SOURCES})
 endif (MSVC)
 
 #bc using <> instead of ""
@@ -22,8 +22,6 @@ target_include_directories(curvemanager PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>  
     $<INSTALL_INTERFACE:include>
 )
-get_directory_property(_vars_before VARIABLES)
-
 
 include("cmake/FindQuantExt.cmake")
 find_package(Boost REQUIRED)
@@ -33,25 +31,14 @@ find_package(nlohmann_json REQUIRED)
 find_package(nlohmann_json_schema_validator REQUIRED)
 
 # link libraries
+target_link_libraries(curvemanager PUBLIC ${QLE_LIBRARY})
 target_link_libraries(curvemanager PUBLIC QuantLib::QuantLib)
 target_link_libraries(curvemanager PUBLIC Boost::boost)
 target_link_libraries(curvemanager PUBLIC nlohmann_json::nlohmann_json)
 target_link_libraries(curvemanager PUBLIC nlohmann_json_schema_validator)
 target_link_libraries(curvemanager PUBLIC QuantLibParser::QuantLibParser)
 
-target_include_directories(curvemanager PUBLIC ${CMAKE_INCLUDE_PATH})
-get_directory_property(_vars VARIABLES)
-
-list(REMOVE_ITEM _vars _vars_before ${_vars_before})
-foreach(_var IN LISTS _vars)
-    message(STATUS "${_var} = ${${_var}}")
-endforeach()
-
-
-get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
-foreach(dir ${dirs})
-  message(STATUS "dir='${dir}'")
-endforeach()
+target_include_directories(curvemanager PUBLIC ${QLE_INCLUDE_DIR})
 
 
 #install paths

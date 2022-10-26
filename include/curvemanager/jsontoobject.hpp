@@ -1,7 +1,10 @@
 #pragma once
 
-#include <qlp/parser.hpp>
+#ifndef JSONTOOBJECT_HPP
+#define JSONTOOBJECT_HPP
 
+//Contents of Header
+#include <qlp/parser.hpp>
 #include <qlp/schemas/ratehelpers/bondratehelperschema.hpp>
 #include <qlp/schemas/ratehelpers/depositratehelperschema.hpp>
 #include <qlp/schemas/ratehelpers/oisratehelperschema.hpp>
@@ -322,3 +325,5 @@ namespace CurveManager
 		return JsonToObject<T, Fs...>::initialize(givenParams, getters...);
 	}
 }
+
+#endif // !JSONTOOBJECT_H
