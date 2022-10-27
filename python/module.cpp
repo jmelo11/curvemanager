@@ -9,13 +9,16 @@ using namespace CurveManager;
 using namespace std;
 
 
-PYBIND11_MODULE(curvemanagerpython, m) {
+PYBIND11_MODULE(curvemanager, m) {
     m.doc() = "CurveManager for python"; // optional module docstring
 
     py::class_<MarketStore>(m, "MarketStore")   
         .def(py::init<>())
         .def("allCurves", &MarketStore::allCurves)     
-        .def("results", &MarketStore::results);
+        .def("results", &MarketStore::results)
+        .def("discountRequest", &MarketStore::discountRequest)
+        .def("zeroRateRequest", &MarketStore::zeroRateRequest)
+        .def("forwardRateRequest", &MarketStore::forwardRateRequest);
 
     py::class_<CurveBuilder>(m, "CurveBuilder")
         .def(py::init<json, MarketStore&>(), py::arg("data"), py::arg("marketStore"))

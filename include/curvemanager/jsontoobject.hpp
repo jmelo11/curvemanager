@@ -86,7 +86,7 @@ namespace CurveManager
 				}
 				else
 				{
-					throw std::runtime_error("End date must be after today.");
+					throw std::runtime_error("Error processing FXSWAPRATEHELPER: End date must be after today.");
 				}
 			}
 			else
@@ -318,10 +318,9 @@ namespace CurveManager
 
 	template<typename T, typename ...Fs>
 	auto JsonToObjectWrapper(const json& params, Fs&... getters) {	
-		json givenParams = params;
 		Schema<T> schema;
-		schema.validate(givenParams);
-		schema.setDefaultValues(givenParams);
+		schema.validate(params);
+		json givenParams = schema.setDefaultValues(params);
 		return JsonToObject<T, Fs...>::initialize(givenParams, getters...);
 	}
 }

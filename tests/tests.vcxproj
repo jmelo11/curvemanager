@@ -120,13 +120,14 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>%(AdditionalDependencies);QuantLib-x64-mt.lib;QuantExt-x64-mt.lib;curvemanager.lib;nlohmann_json_schema_validator.lib</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);QuantLib-x64-mt.lib;QuantExt-x64-mt.lib;curvemanager.lib;nlohmann_json_schema_validator.lib;quantlibparser.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

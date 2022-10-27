@@ -1,6 +1,10 @@
 #include <curvemanager/curvemanager.hpp>
 #include <qlp/schemas/termstructures/rateindexschema.hpp>
-#include <qlp/schemas/termstructures/yieldtermstructureschema.hpp>
+
+#include <qlp/schemas/termstructures/discountcurveschema.hpp>
+#include <qlp/schemas/termstructures/flatforwardcurveschema.hpp>
+#include <qlp/schemas/termstructures/bootstrapcurveschema.hpp>
+
 #include <qlp/schemas/requests/curvebuilderrequest.hpp>
 #include <qlp/schemas/requests/updatequoterequest.hpp>
 
@@ -18,18 +22,33 @@ namespace CurveManager {
 	};
 
 	void CurveBuilder::preprocessData() {		
-		Schema<YieldTermStructure> curveSchema;
-		for (auto& curve : data_.at("CURVES")) {
-			
-			curveSchema.validate(curve);
-			curveSchema.setDefaultValues(curve);
+		
+		Schema<DiscountCurve> discountCurveSchema;
+		Schema<FlatForward> flatForwardSchema;
+		Schema<PiecewiseYieldCurve<Discount, LogLinear>> bootstrapCurveSchema;
+		Schema<YieldTermStructure> termStructureSchema;
+		
+		for (auto& curve : data_.at("CURVES")) {			
+			termStructureSchema.validate(curve);
+			if (curve.at("TYPE") == "DISCOUNT") {
+				discountCurveSchema.setDefaultValues(curve);
+				discountCurveSchema.validate(curve);
+			}
+			else if (curve.at("TYPE") == "FLATFORWARD") {
+				flatForwardSchema.setDefaultValues(curve);
+				flatForwardSchema.validate(curve);
+			}
+			else if (curve.at("TYPE") == "PIECEWISE") {
+				bootstrapCurveSchema.setDefaultValues(curve);
+				bootstrapCurveSchema.validate(curve);
+			}
 			const std::string& name = curve.at("NAME");
 			curveConfigs_[name] = curve;
 			RelinkableHandle<YieldTermStructure> handle;
 			marketStore_.addCurveHandle(name, handle);
 		}
 		Schema<InterestRateIndex> indexSchema;
-		for (auto& index : data_.at("INDICES")) {
+		for (auto& index : data_.at("INDEXES")) {
 			indexSchema.validate(index);
 			indexSchema.setDefaultValues(index);
 
@@ -71,7 +90,6 @@ namespace CurveManager {
 	}
 
 	boost::shared_ptr<YieldTermStructure> CurveBuilder::buildPiecewiseCurve(const std::string& curveName, const json& curveParams) {
-
 		auto helpers = buildRateHelpers(curveParams.at("RATEHELPERS"), curveName);
 		DayCounter dayCounter = parse<DayCounter>(curveParams.at("DAYCOUNTER"));			
 		Date qlRefDate = Settings::instance().evaluationDate();
@@ -105,14 +123,14 @@ namespace CurveManager {
 	void CurveBuilder::updateQuotes(const json& prices) {
 		Schema<UpdateQuoteRequest> schema;
 		schema.validate(prices);
-		for (const auto& [ticker, price] : prices.items())
-			if (!marketStore_.hasQuote(ticker)) throw std::runtime_error("No quote found for " + ticker);
+		for (const auto& pair : prices)
+			if (!marketStore_.hasQuote(pair["NAME"])) throw std::runtime_error("No quote found for " + pair["NAME"]);
 
 		marketStore_.freeze();
-		for (const auto& [ticker, price] : prices.items()) {
-			Handle<Quote> handle = marketStore_.getQuote(ticker);
+		for (const auto& pair : prices) {
+			Handle<Quote> handle = marketStore_.getQuote(pair["NAME"]);
 			boost::shared_ptr<SimpleQuote> quote = boost::static_pointer_cast<SimpleQuote>(handle.currentLink());
-			quote->setValue(price);
+			quote->setValue(pair["VALUE"]);
 		}
 		marketStore_.unfreeze();
 	}

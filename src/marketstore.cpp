@@ -1,4 +1,7 @@
 #include <curvemanager/marketstore.hpp>
+#include <qlp/schemas/requests/discountfactorsrequest.hpp>
+#include <qlp/schemas/requests/forwardratesrequest.hpp>
+#include <qlp/schemas/requests/zeroratesrequest.hpp>
 
 namespace CurveManager {
 	
@@ -93,7 +96,7 @@ namespace CurveManager {
 		return names;
 	}
 
-	std::vector<std::string> MarketStore::allIndices() const {
+	std::vector<std::string> MarketStore::allIndexes() const {
 		std::vector<std::string> names;
 		for (const auto& [name, index] : indexMap_)
 			names.push_back(name);
@@ -102,22 +105,81 @@ namespace CurveManager {
 
 	json MarketStore::results(const std::vector<std::string>& dates) const {
 		std::vector<Date> qlDates;
-		json data;
+		json results = json::array();
+
 		for (const auto& date : dates)
-			qlDates.push_back(QuantLibParser::parse<Date>(date));
-		
+			qlDates.push_back(parse<Date>(date));
+
 		auto curves = allCurves();
 		for (const auto& curve : curves) {
+			json data;
 			auto qlCurve = getCurve(curve);
 			std::vector<double> values;
 			for (const auto& date : qlDates) {
 				values.push_back(qlCurve->discount(date));
 			}
-
-			data[curve]["DATES"] = dates;
-			data[curve]["VALUES"] = values;
+			data["NAME"] = curve;
+			data["DATES"] = dates;
+			data["VALUES"] = values;
+			results.push_back(data);
 		}
-		return data;
+		return results;
+	}
+
+	json MarketStore::discountRequest(const json& request) const {
+		Schema<DiscountFactorsRequest> schema;
+		schema.validate(request);
+		json data = schema.setDefaultValues(request);
+
+		auto curve = getCurve(data.at("CURVE"));
+		
+		json response = R"({"DATES":[], "VALUES": []})"_json;
+		for (const auto& date : data.at("DATES")) {
+			auto qlDate = parse<Date>(date);
+			response["VALUES"].push_back(curve->discount(qlDate));
+		}
+		response["DATES"] = request["DATES"];
+		return response;
+	
+	}
+
+	json MarketStore::zeroRateRequest(const json& request) const {
+		Schema<ZeroRatesRequests> schema;
+		schema.validate(request);
+		json data = schema.setDefaultValues(request);
+
+		auto curve = getCurve(data.at("CURVE"));
+		DayCounter dayCounter = parse<DayCounter>(data.at("DAYCOUNTER"));
+		Compounding comp = parse<Compounding>(data.at("COMPOUNDING"));
+		Frequency freq = parse<Frequency>(data.at("FREQUENCY"));		
+		json response;
+		response["VALUES"] = json::array();
+		for (const auto& date : data.at("DATES")) {
+			auto qlDate = parse<Date>(date);			
+			response["VALUES"].push_back(curve->zeroRate(qlDate, dayCounter, comp, freq).rate());
+		}
+		response["DATES"] = request["DATES"];
+		return response;
+	}
+
+	json MarketStore::forwardRateRequest(const json& request) const {
+		Schema<ForwardRatesRequest> schema;
+		schema.validate(request);
+		json data = schema.setDefaultValues(request);
+
+		auto curve = getCurve(data.at("CURVE"));
+		DayCounter dayCounter = parse<DayCounter>(data.at("DAYCOUNTER"));
+		Compounding comp = parse<Compounding>(data.at("COMPOUNDING"));
+		Frequency freq = parse<Frequency>(data.at("FREQUENCY"));
+		json response;
+		response["VALUES"] = json::array();
+		for (const auto& dates : data.at("DATES")) {
+			auto startDate = parse<Date>(dates[0]);
+			auto endDate = parse<Date>(dates[1]);
+			response["VALUES"].push_back(curve->forwardRate(startDate,endDate, dayCounter, comp, freq).rate());
+		}
+		response["DATES"] = request["DATES"];
+		return response;
 	}
 }
 

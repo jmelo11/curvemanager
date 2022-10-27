@@ -58,3 +58,4 @@ Thumbs.db
 /tests/x64
 /build
 /python/notebooks
+/python/__pycache__

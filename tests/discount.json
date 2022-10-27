@@ -22,7 +22,7 @@
       ]
     }
   ],
-  "INDICES": [
+  "INDEXES": [
     {
       "NAME": "SOFR",
       "TYPE": "OVERNIGHT",

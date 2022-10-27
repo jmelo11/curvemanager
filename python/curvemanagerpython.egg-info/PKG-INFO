@@ -1,7 +1,0 @@
-Metadata-Version: 2.1
-Name: curvemanagerpython
-Version: 1.0.0
-Summary: curvemanager using pybind11
-Author: Itau
-Author-email: jose.melo@itau.cl
-Requires-Python: >=3.7

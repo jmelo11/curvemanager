@@ -18,6 +18,7 @@
 
 namespace CurveManager {
 	using namespace QuantLib;
+	using namespace QuantLibParser;
 	using json = nlohmann::json;
 	
 	class MarketStore {
@@ -45,9 +46,13 @@ namespace CurveManager {
 		void unfreeze();
 
 		std::vector<std::string> allCurves() const;
-		std::vector<std::string> allIndices() const;
+		std::vector<std::string> allIndexes() const;
 
 		json results(const std::vector<std::string>& dates) const;
+
+		json discountRequest(const json& request) const;
+		json zeroRateRequest(const json& request) const;
+		json forwardRateRequest(const json& request) const;
 
 	private:
 

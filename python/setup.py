@@ -22,7 +22,7 @@ else:
     libraries  = ['QuantLib','QuantExt','curvemanager','QuantLibParser','nlohmann_json_schema_validator']
 
 ext_modules = [
-    Pybind11Extension("curvemanagerpython",
+    Pybind11Extension("curvemanager",
         ["module.cpp"],
         include_dirs=include_dirs,
         library_dirs=library_dirs,
@@ -33,7 +33,7 @@ ext_modules = [
 ]
 
 setup(
-    name="curvemanagerpython",
+    name="curvemanager",
     version=__version__,
     author="Itau",
     author_email="jose.melo@itau.cl",

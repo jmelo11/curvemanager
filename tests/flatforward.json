@@ -11,7 +11,7 @@
       "ENABLEEXTRAPOLATION": true
     }
   ],
-  "INDICES": [
+  "INDEXES": [
     {
       "NAME": "SOFR",
       "TYPE": "OVERNIGHT",
