@@ -8,13 +8,12 @@ namespace py = pybind11;
 using namespace CurveManager;
 using namespace std;
 
-
 PYBIND11_MODULE(curvemanager, m) {
-    m.doc() = "CurveManager for python"; // optional module docstring
+    m.doc() = "CurveManager for python";  // optional module docstring
 
-    py::class_<MarketStore>(m, "MarketStore")   
+    py::class_<MarketStore>(m, "MarketStore")
         .def(py::init<>())
-        .def("allCurves", &MarketStore::allCurves)     
+        .def("allCurves", &MarketStore::allCurves)
         .def("results", &MarketStore::results)
         .def("discountRequest", &MarketStore::discountRequest)
         .def("zeroRateRequest", &MarketStore::zeroRateRequest)
@@ -24,5 +23,4 @@ PYBIND11_MODULE(curvemanager, m) {
         .def(py::init<json, MarketStore&>(), py::arg("data"), py::arg("marketStore"))
         .def("build", &CurveBuilder::build)
         .def("updateQuotes", &CurveBuilder::updateQuotes, py::arg("prices"));
-        
 }

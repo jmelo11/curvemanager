@@ -57,6 +57,7 @@
     <None Include="flatforward.json" />
     <None Include="packages.config" />
     <None Include="piecewise.json" />
+    <None Include="piecewisefull.json" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
