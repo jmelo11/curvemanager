@@ -11,25 +11,35 @@ Standard:        c++20
 BasedOnStyle: Google 
 
 IndentWidth: 4
-ColumnLimit: 100
+ColumnLimit: 150
 NamespaceIndentation: All
 MaxEmptyLinesToKeep: 1
 FixNamespaceComments: true
 
 # Function declarations:
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterEnum: true
+  AfterStruct: false
+  AfterClass: false
+  AfterCaseLabel: false
+  AfterFunction: false
+  AfterNamespace: true
+  BeforeCatch: true
+  BeforeElse : true
+  SplitEmptyFunction: false
 
-BinPackParameters: true
-AllowShortFunctionsOnASingleLine: Inline
-AlwaysBreakTemplateDeclarations: true
+BinPackParameters: false
+BinPackArguments : false
+AllowShortFunctionsOnASingleLine: Empty
+AlwaysBreakTemplateDeclarations: Yes
 
 # T& x, not T &x:
 
 DerivePointerAlignment: false
 PointerAlignment: Left
-AllowShortBlocksOnASingleLine: true
-AllowShortFunctionsOnASingleLine: Inline
-AlignAfterOpenBracket: BlockIndent
-AlignAfterOpenBracket: true
+AllowShortBlocksOnASingleLine: false
+AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: true
 KeepEmptyLinesAtTheStartOfBlocks: false
 
@@ -55,7 +65,7 @@ IncludeCategories:
 AlignEscapedNewlines: Left
 BreakBeforeTernaryOperators: false
 ConstructorInitializerIndentWidth: 0
-SortUsingDeclarations: false
+SortUsingDeclarations: true
 IndentCaseLabels: true
 
 

@@ -1,7 +1,11 @@
-#pragma once
+/*
+ * Created on Sat Oct 29 2022
+ *
+ * Jose Melo - 2022 
+ */
 
-#ifndef MARKETSTORE_HPP
-#define MARKETSTORE_HPP
+#ifndef BAB0CCE6_F3E6_4E00_8FCE_23361591F7DF
+#define BAB0CCE6_F3E6_4E00_8FCE_23361591F7DF
 
 #include <qlp/parser.hpp>
 #include <ql/handle.hpp>
@@ -14,7 +18,8 @@
 #include <string>
 #include <unordered_map>
 
-namespace CurveManager {
+namespace CurveManager
+{
     using namespace QuantLib;
     using namespace QuantLibParser;
     using json = nlohmann::json;
@@ -45,7 +50,7 @@ namespace CurveManager {
         std::vector<std::string> allCurves() const;
         std::vector<std::string> allIndexes() const;
 
-        json results(const std::vector<std::string>& dates) const;
+        json bootstrapResults() const;
 
         json discountRequest(const json& request) const;
         json zeroRateRequest(const json& request) const;
@@ -58,6 +63,6 @@ namespace CurveManager {
         std::unordered_map<std::string, Handle<Quote>> quoteMap_;
     };
 
-}  // namespace CurveManager
+};  // namespace CurveManager
 
-#endif  // !MARKETSTORE_HPP
+#endif /* BAB0CCE6_F3E6_4E00_8FCE_23361591F7DF */

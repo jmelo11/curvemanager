@@ -1,10 +1,16 @@
+/*
+ * Created on Sat Oct 29 2022
+ *
+ * Jose Melo - 2022
+ */
+
 #include <qlp/schemas/requests/discountfactorsrequest.hpp>
 #include <qlp/schemas/requests/forwardratesrequest.hpp>
 #include <qlp/schemas/requests/zeroratesrequest.hpp>
 #include <curvemanager/marketstore.hpp>
 
-namespace CurveManager {
-
+namespace CurveManager
+{
     MarketStore::MarketStore(){};
 
     boost::shared_ptr<YieldTermStructure> MarketStore::getCurve(const std::string& name) const {
@@ -48,8 +54,7 @@ namespace CurveManager {
         indexMap_[name]->addFixing(date, fixing, true);
     }
 
-    void MarketStore::addCurve(const std::string& name,
-                               boost::shared_ptr<YieldTermStructure>& curve) {
+    void MarketStore::addCurve(const std::string& name, boost::shared_ptr<YieldTermStructure>& curve) {
         curveMap_[name] = curve;
     }
 
@@ -61,8 +66,7 @@ namespace CurveManager {
         quoteMap_.insert({ticker, handle});
     }
 
-    void MarketStore::addCurveHandle(const std::string& name,
-                                     RelinkableHandle<YieldTermStructure>& handle) {
+    void MarketStore::addCurveHandle(const std::string& name, RelinkableHandle<YieldTermStructure>& handle) {
         curveHandleMap_.insert({name, handle});
     }
 
@@ -92,23 +96,27 @@ namespace CurveManager {
         return names;
     }
 
-    json MarketStore::results(const std::vector<std::string>& dates) const {
+    json MarketStore::bootstrapResults() const {
         std::vector<Date> qlDates;
         json results = json::array();
-
-        for (const auto& date : dates) qlDates.push_back(parse<Date>(date));
-
-        auto curves = allCurves();
-        for (const auto& curve : curves) {
-            json data;
-            auto qlCurve = getCurve(curve);
-            std::vector<double> values;
-            for (const auto& date : qlDates) { values.push_back(qlCurve->discount(date)); }
-            data["NAME"]   = curve;
-            data["DATES"]  = dates;
-            data["VALUES"] = values;
-            results.push_back(data);
-        }
+       
+        for (const auto& [name, curve] : curveMap_) {
+            auto ptr = boost::dynamic_pointer_cast<PiecewiseYieldCurve<Discount, LogLinear>>(curve);
+            if (ptr) {
+                json data;
+                auto nodes     = ptr->nodes();
+                data["NAME"]   = name;				
+                std::vector<double> values;
+                std::vector<std::string> dates;
+                for (const auto& pair : nodes) {
+                    dates.push_back(parseDate(pair.first, DateFormat::MIXED));
+                    values.push_back(pair.second);
+                }
+                data["DATES"]  = dates;
+                data["VALUES"] = values;
+                results.push_back(data);
+            }            
+        }	
         return results;
     }
 
@@ -161,8 +169,7 @@ namespace CurveManager {
         for (const auto& dates : data.at("DATES")) {
             auto startDate = parse<Date>(dates[0]);
             auto endDate   = parse<Date>(dates[1]);
-            response["VALUES"].push_back(
-                curve->forwardRate(startDate, endDate, dayCounter, comp, freq).rate());
+            response["VALUES"].push_back(curve->forwardRate(startDate, endDate, dayCounter, comp, freq).rate());
         }
         response["DATES"] = request["DATES"];
         return response;

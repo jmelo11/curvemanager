@@ -1,9 +1,12 @@
-#pragma once
+/*
+ * Created on Sat Oct 29 2022
+ *
+ * Jose Melo - 2022
+ */
 
-#ifndef JSONTOOBJECT_HPP
-#define JSONTOOBJECT_HPP
+#ifndef F31B27ED_10DB_49AC_BAB9_CF49C94C9C35
+#define F31B27ED_10DB_49AC_BAB9_CF49C94C9C35
 
-// Contents of Header
 #include <qlp/parser.hpp>
 #include <qlp/schemas/ratehelpers/bondratehelperschema.hpp>
 #include <qlp/schemas/ratehelpers/depositratehelperschema.hpp>
@@ -16,13 +19,16 @@
 
 #define SETVAR(dict, dataType, name) dataType name = parse<dataType>(dict.at(#name))
 
-namespace CurveManager {
+namespace CurveManager
+{
     using namespace QuantLib;
     using namespace QuantExt;
     using namespace QuantLibParser;
     using json = nlohmann::json;
 
-    static bool has(const json& j, const std::string& key) { return j.find(key) != j.end(); }
+    static bool has(const json& j, const std::string& key) {
+        return j.find(key) != j.end();
+    }
 
     template <typename Helper, typename F0, typename... Fs>
     struct JsonToObject;
@@ -47,8 +53,7 @@ namespace CurveManager {
             SETVAR(params, Period, TENOR);
 
             Handle<Quote> RATE = priceGetter(params.at("RATE"), params.at("RATETICKER"));
-            return boost::shared_ptr<DepositRateHelper>(new DepositRateHelper(
-                RATE, TENOR, FIXINGDAYS, CALENDAR, CONVENTION, ENDOFMONTH, DAYCOUNTER));
+            return boost::shared_ptr<DepositRateHelper>(new DepositRateHelper(RATE, TENOR, FIXINGDAYS, CALENDAR, CONVENTION, ENDOFMONTH, DAYCOUNTER));
         }
     };
 
@@ -64,8 +69,7 @@ namespace CurveManager {
             SETVAR(params, BusinessDayConvention, CONVENTION);
 
             RelinkableHandle<YieldTermStructure> COLLATERALCURVE =
-                has(params, "COLLATERALCURVE") ? curveGetter(params.at("COLLATERALCURVE")) :
-                                                 RelinkableHandle<YieldTermStructure>();
+                has(params, "COLLATERALCURVE") ? curveGetter(params.at("COLLATERALCURVE")) : RelinkableHandle<YieldTermStructure>();
 
             // non-defaults
             Period TENOR;
@@ -74,11 +78,12 @@ namespace CurveManager {
                 int days = ENDDATE - Settings::instance().evaluationDate();
                 if (days > 0) {
                     TENOR = Period(days, TimeUnit::Days);
-                } else {
-                    throw std::runtime_error(
-                        "Error processing FXSWAPRATEHELPER: End date must be after today.");
                 }
-            } else {
+                else {
+                    throw std::runtime_error("Error processing FXSWAPRATEHELPER: End date must be after today.");
+                }
+            }
+            else {
                 TENOR = parse<Period>(params.at("TENOR"));
             }
 
@@ -86,8 +91,7 @@ namespace CurveManager {
             auto FXSPOT   = priceGetter(params.at("FXSPOT"), params.at("FXSPOTTICKER"));
 
             return boost::shared_ptr<FxSwapRateHelper>(
-                new FxSwapRateHelper(FXPOINTS, FXSPOT, TENOR, FIXINGDAYS, CALENDAR, CONVENTION,
-                                     ENDOFMONTH, BASECURRENCYCOLLATERAL, COLLATERALCURVE));
+                new FxSwapRateHelper(FXPOINTS, FXSPOT, TENOR, FIXINGDAYS, CALENDAR, CONVENTION, ENDOFMONTH, BASECURRENCYCOLLATERAL, COLLATERALCURVE));
         }
     };
 
@@ -109,47 +113,41 @@ namespace CurveManager {
             Date STARTDATE;
             if (has(params, "STARTDATE")) {
                 STARTDATE = parse<Date>(params.at("STARTDATE"));
-            } else {
+            }
+            else {
                 STARTDATE = Settings::instance().evaluationDate();
             }
             Date ENDDATE;
             if (has(params, "ENDDATE")) {
                 ENDDATE = parse<Date>(params.at("ENDDATE"));
-            } else {
+            }
+            else {
                 ENDDATE = STARTDATE + TENOR;
             }
 
             /* coupon rate */
 
-            InterestRate couponRate(COUPON, COUPONDAYCOUNTER, Compounding::Simple,
-                                    Frequency::Annual);
+            InterestRate couponRate(COUPON, COUPONDAYCOUNTER, Compounding::Simple, Frequency::Annual);
             std::vector<InterestRate> coupons{couponRate};
             auto RATE = priceGetter(params.at("RATE"), params.at("RATETICKER"));
 
-            Schedule schedule = MakeSchedule()
-                                    .from(STARTDATE)
-                                    .to(ENDDATE)
-                                    .withTenor(TENOR)
-                                    .withFrequency(FREQUENCY)
-                                    .withCalendar(CALENDAR)
-                                    .withConvention(CONVENTION);
+            Schedule schedule =
+                MakeSchedule().from(STARTDATE).to(ENDDATE).withTenor(TENOR).withFrequency(FREQUENCY).withCalendar(CALENDAR).withConvention(
+                    CONVENTION);
 
             FixedRateBond bond(SETTLEMENTDAYS, FACEAMOUNT, schedule, coupons);
             boost::shared_ptr<SimpleQuote> cleanPrice(
-                boost::make_shared<SimpleQuote>(bond.cleanPrice(
-                    RATE->value(), IRRDAYCOUNTER, Compounding::Compounded, Frequency::Annual)));
+                boost::make_shared<SimpleQuote>(bond.cleanPrice(RATE->value(), IRRDAYCOUNTER, Compounding::Compounded, Frequency::Annual)));
             Handle<Quote> handlePrice(cleanPrice);
             return boost::shared_ptr<FixedRateBondHelper>(
-                new FixedRateBondHelper(handlePrice, SETTLEMENTDAYS, FACEAMOUNT, schedule,
-                                        std::vector<double>{COUPON}, COUPONDAYCOUNTER));
+                new FixedRateBondHelper(handlePrice, SETTLEMENTDAYS, FACEAMOUNT, schedule, std::vector<double>{COUPON}, COUPONDAYCOUNTER));
         }
     };
 
     // SwapRateHelper param tuple
     template <typename F0, typename F1, typename F2>
     struct JsonToObject<SwapRateHelper, F0, F1, F2> {
-        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter,
-                               F2& curveGetter) {
+        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter, F2& curveGetter) {
             SETVAR(params, DayCounter, DAYCOUNTER);
             SETVAR(params, Calendar, CALENDAR);
             SETVAR(params, BusinessDayConvention, CONVENTION);
@@ -167,23 +165,20 @@ namespace CurveManager {
             Handle<Quote> SPREADQUOTE(spreadPtr);
 
             RelinkableHandle<YieldTermStructure> DISCOUNTINGCURVE =
-                has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) :
-                                                  RelinkableHandle<YieldTermStructure>();
+                has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) : RelinkableHandle<YieldTermStructure>();
 
             auto RATE = priceGetter(params.at("RATE"), params.at("RATETICKER"));
 
             boost::shared_ptr<IborIndex> INDEX = indexGetter(params.at("INDEX"));
-            return boost::shared_ptr<SwapRateHelper>(
-                new SwapRateHelper(RATE, TENOR, CALENDAR, FREQUENCY, CONVENTION, DAYCOUNTER, INDEX,
-                                   SPREADQUOTE, FWDSTART, DISCOUNTINGCURVE, SETTLEMENTDAYS));
+            return boost::shared_ptr<SwapRateHelper>(new SwapRateHelper(
+                RATE, TENOR, CALENDAR, FREQUENCY, CONVENTION, DAYCOUNTER, INDEX, SPREADQUOTE, FWDSTART, DISCOUNTINGCURVE, SETTLEMENTDAYS));
         }
     };
 
     // OISRateHelper param tuple
     template <typename F0, typename F1, typename F2>
     struct JsonToObject<OISRateHelper, F0, F1, F2> {
-        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter,
-                               F2& curveGetter) {
+        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter, F2& curveGetter) {
             SETVAR(params, DayCounter, DAYCOUNTER);
             SETVAR(params, Calendar, CALENDAR);
             SETVAR(params, BusinessDayConvention, CONVENTION);
@@ -202,23 +197,29 @@ namespace CurveManager {
             SETVAR(params, Period, TENOR);
 
             RelinkableHandle<YieldTermStructure> DISCOUNTINGCURVE =
-                has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) :
-                                                  RelinkableHandle<YieldTermStructure>();
+                has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) : RelinkableHandle<YieldTermStructure>();
 
-            auto RATE = priceGetter(params.at("RATE"), params.at("RATETICKER"));
-            boost::shared_ptr<OvernightIndex> INDEX =
-                boost::dynamic_pointer_cast<OvernightIndex>(indexGetter(params.at("INDEX")));
-            return boost::shared_ptr<OISRateHelper>(new OISRateHelper(
-                SETTLEMENTDAYS, TENOR, RATE, INDEX, DISCOUNTINGCURVE, TELESCOPICVALUEDATES,
-                PAYMENTLAG, CONVENTION, FREQUENCY, CALENDAR, FWDSTART, SPREAD));
+            auto RATE                               = priceGetter(params.at("RATE"), params.at("RATETICKER"));
+            boost::shared_ptr<OvernightIndex> INDEX = boost::dynamic_pointer_cast<OvernightIndex>(indexGetter(params.at("INDEX")));
+            return boost::shared_ptr<OISRateHelper>(new OISRateHelper(SETTLEMENTDAYS,
+                                                                      TENOR,
+                                                                      RATE,
+                                                                      INDEX,
+                                                                      DISCOUNTINGCURVE,
+                                                                      TELESCOPICVALUEDATES,
+                                                                      PAYMENTLAG,
+                                                                      CONVENTION,
+                                                                      FREQUENCY,
+                                                                      CALENDAR,
+                                                                      FWDSTART,
+                                                                      SPREAD));
         }
     };
 
     // XCCY param tuple
     template <typename F0, typename F1, typename F2>
     struct JsonToObject<CrossCcyFixFloatSwapHelper, F0, F1, F2> {
-        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter,
-                               F2& curveGetter) {
+        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter, F2& curveGetter) {
             SETVAR(params, DayCounter, DAYCOUNTER);
             SETVAR(params, Calendar, CALENDAR);
             SETVAR(params, BusinessDayConvention, CONVENTION);
@@ -235,58 +236,63 @@ namespace CurveManager {
             boost::shared_ptr<Quote> spreadPtr(new SimpleQuote(SPREAD));
             Handle<Quote> SPREADQUOTE(spreadPtr);
             RelinkableHandle<YieldTermStructure> DISCOUNTINGCURVE =
-                has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) :
-                                                  RelinkableHandle<YieldTermStructure>();
-            auto RATE   = priceGetter(params.at("RATE"), params.at("RATETICKER"));
-            auto FXSPOT = priceGetter(params.at("FXSPOT"), params.at("FXSPOTTICKER"));
+                has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) : RelinkableHandle<YieldTermStructure>();
+            auto RATE                          = priceGetter(params.at("RATE"), params.at("RATETICKER"));
+            auto FXSPOT                        = priceGetter(params.at("FXSPOT"), params.at("FXSPOTTICKER"));
             boost::shared_ptr<IborIndex> INDEX = indexGetter(params.at("INDEX"));
-            return boost::shared_ptr<CrossCcyFixFloatSwapHelper>(new CrossCcyFixFloatSwapHelper(
-                RATE, FXSPOT, SETTLEMENTDAYS, CALENDAR, CONVENTION, TENOR, CURRENCY, FREQUENCY,
-                CONVENTION, DAYCOUNTER, INDEX, DISCOUNTINGCURVE, SPREADQUOTE, ENDOFMONTH));
+            return boost::shared_ptr<CrossCcyFixFloatSwapHelper>(new CrossCcyFixFloatSwapHelper(RATE,
+                                                                                                FXSPOT,
+                                                                                                SETTLEMENTDAYS,
+                                                                                                CALENDAR,
+                                                                                                CONVENTION,
+                                                                                                TENOR,
+                                                                                                CURRENCY,
+                                                                                                FREQUENCY,
+                                                                                                CONVENTION,
+                                                                                                DAYCOUNTER,
+                                                                                                INDEX,
+                                                                                                DISCOUNTINGCURVE,
+                                                                                                SPREADQUOTE,
+                                                                                                ENDOFMONTH));
         }
     };
 
     template <typename F0, typename F1, typename F2>
     struct JsonToObject<TenorBasisSwapHelper, F0, F1, F2> {
-        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter,
-                               F2& curveGetter) {
+        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter, F2& curveGetter) {
             SETVAR(params, Period, TENOR);
 
             bool SPREADONSHORT = params.at("SPREADONSHORT");
 
             RelinkableHandle<YieldTermStructure> DISCOUNTINGCURVE =
-                has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) :
-                                                  RelinkableHandle<YieldTermStructure>();
+                has(params, "DISCOUNTINGCURVE") ? curveGetter(params.at("DISCOUNTINGCURVE")) : RelinkableHandle<YieldTermStructure>();
 
-            auto SPREAD = priceGetter(params.at("SPREAD"), params.at("SPREADTICKER"));
+            auto SPREAD                             = priceGetter(params.at("SPREAD"), params.at("SPREADTICKER"));
             boost::shared_ptr<IborIndex> SHORTINDEX = indexGetter(params.at("SHORTINDEX"));
             boost::shared_ptr<IborIndex> LONGINDEX  = indexGetter(params.at("LONGINDEX"));
 
             /*check if any of the curves can be build, otherwise fail*/
-            if (SHORTINDEX->forwardingTermStructure().empty() &&
-                LONGINDEX->forwardingTermStructure().empty()) {
+            if (SHORTINDEX->forwardingTermStructure().empty() && LONGINDEX->forwardingTermStructure().empty()) {
                 RelinkableHandle<YieldTermStructure> handle = curveGetter(params.at("SHORTINDEX"));
                 if (handle.empty()) {
                     handle    = curveGetter(params.at("LONGINDEX"));
                     LONGINDEX = indexGetter(params.at("LONGINDEX"));
-                } else {
+                }
+                else {
                     SHORTINDEX = indexGetter(params.at("SHORTINDEX"));
                 }
             }
 
-            Period SHORTPAYTENOR =
-                has(params, "SHORTPAYTENOR") ? parse<Period>(params.at("SHORTPAYTENOR")) : Period();
+            Period SHORTPAYTENOR = has(params, "SHORTPAYTENOR") ? parse<Period>(params.at("SHORTPAYTENOR")) : Period();
             return boost::shared_ptr<TenorBasisSwapHelper>(
-                new TenorBasisSwapHelper(SPREAD, TENOR, LONGINDEX, SHORTINDEX, SHORTPAYTENOR,
-                                         DISCOUNTINGCURVE, SPREADONSHORT));
+                new TenorBasisSwapHelper(SPREAD, TENOR, LONGINDEX, SHORTINDEX, SHORTPAYTENOR, DISCOUNTINGCURVE, SPREADONSHORT));
         }
     };
 
     // XCCYBasis param tuple
     template <typename F0, typename F1, typename F2>
     struct JsonToObject<CrossCcyBasisSwapHelper, F0, F1, F2> {
-        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter,
-                               F2& curveGetter) {
+        auto static initialize(const json& params, F0& priceGetter, F1& indexGetter, F2& curveGetter) {
             SETVAR(params, Calendar, CALENDAR);
             SETVAR(params, BusinessDayConvention, CONVENTION);
             SETVAR(params, Period, TENOR);
@@ -298,13 +304,9 @@ namespace CurveManager {
             auto SPREAD = priceGetter(params.at("SPREAD"), params.at("SPREADTICKER"));
 
             RelinkableHandle<YieldTermStructure> FLATDISCOUNTINGCURVE =
-                has(params, "FLATDISCOUNTINGCURVE") ?
-                    curveGetter(params.at("FLATDISCOUNTINGCURVE")) :
-                    RelinkableHandle<YieldTermStructure>();
+                has(params, "FLATDISCOUNTINGCURVE") ? curveGetter(params.at("FLATDISCOUNTINGCURVE")) : RelinkableHandle<YieldTermStructure>();
             RelinkableHandle<YieldTermStructure> SPREADDISCOUNTINGCURVE =
-                has(params, "SPREADDISCOUNTINGCURVE") ?
-                    curveGetter(params.at("SPREADDISCOUNTINGCURVE")) :
-                    RelinkableHandle<YieldTermStructure>();
+                has(params, "SPREADDISCOUNTINGCURVE") ? curveGetter(params.at("SPREADDISCOUNTINGCURVE")) : RelinkableHandle<YieldTermStructure>();
             if (FLATDISCOUNTINGCURVE.empty() && SPREADDISCOUNTINGCURVE.empty())
                 throw std::runtime_error(
                     "Either FLATDISCOUNTINGCURVE or "
@@ -315,9 +317,18 @@ namespace CurveManager {
             boost::shared_ptr<IborIndex> FLATINDEX   = indexGetter(params.at("FLATINDEX"));
             boost::shared_ptr<IborIndex> SPREADINDEX = indexGetter(params.at("SPREADINDEX"));
 
-            return boost::shared_ptr<CrossCcyBasisSwapHelper>(new CrossCcyBasisSwapHelper(
-                SPREAD, FXSPOT, SETTLEMENTDAYS, CALENDAR, TENOR, CONVENTION, FLATINDEX, SPREADINDEX,
-                FLATDISCOUNTINGCURVE, SPREADDISCOUNTINGCURVE, ENDOFMONTH, FLATISDOMESTIC));
+            return boost::shared_ptr<CrossCcyBasisSwapHelper>(new CrossCcyBasisSwapHelper(SPREAD,
+                                                                                          FXSPOT,
+                                                                                          SETTLEMENTDAYS,
+                                                                                          CALENDAR,
+                                                                                          TENOR,
+                                                                                          CONVENTION,
+                                                                                          FLATINDEX,
+                                                                                          SPREADINDEX,
+                                                                                          FLATDISCOUNTINGCURVE,
+                                                                                          SPREADDISCOUNTINGCURVE,
+                                                                                          ENDOFMONTH,
+                                                                                          FLATISDOMESTIC));
         }
     };
 
@@ -330,4 +341,4 @@ namespace CurveManager {
     }
 }  // namespace CurveManager
 
-#endif  // !JSONTOOBJECT_H
+#endif /* F31B27ED_10DB_49AC_BAB9_CF49C94C9C35 */

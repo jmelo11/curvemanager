@@ -11,9 +11,6 @@
           "DAYCOUNTER": "ACT360",
           "TENOR": "1D",
           "CALENDAR": "NULLCALENDAR",
-          "FIXINGDAYS": 0.0,
-          "ENDOFMONTH": true,
-          "CONVENTION": "MODIFIEDFOLLOWING",
           "TYPE": "DEPOSIT",
           "RATETICKER": "CF_CLP_1D"
         },
@@ -22,9 +19,6 @@
           "DAYCOUNTER": "ACT360",
           "TENOR": "1W",
           "CALENDAR": "NULLCALENDAR",
-          "FIXINGDAYS": 0.0,
-          "ENDOFMONTH": true,
-          "CONVENTION": "MODIFIEDFOLLOWING",
           "TYPE": "DEPOSIT",
           "RATETICKER": "CF_CLP_1W"
         },
@@ -33,9 +27,6 @@
           "DAYCOUNTER": "ACT360",
           "TENOR": "2W",
           "CALENDAR": "NULLCALENDAR",
-          "FIXINGDAYS": 0.0,
-          "ENDOFMONTH": true,
-          "CONVENTION": "MODIFIEDFOLLOWING",
           "TYPE": "DEPOSIT",
           "RATETICKER": "CF_CLP_2W"
         },

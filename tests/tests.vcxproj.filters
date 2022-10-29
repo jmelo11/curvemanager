@@ -21,6 +21,9 @@
     <None Include="piecewisefull.json">
       <Filter>json</Filter>
     </None>
+    <None Include="piecewisefull2.json">
+      <Filter>json</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="json">

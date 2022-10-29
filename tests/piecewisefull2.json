@@ -1,0 +1,934 @@
+{
+  "REFDATE": "28102022",
+  "CURVES": [
+    {
+      "TYPE": "PIECEWISE",
+      "NAME": "CF_USD",
+      "DAYCOUNTER": "ACT360",
+      "ENABLEEXTRAPOLATION": true,
+      "RATEHELPERS": [
+        {
+          "RATE": 0.033518703852712,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "1D",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_1D"
+        },
+        {
+          "RATE": 0.033518703852712,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "7D",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_7D"
+        },
+        {
+          "RATE": 0.0339014632405213,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "15D",
+          "CALENDAR": "NULLCALENDAR",
+          "ENDOFMONTH": false,
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_15D"
+        },
+        {
+          "RATE": 0.0364524955411621,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "1M",
+          "CALENDAR": "NULLCALENDAR",
+          "ENDOFMONTH": false,
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_1M"
+        },
+        {
+          "RATE": 0.0373672794191295,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "2M",
+          "CALENDAR": "NULLCALENDAR",
+          "ENDOFMONTH": false,
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_2M"
+        },
+        {
+          "RATE": 0.0398263273445547,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "3M",
+          "CALENDAR": "NULLCALENDAR",
+          "ENDOFMONTH": false,
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_3M"
+        },
+        {
+          "RATE": 0.0413754869391674,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "4M",
+          "CALENDAR": "NULLCALENDAR",
+          "ENDOFMONTH": false,
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_4M"
+        },
+        {
+          "RATE": 0.04327377836537,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "5M",
+          "CALENDAR": "NULLCALENDAR",
+          "ENDOFMONTH": false,
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_5M"
+        },
+        {
+          "RATE": 0.0439939531829608,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "6M",
+          "CALENDAR": "NULLCALENDAR",
+          "ENDOFMONTH": false,
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_6M"
+        },
+        {
+          "RATE": 0.0530373048296681,
+          "DAYCOUNTER": "ACT360",
+          "TENOR": "12M",
+          "CALENDAR": "NULLCALENDAR",
+          "ENDOFMONTH": false,
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "TYPE": "DEPOSIT",
+          "RATETICKER": "DAP_12M"
+        },
+        {
+          "SPREAD": 0.013,
+          "TENOR": "2Y",
+          "CALENDAR": "NULLCALENDAR",
+          "DAYCOUNTER": "ACT360",
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "ENDOFMONTH": false,
+          "SETTLEMENTDAYS": 1,
+          "FXSPOT": 945.99,
+          "FXSPOTTICKER": "CLP CURNCY",
+          "FLATISDOMESTIC": true,
+          "FLATDISCOUNTINGCURVE": "ICP_ICAP",
+          "FLATINDEX": "ICP_ICAP",
+          "SPREADINDEX": "LIBOR6M",
+          "SPREADTICKER": "LIB6M_MAS_2Y",
+          "COUPONDAYCOUNTER": "THIRTY360",
+          "TYPE": "XCCYBASIS",
+          "RATETICKER": "USD_BOND_2Y"
+        },
+        {
+          "SPREAD": 0.014,
+          "TENOR": "3Y",
+          "CALENDAR": "NULLCALENDAR",
+          "DAYCOUNTER": "ACT360",
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "ENDOFMONTH": false,
+          "SETTLEMENTDAYS": 0,
+          "FXSPOT": 945.99,
+          "FXSPOTTICKER": "CLP CURNCY",
+          "FLATISDOMESTIC": true,
+          "FLATDISCOUNTINGCURVE": "ICP_ICAP",
+          "FLATINDEX": "ICP_ICAP",
+          "SPREADINDEX": "LIBOR6M",
+          "SPREADTICKER": "LIB6M_MAS_3Y",
+          "TYPE": "XCCYBASIS",
+          "RATETICKER": "USD_BOND_3Y"
+        },
+        {
+          "SPREAD": 0.015,
+          "TENOR": "4Y",
+          "CALENDAR": "NULLCALENDAR",
+          "DAYCOUNTER": "ACT360",
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "ENDOFMONTH": false,
+          "SETTLEMENTDAYS": 1,
+          "FXSPOT": 945.99,
+          "FXSPOTTICKER": "CLP CURNCY",
+          "FLATISDOMESTIC": true,
+          "FLATDISCOUNTINGCURVE": "ICP_ICAP",
+          "FLATINDEX": "ICP_ICAP",
+          "SPREADINDEX": "LIBOR6M",
+          "SPREADTICKER": "LIB6M_MAS_4Y",
+          "COUPONDAYCOUNTER": "THIRTY360",
+          "TYPE": "XCCYBASIS",
+          "RATETICKER": "USD_BOND_4Y"
+        },
+        {
+          "SPREAD": 0.015,
+          "TENOR": "5Y",
+          "CALENDAR": "NULLCALENDAR",
+          "DAYCOUNTER": "ACT360",
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "ENDOFMONTH": false,
+          "SETTLEMENTDAYS": 1,
+          "FXSPOT": 945.99,
+          "FXSPOTTICKER": "CLP CURNCY",
+          "FLATISDOMESTIC": true,
+          "FLATDISCOUNTINGCURVE": "ICP_ICAP",
+          "FLATINDEX": "ICP_ICAP",
+          "SPREADINDEX": "LIBOR6M",
+          "SPREADTICKER": "LIB6M_MAS_5Y",
+          "COUPONDAYCOUNTER": "THIRTY360",
+          "TYPE": "XCCYBASIS",
+          "RATETICKER": "USD_BOND_5Y"
+        },
+        {
+          "SPREAD": 0.015,
+          "TENOR": "7Y",
+          "CALENDAR": "NULLCALENDAR",
+          "DAYCOUNTER": "ACT360",
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "ENDOFMONTH": false,
+          "SETTLEMENTDAYS": 1,
+          "FXSPOT": 945.99,
+          "FXSPOTTICKER": "CLP CURNCY",
+          "FLATISDOMESTIC": true,
+          "FLATDISCOUNTINGCURVE": "ICP_ICAP",
+          "FLATINDEX": "ICP_ICAP",
+          "SPREADINDEX": "LIBOR6M",
+          "SPREADTICKER": "LIB6M_MAS_7Y",
+          "COUPONDAYCOUNTER": "THIRTY360",
+          "TYPE": "XCCYBASIS",
+          "RATETICKER": "USD_BOND_7Y"
+        },
+        {
+          "SPREAD": 0.016,
+          "TENOR": "10Y",
+          "CALENDAR": "NULLCALENDAR",
+          "DAYCOUNTER": "ACT360",
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "ENDOFMONTH": false,
+          "SETTLEMENTDAYS": 1,
+          "FXSPOT": 945.99,
+          "FXSPOTTICKER": "CLP CURNCY",
+          "FLATISDOMESTIC": true,
+          "FLATDISCOUNTINGCURVE": "ICP_ICAP",
+          "FLATINDEX": "ICP_ICAP",
+          "SPREADINDEX": "LIBOR6M",
+          "SPREADTICKER": "LIB6M_MAS_10Y",
+          "COUPONDAYCOUNTER": "THIRTY360",
+          "TYPE": "XCCYBASIS",
+          "RATETICKER": "USD_BOND_10Y"
+        },
+        {
+          "SPREAD": 0.019,
+          "TENOR": "15Y",
+          "CALENDAR": "NULLCALENDAR",
+          "DAYCOUNTER": "ACT360",
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "ENDOFMONTH": false,
+          "SETTLEMENTDAYS": 1,
+          "FXSPOT": 945.99,
+          "FXSPOTTICKER": "CLP CURNCY",
+          "FLATISDOMESTIC": true,
+          "FLATDISCOUNTINGCURVE": "ICP_ICAP",
+          "FLATINDEX": "ICP_ICAP",
+          "SPREADINDEX": "LIBOR6M",
+          "SPREADTICKER": "LIB6M_MAS_15Y",
+          "COUPONDAYCOUNTER": "THIRTY360",
+          "TYPE": "XCCYBASIS",
+          "RATETICKER": "USD_BOND_15Y"
+        },
+        {
+          "SPREAD": 0.023,
+          "TENOR": "20Y",
+          "CALENDAR": "NULLCALENDAR",
+          "DAYCOUNTER": "ACT360",
+          "CONVENTION": "MODIFIEDFOLLOWING",
+          "ENDOFMONTH": false,
+          "SETTLEMENTDAYS": 1,
+          "FXSPOT": 945.99,
+          "FXSPOTTICKER": "CLP CURNCY",
+          "FLATISDOMESTIC": true,
+          "FLATDISCOUNTINGCURVE": "ICP_ICAP",
+          "FLATINDEX": "ICP_ICAP",
+          "SPREADINDEX": "LIBOR6M",
+          "SPREADTICKER": "LIB6M_MAS_20Y",
+          "COUPONDAYCOUNTER": "THIRTY360",
+          "TYPE": "XCCYBASIS",
+          "RATETICKER": "USD_BOND_20Y"
+        }
+      ]
+    },
+    {
+      "TYPE": "DISCOUNT",
+      "NAME": "ICP_ICAP",
+      "ENABLEEXTRAPOLATION": true,
+      "DAYCOUNTER": "ACT360",
+      "NODES": [
+        {
+          "DATE": "28102022",
+          "VALUE": 1.0
+        },
+        {
+          "DATE": "28112022",
+          "VALUE": 0.990349345319859
+        },
+        {
+          "DATE": "28122022",
+          "VALUE": 0.9810983232212074
+        },
+        {
+          "DATE": "28012023",
+          "VALUE": 0.9715828217679897
+        },
+        {
+          "DATE": "28022023",
+          "VALUE": 0.9624418135694448
+        },
+        {
+          "DATE": "28032023",
+          "VALUE": 0.9542593620828697
+        },
+        {
+          "DATE": "28042023",
+          "VALUE": 0.9452813393586055
+        },
+        {
+          "DATE": "28052023",
+          "VALUE": 0.9372954293620049
+        },
+        {
+          "DATE": "28062023",
+          "VALUE": 0.929114192932876
+        },
+        {
+          "DATE": "28072023",
+          "VALUE": 0.9212648659522327
+        },
+        {
+          "DATE": "28082023",
+          "VALUE": 0.9141955309880425
+        },
+        {
+          "DATE": "28092023",
+          "VALUE": 0.9071804426348792
+        },
+        {
+          "DATE": "28102023",
+          "VALUE": 0.9004429053540622
+        },
+        {
+          "DATE": "28112023",
+          "VALUE": 0.8949135964834019
+        },
+        {
+          "DATE": "28122023",
+          "VALUE": 0.8895949828797536
+        },
+        {
+          "DATE": "28012024",
+          "VALUE": 0.8841322873541579
+        },
+        {
+          "DATE": "28022024",
+          "VALUE": 0.8787031363549811
+        },
+        {
+          "DATE": "28032024",
+          "VALUE": 0.8736544387680913
+        },
+        {
+          "DATE": "28042024",
+          "VALUE": 0.8682896286180544
+        },
+        {
+          "DATE": "28052024",
+          "VALUE": 0.8638650688123766
+        },
+        {
+          "DATE": "28062024",
+          "VALUE": 0.8593167084911552
+        },
+        {
+          "DATE": "28072024",
+          "VALUE": 0.8549378721634788
+        },
+        {
+          "DATE": "28082024",
+          "VALUE": 0.8504365146769401
+        },
+        {
+          "DATE": "28092024",
+          "VALUE": 0.8459588574145713
+        },
+        {
+          "DATE": "28102024",
+          "VALUE": 0.841648088940081
+        },
+        {
+          "DATE": "28042025",
+          "VALUE": 0.8194593104350043
+        },
+        {
+          "DATE": "28102025",
+          "VALUE": 0.797875591592193
+        },
+        {
+          "DATE": "28042026",
+          "VALUE": 0.7777083666243259
+        },
+        {
+          "DATE": "28102026",
+          "VALUE": 0.7579688231258347
+        },
+        {
+          "DATE": "28042027",
+          "VALUE": 0.7384273023962373
+        },
+        {
+          "DATE": "28102027",
+          "VALUE": 0.7192727760384319
+        },
+        {
+          "DATE": "28042028",
+          "VALUE": 0.6995948635790239
+        },
+        {
+          "DATE": "28102028",
+          "VALUE": 0.6804216876072137
+        },
+        {
+          "DATE": "28042029",
+          "VALUE": 0.6611227198944089
+        },
+        {
+          "DATE": "28102029",
+          "VALUE": 0.6422445668564959
+        },
+        {
+          "DATE": "28042030",
+          "VALUE": 0.6245525975498996
+        },
+        {
+          "DATE": "28102030",
+          "VALUE": 0.6072794401324983
+        },
+        {
+          "DATE": "28042031",
+          "VALUE": 0.5898151619475069
+        },
+        {
+          "DATE": "28102031",
+          "VALUE": 0.5727316500440346
+        },
+        {
+          "DATE": "28042032",
+          "VALUE": 0.5544463675425804
+        },
+        {
+          "DATE": "28102032",
+          "VALUE": 0.5366892818222874
+        },
+        {
+          "DATE": "28042033",
+          "VALUE": 0.5199264378362674
+        },
+        {
+          "DATE": "28102033",
+          "VALUE": 0.5036104142544625
+        },
+        {
+          "DATE": "28042034",
+          "VALUE": 0.48789140908257633
+        },
+        {
+          "DATE": "28102034",
+          "VALUE": 0.4725806898025959
+        },
+        {
+          "DATE": "28042035",
+          "VALUE": 0.45783020391731566
+        },
+        {
+          "DATE": "28102035",
+          "VALUE": 0.4434628475761676
+        },
+        {
+          "DATE": "28042036",
+          "VALUE": 0.4295463591036471
+        },
+        {
+          "DATE": "28102036",
+          "VALUE": 0.41606658963129617
+        },
+        {
+          "DATE": "28042037",
+          "VALUE": 0.4030800574049017
+        },
+        {
+          "DATE": "28102037",
+          "VALUE": 0.39043083773962917
+        },
+        {
+          "DATE": "28042038",
+          "VALUE": 0.3782949593290306
+        },
+        {
+          "DATE": "28102038",
+          "VALUE": 0.36647439314630337
+        },
+        {
+          "DATE": "28042039",
+          "VALUE": 0.3550847759568279
+        },
+        {
+          "DATE": "28102039",
+          "VALUE": 0.3439894573670132
+        },
+        {
+          "DATE": "28042040",
+          "VALUE": 0.3332408337158306
+        },
+        {
+          "DATE": "28102040",
+          "VALUE": 0.32282807184157297
+        },
+        {
+          "DATE": "28042041",
+          "VALUE": 0.3127949338514265
+        },
+        {
+          "DATE": "28102041",
+          "VALUE": 0.30302104412323516
+        },
+        {
+          "DATE": "28042042",
+          "VALUE": 0.2936034865599676
+        },
+        {
+          "DATE": "28102042",
+          "VALUE": 0.2844292711527172
+        },
+        {
+          "DATE": "28042043",
+          "VALUE": 0.2756355554472651
+        },
+        {
+          "DATE": "28102043",
+          "VALUE": 0.26706915653886887
+        },
+        {
+          "DATE": "28042044",
+          "VALUE": 0.25876899030186623
+        },
+        {
+          "DATE": "28102044",
+          "VALUE": 0.2507267825669037
+        },
+        {
+          "DATE": "28042045",
+          "VALUE": 0.24297643198090937
+        },
+        {
+          "DATE": "28102045",
+          "VALUE": 0.23542503666723233
+        },
+        {
+          "DATE": "28042046",
+          "VALUE": 0.22814768658834828
+        },
+        {
+          "DATE": "28102046",
+          "VALUE": 0.221057149628513
+        },
+        {
+          "DATE": "28042047",
+          "VALUE": 0.21422393304262874
+        },
+        {
+          "DATE": "28102047",
+          "VALUE": 0.2075661284528293
+        },
+        {
+          "DATE": "28042048",
+          "VALUE": 0.20096457784375657
+        },
+        {
+          "DATE": "28102048",
+          "VALUE": 0.1945671872867885
+        },
+        {
+          "DATE": "28042049",
+          "VALUE": 0.18840675157062922
+        },
+        {
+          "DATE": "28102049",
+          "VALUE": 0.18240911961827558
+        },
+        {
+          "DATE": "28042050",
+          "VALUE": 0.17663363572954954
+        },
+        {
+          "DATE": "28102050",
+          "VALUE": 0.17101078236213824
+        },
+        {
+          "DATE": "28042051",
+          "VALUE": 0.16559619552350954
+        },
+        {
+          "DATE": "28102051",
+          "VALUE": 0.16032470166683804
+        },
+        {
+          "DATE": "28042052",
+          "VALUE": 0.15522101750768452
+        }
+      ]
+    },
+    {
+      "TYPE": "DISCOUNT",
+      "NAME": "LIBOR6M",
+      "ENABLEEXTRAPOLATION": true,
+      "DAYCOUNTER": "ACT360",
+      "NODES": [
+        {
+          "DATE": "28102022",
+          "VALUE": 1.0
+        },
+        {
+          "DATE": "28112022",
+          "VALUE": 0.9958148235114912
+        },
+        {
+          "DATE": "28122022",
+          "VALUE": 0.9917813307490106
+        },
+        {
+          "DATE": "28012023",
+          "VALUE": 0.987630550841818
+        },
+        {
+          "DATE": "28022023",
+          "VALUE": 0.9834971426811018
+        },
+        {
+          "DATE": "28032023",
+          "VALUE": 0.9797786126676198
+        },
+        {
+          "DATE": "28042023",
+          "VALUE": 0.9756780662539395
+        },
+        {
+          "DATE": "28052023",
+          "VALUE": 0.9709317359690274
+        },
+        {
+          "DATE": "28062023",
+          "VALUE": 0.9660514498764002
+        },
+        {
+          "DATE": "28072023",
+          "VALUE": 0.9613519496909178
+        },
+        {
+          "DATE": "28082023",
+          "VALUE": 0.9565198153848801
+        },
+        {
+          "DATE": "28092023",
+          "VALUE": 0.9517119692929134
+        },
+        {
+          "DATE": "28102023",
+          "VALUE": 0.9470822256319622
+        },
+        {
+          "DATE": "28112023",
+          "VALUE": 0.9436368565957701
+        },
+        {
+          "DATE": "28122023",
+          "VALUE": 0.940314562839268
+        },
+        {
+          "DATE": "28012024",
+          "VALUE": 0.9368938137306833
+        },
+        {
+          "DATE": "28022024",
+          "VALUE": 0.9334855088880137
+        },
+        {
+          "DATE": "28032024",
+          "VALUE": 0.9303083204561746
+        },
+        {
+          "DATE": "28042024",
+          "VALUE": 0.9269239728307371
+        },
+        {
+          "DATE": "28052024",
+          "VALUE": 0.9236770734035173
+        },
+        {
+          "DATE": "28062024",
+          "VALUE": 0.9203338920077919
+        },
+        {
+          "DATE": "28072024",
+          "VALUE": 0.9171100768143136
+        },
+        {
+          "DATE": "28082024",
+          "VALUE": 0.9137906641809133
+        },
+        {
+          "DATE": "28092024",
+          "VALUE": 0.9104832659179896
+        },
+        {
+          "DATE": "28102024",
+          "VALUE": 0.9072939562429208
+        },
+        {
+          "DATE": "28042025",
+          "VALUE": 0.8887534431266771
+        },
+        {
+          "DATE": "28102025",
+          "VALUE": 0.8704930475917606
+        },
+        {
+          "DATE": "28042026",
+          "VALUE": 0.8536325751049958
+        },
+        {
+          "DATE": "28102026",
+          "VALUE": 0.8370087157621354
+        },
+        {
+          "DATE": "28042027",
+          "VALUE": 0.8208079505063148
+        },
+        {
+          "DATE": "28102027",
+          "VALUE": 0.8048343226804072
+        },
+        {
+          "DATE": "28042028",
+          "VALUE": 0.7893339556040662
+        },
+        {
+          "DATE": "28102028",
+          "VALUE": 0.7741321113077939
+        },
+        {
+          "DATE": "28042029",
+          "VALUE": 0.7593037255300609
+        },
+        {
+          "DATE": "28102029",
+          "VALUE": 0.7446802357800806
+        },
+        {
+          "DATE": "28042030",
+          "VALUE": 0.7301468313005609
+        },
+        {
+          "DATE": "28102030",
+          "VALUE": 0.715819542950982
+        },
+        {
+          "DATE": "28042031",
+          "VALUE": 0.7018493924726982
+        },
+        {
+          "DATE": "28102031",
+          "VALUE": 0.68807736992482
+        },
+        {
+          "DATE": "28042032",
+          "VALUE": 0.6745755885527461
+        },
+        {
+          "DATE": "28102032",
+          "VALUE": 0.6613387455556099
+        },
+        {
+          "DATE": "28042033",
+          "VALUE": 0.6480021198518057
+        },
+        {
+          "DATE": "28102033",
+          "VALUE": 0.634863374357581
+        },
+        {
+          "DATE": "28042034",
+          "VALUE": 0.6220606537340556
+        },
+        {
+          "DATE": "28102034",
+          "VALUE": 0.6094478915825183
+        },
+        {
+          "DATE": "28042035",
+          "VALUE": 0.5971068375573857
+        },
+        {
+          "DATE": "28102035",
+          "VALUE": 0.5849499305086527
+        },
+        {
+          "DATE": "28042036",
+          "VALUE": 0.5730405342564735
+        },
+        {
+          "DATE": "28102036",
+          "VALUE": 0.5613736095590273
+        },
+        {
+          "DATE": "28042037",
+          "VALUE": 0.5500060387797401
+        },
+        {
+          "DATE": "28102037",
+          "VALUE": 0.53880808915143
+        },
+        {
+          "DATE": "28042038",
+          "VALUE": 0.5288911634356133
+        },
+        {
+          "DATE": "28102038",
+          "VALUE": 0.5191037739735898
+        },
+        {
+          "DATE": "28042039",
+          "VALUE": 0.509549512133528
+        },
+        {
+          "DATE": "28102039",
+          "VALUE": 0.5001200493816095
+        },
+        {
+          "DATE": "28042040",
+          "VALUE": 0.49086508344633506
+        },
+        {
+          "DATE": "28102040",
+          "VALUE": 0.48178138517883173
+        },
+        {
+          "DATE": "28042041",
+          "VALUE": 0.47291405318386054
+        },
+        {
+          "DATE": "28102041",
+          "VALUE": 0.46416254750449215
+        },
+        {
+          "DATE": "28042042",
+          "VALUE": 0.4556194955415648
+        },
+        {
+          "DATE": "28102042",
+          "VALUE": 0.44718803410366
+        },
+        {
+          "DATE": "28042043",
+          "VALUE": 0.44039579216661706
+        },
+        {
+          "DATE": "28102043",
+          "VALUE": 0.43367024502767065
+        },
+        {
+          "DATE": "28042044",
+          "VALUE": 0.4270474077354638
+        },
+        {
+          "DATE": "28102044",
+          "VALUE": 0.4205257117465904
+        },
+        {
+          "DATE": "28042045",
+          "VALUE": 0.41413843803374345
+        },
+        {
+          "DATE": "28102045",
+          "VALUE": 0.407813882630199
+        },
+        {
+          "DATE": "28042046",
+          "VALUE": 0.4016196861292546
+        },
+        {
+          "DATE": "28102046",
+          "VALUE": 0.3954863120620263
+        },
+        {
+          "DATE": "28042047",
+          "VALUE": 0.3894793563533423
+        },
+        {
+          "DATE": "28102047",
+          "VALUE": 0.38353138451211755
+        },
+        {
+          "DATE": "28042048",
+          "VALUE": 0.37819663033451867
+        },
+        {
+          "DATE": "28102048",
+          "VALUE": 0.3729360802593341
+        },
+        {
+          "DATE": "28042049",
+          "VALUE": 0.36777685148270084
+        },
+        {
+          "DATE": "28102049",
+          "VALUE": 0.3626612359839398
+        },
+        {
+          "DATE": "28042050",
+          "VALUE": 0.35764415025826635
+        },
+        {
+          "DATE": "28102050",
+          "VALUE": 0.3526694762114184
+        },
+        {
+          "DATE": "28042051",
+          "VALUE": 0.3477906173221287
+        },
+        {
+          "DATE": "28102051",
+          "VALUE": 0.3429530016181385
+        },
+        {
+          "DATE": "28042052",
+          "VALUE": 0.3381826750373561
+        }
+      ]
+    }
+  ],
+  "INDEXES": [
+    {
+      "NAME": "ICP_ICAP",
+      "TYPE": "OVERNIGHT",
+      "TENOR": "1D",
+      "DAYCOUNTER": "ACT360",
+      "CURRENCY": "CLP",
+      "FIXINGDAYS": 0,
+      "CALENDAR": "NULLCALENDAR"
+    },
+    {
+      "NAME": "LIBOR6M",
+      "TYPE": "IBOR",
+      "TENOR": "6M",
+      "DAYCOUNTER": "ACT360",
+      "CURRENCY": "USD",
+      "FIXINGDAYS": 0,
+      "CALENDAR": "USA"
+    }
+  ]
+}

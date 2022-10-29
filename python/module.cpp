@@ -1,3 +1,9 @@
+/*
+ * Created on Sat Oct 29 2022
+ *
+ * Jose Melo - 2022
+ */
+
 #include <curvemanager/curvemanager.hpp>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -14,7 +20,7 @@ PYBIND11_MODULE(curvemanager, m) {
     py::class_<MarketStore>(m, "MarketStore")
         .def(py::init<>())
         .def("allCurves", &MarketStore::allCurves)
-        .def("results", &MarketStore::results)
+        .def("bootstrapResults", &MarketStore::bootstrapResults)
         .def("discountRequest", &MarketStore::discountRequest)
         .def("zeroRateRequest", &MarketStore::zeroRateRequest)
         .def("forwardRateRequest", &MarketStore::forwardRateRequest);

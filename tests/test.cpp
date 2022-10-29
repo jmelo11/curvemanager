@@ -1,4 +1,8 @@
-#pragma once
+/*
+ * Created on Sat Oct 29 2022
+ *
+ * Jose Melo - 2022
+ */
 
 #include "pch.h"
 #include <curvemanager/curvemanager.hpp>
@@ -32,11 +36,46 @@ TEST(PiecewiseCurveFullBuild, CurveManager) {
     CurveBuilder builder(curveData, store);
     try {
         builder.build();
-    } catch (const std::exception& e) { std::cout << e.what() << std::endl; }
+    }
+    catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
+
     EXPECT_NO_THROW(builder.build());
 
     auto curves = store.allCurves();
-    for (const auto& curve : curves) EXPECT_NO_THROW(store.getCurve(curve)->discount(1));
+    for (const auto& curve : curves) {
+        try {
+            std::cout << curve << ":\t" << store.getCurve(curve)->discount(1) << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cout << e.what() << std::endl;
+        }
+    }
+    // EXPECT_NO_THROW(store.getCurve(curve)->discount(1));
+}
+
+TEST(PiecewiseCurveFullBuild2, CurveManager) {
+    json curveData = readJSONFile("piecewisefull2.json");
+    MarketStore store;
+    CurveBuilder builder(curveData, store);
+    try {
+        builder.build();
+    }
+    catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
+    EXPECT_NO_THROW(builder.build());
+
+    auto curves = store.allCurves();
+    for (const auto& curve : curves) {
+        try {
+            std::cout << curve << ":\t" << store.getCurve(curve)->discount(1) << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cout << e.what() << std::endl;
+        }
+    }
 }
 
 TEST(FlatForwardCurveBuild, CurveManager) {
@@ -45,7 +84,10 @@ TEST(FlatForwardCurveBuild, CurveManager) {
     CurveBuilder builder(curveData, store);
     try {
         EXPECT_NO_THROW(builder.build());
-    } catch (const std::exception& e) { std::cout << e.what() << "\n"; }
+    }
+    catch (const std::exception& e) {
+        std::cout << e.what() << "\n";
+    }
 
     auto curve = store.getCurve("SOFR");
     EXPECT_NO_THROW(curve->discount(1));
@@ -58,24 +100,28 @@ TEST(DiscountCurveBuild, CurveManager) {
 
     try {
         builder.build();
-    } catch (const std::exception& e) { std::cout << e.what() << "\n"; }
+    }
+    catch (const std::exception& e) {
+        std::cout << e.what() << "\n";
+    }
 
     auto curve = store.getCurve("SOFR");
     EXPECT_NO_THROW(curve->discount(1));
 }
 
-TEST(Results, CurveManager) {
+TEST(BootstrapResults, CurveManager) {
     json curveData = readJSONFile("discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
 
     try {
         builder.build();
-    } catch (const std::exception& e) { std::cout << e.what() << "\n"; }
+    }
+    catch (const std::exception& e) {
+        std::cout << e.what() << "\n";
+    }
 
-    std::vector<std::string> dates = {"28082022", "25022023", "25022025"};
-    json results                   = store.results(dates);
-    EXPECT_NO_THROW(store.results(dates));
+    EXPECT_NO_THROW(store.bootstrapResults(););
 }
 
 TEST(UpdateQuotes, CurveManager) {
@@ -141,6 +187,9 @@ TEST(ForwardRatesRequests, CurveManager) {
 	})"_json;
     try {
         store.forwardRateRequest(request);
-    } catch (const std::exception& e) { std::cout << e.what() << std::endl; }
+    }
+    catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
     EXPECT_NO_THROW(store.forwardRateRequest(request));
 }
