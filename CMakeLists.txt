@@ -2,6 +2,8 @@
 
 # set the project name
 project(curvemanager VERSION 1.0 LANGUAGES CXX)
+set (CMAKE_CXX_STANDARD 20)
+
 include(GNUInstallDirs) #despues de definir el proyecto
 
 #target is curvemanager, and use include a src folders
@@ -55,8 +57,6 @@ configure_package_config_file("${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config
 
 set(CONFIG_INSTALL_DIR        "${CMAKE_INSTALL_DATADIR}/cmake/${PROJECT_NAME}" CACHE INTERNAL "")
 set(INCLUDE_INSTALL_DIR       "${CMAKE_INSTALL_INCLUDEDIR}")
-
-
 
 #export targets to be used with find_package
 install(TARGETS curvemanager

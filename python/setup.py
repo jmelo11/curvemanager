@@ -18,7 +18,11 @@ if os.name == "nt":
 else:
     LIB_DIR = Path('/usr/local')
     include_dirs = [str(LIB_DIR / 'include')]
+    include_dirs += ['/opt/homebrew/opt/boost/include']
+
     library_dirs = [str(LIB_DIR / 'lib')]
+    library_dirs += ['/opt/homebrew/opt/boost/lib']
+
     libraries  = ['QuantLib','QuantExt','curvemanager','QuantLibParser','nlohmann_json_schema_validator']
 
 ext_modules = [

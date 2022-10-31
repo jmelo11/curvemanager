@@ -26,7 +26,7 @@ namespace CurveManager
     using namespace QuantLibParser;
     using json = nlohmann::json;
 
-    static bool has(const json& j, const std::string& key) {
+    inline bool has(const json& j, const std::string& key) {
         return j.find(key) != j.end();
     }
 
