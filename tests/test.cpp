@@ -5,8 +5,8 @@
  */
 
 #include "pch.h"
-#include <curvemanager/curvemanager.hpp>
 #include <fstream>
+#include <curvemanager/curvemanager.hpp>
 #include <iostream>
 
 using namespace CurveManager;
@@ -42,17 +42,6 @@ TEST(PiecewiseCurveFullBuild, CurveManager) {
     }
 
     EXPECT_NO_THROW(builder.build());
-
-    auto curves = store.allCurves();
-    for (const auto& curve : curves) {
-        try {
-            std::cout << curve << ":\t" << store.getCurve(curve)->discount(1) << std::endl;
-        }
-        catch (const std::exception& e) {
-            std::cout << e.what() << std::endl;
-        }
-    }
-    // EXPECT_NO_THROW(store.getCurve(curve)->discount(1));
 }
 
 TEST(PiecewiseCurveFullBuild2, CurveManager) {
@@ -158,23 +147,17 @@ TEST(DiscountFactorRequests, CurveManager) {
 }
 
 TEST(ZeroRatesRequest, CurveManager) {
-    json curveData = readJSONFile("discount.json");
+    json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     builder.build();
-    json request = R"({
-	  "REFDATE":"28082022",
-	  "CURVE":"SOFR",
-	  "DAYCOUNTER":"ACT360",
-	  "COMPOUNDING":"SIMPLE",
-	  "DATES":["24022023"]
-	})"_json;
+    json request = R"({"REFDATE":"28082022","CURVE":"SOFR","DAYCOUNTER":"ACT360","COMPOUNDING":"SIMPLE","DATES":["24022023"]})"_json;
 
     EXPECT_NO_THROW(store.zeroRateRequest(request));
 }
 
 TEST(ForwardRatesRequests, CurveManager) {
-    json curveData = readJSONFile("discount.json");
+    json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     builder.build();
