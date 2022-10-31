@@ -21,7 +21,7 @@ json readJSONFile(std::string filePath) {
 }
 
 TEST(PiecewiseCurveBuild, CurveManager) {
-    json curveData = readJSONFile("piecewise.json");
+    json curveData = readJSONFile("json/piecewise.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     EXPECT_NO_THROW(builder.build());
@@ -31,7 +31,7 @@ TEST(PiecewiseCurveBuild, CurveManager) {
 }
 
 TEST(PiecewiseCurveFullBuild, CurveManager) {
-    json curveData = readJSONFile("piecewisefull.json");
+    json curveData = readJSONFile("json/piecewisefull.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     try {
@@ -56,7 +56,7 @@ TEST(PiecewiseCurveFullBuild, CurveManager) {
 }
 
 TEST(PiecewiseCurveFullBuild2, CurveManager) {
-    json curveData = readJSONFile("piecewisefull2.json");
+    json curveData = readJSONFile("json/piecewisefull2.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     try {
@@ -79,7 +79,7 @@ TEST(PiecewiseCurveFullBuild2, CurveManager) {
 }
 
 TEST(FlatForwardCurveBuild, CurveManager) {
-    json curveData = readJSONFile("flatforward.json");
+    json curveData = readJSONFile("json/flatforward.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     try {
@@ -94,7 +94,7 @@ TEST(FlatForwardCurveBuild, CurveManager) {
 }
 
 TEST(DiscountCurveBuild, CurveManager) {
-    json curveData = readJSONFile("discount.json");
+    json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
 
@@ -110,7 +110,7 @@ TEST(DiscountCurveBuild, CurveManager) {
 }
 
 TEST(BootstrapResults, CurveManager) {
-    json curveData = readJSONFile("discount.json");
+    json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
 
@@ -125,7 +125,7 @@ TEST(BootstrapResults, CurveManager) {
 }
 
 TEST(UpdateQuotes, CurveManager) {
-    json curveData = readJSONFile("piecewise.json");
+    json curveData = readJSONFile("json/piecewise.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     builder.build();
@@ -148,7 +148,7 @@ TEST(UpdateQuotes, CurveManager) {
 }
 
 TEST(DiscountFactorRequests, CurveManager) {
-    json curveData = readJSONFile("discount.json");
+    json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     builder.build();

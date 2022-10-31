@@ -79,3 +79,6 @@ install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
 #exports headers
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include DESTINATION ${CMAKE_INSTALL_PREFIX})
 
+if(APPLE)
+        add_subdirectory(tests)
+endif()
