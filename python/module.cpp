@@ -14,7 +14,7 @@ namespace py = pybind11;
 using namespace CurveManager;
 using namespace std;
 
-PYBIND11_MODULE(curvemanager, m) {
+PYBIND11_MODULE(CurveManager, m) {
     m.doc() = "CurveManager for python";  // optional module docstring
 
     py::class_<MarketStore>(m, "MarketStore")
