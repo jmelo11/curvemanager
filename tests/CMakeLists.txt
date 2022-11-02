@@ -40,7 +40,13 @@ target_link_libraries(curvemanagertests PUBLIC QuantLibParser::QuantLibParser)
 #parent folder
 message(STATUS "Using this folder for test building: ${CMAKE_SOURCE_DIR}")
 target_include_directories(curvemanagertests PUBLIC "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/src")
-target_link_libraries(curvemanagertests PUBLIC "${CMAKE_SOURCE_DIR}/build/libcurvemanager.dylib")
+
+if(MSVC)
+  target_link_libraries(curvemanagertests PUBLIC "${CMAKE_SOURCE_DIR}/build/Debug/CurveManager.lib")
+else()
+  target_link_libraries(curvemanagertests PUBLIC "${CMAKE_SOURCE_DIR}/build/libcurvemanager.dylib")
+endif(MSVC)
+
 
 
 # external libs

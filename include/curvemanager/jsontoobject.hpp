@@ -105,7 +105,6 @@ namespace CurveManager
             SETVAR(params, DayCounter, COUPONDAYCOUNTER);
             SETVAR(params, DayCounter, IRRDAYCOUNTER);
 
-            bool ENDOFMONTH       = params.at("ENDOFMONTH");
             double SETTLEMENTDAYS = params.at("SETTLEMENTDAYS");
             double FACEAMOUNT     = params.at("FACEAMOUNT");
             double COUPON         = params.at("COUPON");
@@ -154,7 +153,6 @@ namespace CurveManager
 
             SETVAR(params, Frequency, FREQUENCY);
 
-            bool ENDOFMONTH    = params.at("ENDOFMONTH");
             double SPREAD      = params.at("SPREAD");
             int SETTLEMENTDAYS = params.at("SETTLEMENTDAYS");
 
@@ -185,7 +183,6 @@ namespace CurveManager
 
             SETVAR(params, Frequency, FREQUENCY);
 
-            bool ENDOFMONTH           = params.at("ENDOFMONTH");
             double SPREAD             = params.at("SPREAD");
             int SETTLEMENTDAYS        = params.at("SETTLEMENTDAYS");
             int PAYMENTLAG            = params.at("PAYMENTLAG");

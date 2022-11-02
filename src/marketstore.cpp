@@ -121,6 +121,7 @@ namespace CurveManager
     }
 
     json MarketStore::discountRequest(const json& request) const {
+        //shoulnt require ref date (not the same for the microservice)
         Schema<DiscountFactorsRequest> schema;
         schema.validate(request);
         json data = schema.setDefaultValues(request);
