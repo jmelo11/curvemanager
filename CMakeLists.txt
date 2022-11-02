@@ -5,10 +5,11 @@ project(
   CurveManager
   VERSION 1.0
   LANGUAGES CXX)
+  
 set(CMAKE_CXX_STANDARD 20)
+set(BUILD_TESTS OFF)
 
 include(GNUInstallDirs) # despues de definir el proyecto
-set(BUILD_TESTS OFF)
 # target is curvemanager, and use include a src folders
 
 file(GLOB SOURCES "src/*.cpp" "src/utils/*.cpp")

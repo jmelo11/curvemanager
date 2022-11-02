@@ -169,6 +169,7 @@ namespace CurveManager
         };
 
         for (auto const& helper : rateHelperVector) {
+            if (helper.find("TYPE") == helper.end()) throw std::runtime_error("Rate helper type not specified: " + helper.dump(4));
             const std::string& type = helper.at("TYPE");
 
             if (type == "DEPOSIT") {

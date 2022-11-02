@@ -8,21 +8,25 @@ __version__ = "1.0.0"
 
 BASE_DIR = Path(__file__).absolute().parent.resolve()
 
+# reorder this
 if platform == "win32":
     LIB_DIR = Path('C:/Users/bloomberg/Desktop/Desarrollo/builds')
     folders = ['QuantLib', 'QuantExt', 'curvemanager', 'quantlibparser',
                'nlohmann_json_schema_validator', 'nlohmann_json', 'pybind11', 'pybind11_json']
     include_dirs = [str(LIB_DIR / folder / 'include') for folder in folders]
-    include_dirs.append(str(LIB_DIR / 'boost'))
+    include_dirs += [str(LIB_DIR / 'boost'), str(LIB_DIR / 'include')]
     library_dirs = [str(LIB_DIR / folder / 'lib') for folder in folders]
+    library_dirs += [str(LIB_DIR / 'lib')]
+
     libraries = ['QuantLib-x64-mt', 'QuantExt-x64-mt', 'CurveManager',
                  'QuantLibParser', 'nlohmann_json_schema_validator']
+    extra_compile_args = ['-std=c++20']
 
 elif platform == "linux" or platform == "linux2":
     LIB_DIR = Path('/usr/local')
     include_dirs = [str(LIB_DIR / 'include')]
     library_dirs = [str(LIB_DIR / 'lib')]
-    libraries = ['QuantLib', 'QuantExt', 'QuantLibParser','CurveManager',
+    libraries = ['QuantLib', 'QuantExt', 'QuantLibParser', 'CurveManager',
                  'nlohmann_json_schema_validator']
     extra_compile_args = ['-std=c++20']
 
@@ -32,7 +36,7 @@ else:
     include_dirs += ['/opt/homebrew/opt/boost/include']
     library_dirs = [str(LIB_DIR / 'lib')]
     library_dirs += ['/opt/homebrew/opt/boost/lib']
-    libraries = ['QuantLib', 'QuantExt', 'QuantLibParser','CurveManager',
+    libraries = ['QuantLib', 'QuantExt', 'QuantLibParser', 'CurveManager',
                  'nlohmann_json_schema_validator']
     extra_compile_args = ['-std=c++20', '-arch', 'arm64']
 
