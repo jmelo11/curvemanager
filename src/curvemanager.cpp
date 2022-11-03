@@ -18,7 +18,7 @@
 namespace CurveManager
 {
     CurveBuilder::CurveBuilder(const json& data, MarketStore& marketStore) : data_(data), marketStore_(marketStore) {
-        Schema<CurveBuilderRequest> schema;
+        Schema<CurveBuilderRequest> schema;  // ok
         schema.validate(data);
         if (!data_.empty()) preprocessData();
     };
@@ -27,8 +27,8 @@ namespace CurveManager
         Schema<DiscountCurve> discountCurveSchema;
         Schema<FlatForward> flatForwardSchema;
         Schema<PiecewiseYieldCurve<Discount, LogLinear>> bootstrapCurveSchema;
-        Schema<YieldTermStructure> termStructureSchema;
 
+        Schema<YieldTermStructure> termStructureSchema;
         for (auto& curve : data_.at("CURVES")) {
             termStructureSchema.validate(curve);
             if (curve.at("TYPE") == "DISCOUNT") {
@@ -106,7 +106,8 @@ namespace CurveManager
             dfs.push_back(node.at("VALUE"));
         }
         if (qlRefDate != dates[0])
-            throw std::runtime_error("Error at " + curveName + ": Reference date must be equal to the first node in the curve");
+            throw std::runtime_error("Error building curve" + curveName +
+                                     ": Reference date (REFDATE) must be equal to the first node date (NODES/DATES) in the curve.");
 
         DayCounter dayCounter = parse<DayCounter>(curveParams.at("DAYCOUNTER"));
         boost::shared_ptr<YieldTermStructure> curvePtr(new DiscountCurve(dates, dfs, dayCounter));
