@@ -10,13 +10,8 @@ namespace CurveManager
     using namespace QuantLibParser;
 
     CurveBuilder::CurveBuilder(const json& data, MarketStore& marketStore) : data_(data), marketStore_(marketStore) {
-<<<<<<< HEAD
-        Schema<CurveBuilderRequest> schema;  // ok
-        schema.validate(data);
-=======
         Schema<CurveBuilderRequest> schema;
         schema.validate(data_);
->>>>>>> cefc82b (changed jsonobject file for schema's makeObj)
         if (!data_.empty()) preprocessData();
     };
 
@@ -35,10 +30,6 @@ namespace CurveManager
         Schema<DiscountCurve> discountCurveSchema;
         Schema<BootstrapCurve> bootstrapCurveSchema;
         Schema<FlatForward> flatForwardSchema;
-<<<<<<< HEAD
-        Schema<PiecewiseYieldCurve<Discount, LogLinear>> bootstrapCurveSchema;
-=======
->>>>>>> cefc82b (changed jsonobject file for schema's makeObj)
 
         Schema<YieldTermStructure> termStructureSchema;
         for (auto& curve : data_.at("CURVES")) {
@@ -186,16 +177,6 @@ namespace CurveManager
             return marketStore_.getCurveHandle(curveName);
         };
 
-<<<<<<< HEAD
-        for (auto const& helper : rateHelperVector) {
-            if (helper.find("TYPE") == helper.end()) throw std::runtime_error("Rate helper type not specified: " + helper.dump(4));
-            const std::string& type = helper.at("TYPE");
-
-            if (type == "DEPOSIT") {
-                boost::shared_ptr<DepositRateHelper> h = JsonToObjectWrapper<DepositRateHelper>(helper, priceGetter);
-                h->unregisterWith(Settings::instance().evaluationDate());
-                rateHelpers.push_back(h);
-=======
         std::vector<boost::shared_ptr<RateHelper>> rateHelpers;
         rateHelpers.reserve(rateHelperVector.size());
         size_t rateHelperCount = 0;
@@ -240,7 +221,6 @@ namespace CurveManager
                 }
                 helper->unregisterWith(Settings::instance().evaluationDate());
                 rateHelpers.push_back(helper);
->>>>>>> cefc82b (changed jsonobject file for schema's makeObj)
             }
             catch (std::exception& e) {
                 throw std::runtime_error("Error at curve " + currentCurve + ", rate helper pos " + std::to_string(rateHelperCount) + ":\n" +
