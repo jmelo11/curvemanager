@@ -47,18 +47,21 @@ AllowAllParametersOfDeclarationOnNextLine: false
 SortIncludes: true
 IncludeBlocks: Merge
 IncludeCategories: 
-  - Regex:           '^"'
+  - Regex:           '^<curvemanager/'
     Priority:        1
-  - Regex:           '^<qlp/'
-    Priority:        2
   - Regex:           '^<ql/'
+    Priority:        2
+  - Regex:           '^<qlp/'
     Priority:        3
   - Regex:           '^<qle/'
     Priority:        4
   - Regex:           '^<boost/'
     Priority:        5
-  - Regex:           '^<'
+  - Regex:           '^"'
     Priority:        6
+  - Regex:           '^<'
+    Priority:        7
+  
 
 # Other:
 

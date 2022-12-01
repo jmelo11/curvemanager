@@ -7,14 +7,17 @@
 #ifndef A02E616D_E693_447C_B341_9A3B4E69200A
 #define A02E616D_E693_447C_B341_9A3B4E69200A
 
-#include <curvemanager/jsontoobject.hpp>
 #include <curvemanager/marketstore.hpp>
+#include <ql/termstructures/yield/ratehelpers.hpp>
 #include <iostream>
 #include <map>
 #include <stdexcept>
 
 namespace CurveManager
 {
+    using namespace QuantLib;
+    using json = nlohmann::json;
+
     class CurveBuilder {
        public:
         CurveBuilder(const json& data, MarketStore& marketStore);

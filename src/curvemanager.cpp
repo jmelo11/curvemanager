@@ -1,36 +1,56 @@
-/*
- * Created on Sat Oct 29 2022
- *
- * Jose Melo - 2022
- */
 
-#include <qlp/schemas/requests/curvebuilderrequest.hpp>
-#include <qlp/schemas/requests/updatequoterequest.hpp>
-#include <qlp/schemas/termstructures/bootstrapcurveschema.hpp>
-#include <qlp/schemas/termstructures/discountcurveschema.hpp>
-#include <qlp/schemas/termstructures/flatforwardcurveschema.hpp>
-#include <qlp/schemas/termstructures/rateindexschema.hpp>
-#include <ql/termstructures/yield/discountcurve.hpp>
-#include <ql/termstructures/yield/flatforward.hpp>
-#include <ql/termstructures/yield/piecewiseyieldcurve.hpp>
 #include <curvemanager/curvemanager.hpp>
+#include <curvemanager/schemas/all.hpp>
+#include <qlp/schemas/ratehelpers/all.hpp>
+#include <qlp/schemas/termstructures/all.hpp>
 
 namespace CurveManager
 {
+    using namespace QuantExt;
+    using namespace QuantLibParser;
+
     CurveBuilder::CurveBuilder(const json& data, MarketStore& marketStore) : data_(data), marketStore_(marketStore) {
+<<<<<<< HEAD
         Schema<CurveBuilderRequest> schema;  // ok
         schema.validate(data);
+=======
+        Schema<CurveBuilderRequest> schema;
+        schema.validate(data_);
+>>>>>>> cefc82b (changed jsonobject file for schema's makeObj)
         if (!data_.empty()) preprocessData();
     };
 
     void CurveBuilder::preprocessData() {
+        json curveValidation = R"({
+            "title": "Curve type",
+            "type": "object",
+            "properties": {},
+            "required": ["TYPE", "NAME"]
+            })"_json;
+
+        curveValidation["properties"]["TYPE"] = curveTypeSchema;
+        curveValidation["properties"]["NAME"] = curveNameSchema;
+        json_validator validator;
+
         Schema<DiscountCurve> discountCurveSchema;
+        Schema<BootstrapCurve> bootstrapCurveSchema;
         Schema<FlatForward> flatForwardSchema;
+<<<<<<< HEAD
         Schema<PiecewiseYieldCurve<Discount, LogLinear>> bootstrapCurveSchema;
+=======
+>>>>>>> cefc82b (changed jsonobject file for schema's makeObj)
 
         Schema<YieldTermStructure> termStructureSchema;
         for (auto& curve : data_.at("CURVES")) {
-            termStructureSchema.validate(curve);
+            try {
+                validator.set_root_schema(curveValidation);  // insert root-schema
+                validator.validate(curve);
+            }
+            catch (const std::exception& e) {
+                std::string error = e.what();
+                throw std::runtime_error("Validation of schema failed:\t" + error + "\n");
+            }
+
             if (curve.at("TYPE") == "DISCOUNT") {
                 discountCurveSchema.setDefaultValues(curve);
                 discountCurveSchema.validate(curve);
@@ -144,10 +164,7 @@ namespace CurveManager
     }
 
     std::vector<boost::shared_ptr<RateHelper>> CurveBuilder::buildRateHelpers(const json& rateHelperVector, const std::string& currentCurve) {
-        std::vector<boost::shared_ptr<RateHelper>> rateHelpers;
-        rateHelpers.reserve(rateHelperVector.size());
-
-        auto priceGetter = [&](double price, const std::string& ticker) {
+        PriceGetter priceGetter = [&](double price, const std::string& ticker) {
             if (!marketStore_.hasQuote(ticker)) {
                 boost::shared_ptr<Quote> quote(new SimpleQuote(price));
                 Handle<Quote> handle(quote);
@@ -159,16 +176,17 @@ namespace CurveManager
             }
         };
 
-        auto indexGetter = [&](const std::string& indexName) {
+        IndexGetter indexGetter = [&](const std::string& indexName) {
             if (currentCurve != indexName) buildCurve(indexName, curveConfigs_.at(indexName));
             return marketStore_.getIndex(indexName);
         };
 
-        auto curveGetter = [&](const std::string& curveName) {
+        CurveGetter curveGetter = [&](const std::string& curveName) {
             if (currentCurve != curveName) buildCurve(curveName, curveConfigs_.at(curveName));
             return marketStore_.getCurveHandle(curveName);
         };
 
+<<<<<<< HEAD
         for (auto const& helper : rateHelperVector) {
             if (helper.find("TYPE") == helper.end()) throw std::runtime_error("Rate helper type not specified: " + helper.dump(4));
             const std::string& type = helper.at("TYPE");
@@ -177,44 +195,56 @@ namespace CurveManager
                 boost::shared_ptr<DepositRateHelper> h = JsonToObjectWrapper<DepositRateHelper>(helper, priceGetter);
                 h->unregisterWith(Settings::instance().evaluationDate());
                 rateHelpers.push_back(h);
+=======
+        std::vector<boost::shared_ptr<RateHelper>> rateHelpers;
+        rateHelpers.reserve(rateHelperVector.size());
+        size_t rateHelperCount = 0;
+        for (auto const& helperParams : rateHelperVector) {
+            const std::string& type = helperParams.at("TYPE");
+            boost::shared_ptr<RateHelper> helper;
+            try {
+                if (type == "DEPOSIT") {
+                    Schema<DepositRateHelper> schema;
+                    helper = boost::make_shared<DepositRateHelper>(schema.makeObj(helperParams, priceGetter));
+                }
+                else if (type == "FXSWAP") {
+                    Schema<FxSwapRateHelper> schema;
+                    helper = boost::make_shared<FxSwapRateHelper>(schema.makeObj(helperParams, priceGetter, curveGetter));
+                }
+                else if (type == "BOND") {
+                    Schema<FixedRateBondHelper> schema;
+                    helper = boost::make_shared<FixedRateBondHelper>(schema.makeObj(helperParams, priceGetter));
+                }
+                else if (type == "SWAP") {
+                    Schema<SwapRateHelper> schema;
+                    helper = boost::make_shared<SwapRateHelper>(schema.makeObj(helperParams, priceGetter, indexGetter, curveGetter));
+                }
+                else if (type == "OIS") {
+                    Schema<OISRateHelper> schema;
+                    helper = boost::make_shared<OISRateHelper>(schema.makeObj(helperParams, priceGetter, indexGetter, curveGetter));
+                }
+                else if (type == "XCCY") {
+                    Schema<CrossCcyFixFloatSwapHelper> schema;
+                    helper = boost::make_shared<CrossCcyFixFloatSwapHelper>(schema.makeObj(helperParams, priceGetter, indexGetter, curveGetter));
+                }
+                else if (type == "XCCYBASIS") {
+                    Schema<CrossCcyBasisSwapHelper> schema;
+                    helper = boost::make_shared<CrossCcyBasisSwapHelper>(schema.makeObj(helperParams, priceGetter, indexGetter, curveGetter));
+                }
+                else if (type == "TENORBASIS") {
+                    Schema<TenorBasisSwapHelper> schema;
+                    helper = boost::make_shared<TenorBasisSwapHelper>(schema.makeObj(helperParams, priceGetter, indexGetter, curveGetter));
+                }
+                else {
+                    throw std::runtime_error("Helper of type " + type + " not supported");
+                }
+                helper->unregisterWith(Settings::instance().evaluationDate());
+                rateHelpers.push_back(helper);
+>>>>>>> cefc82b (changed jsonobject file for schema's makeObj)
             }
-            else if (type == "FXSWAP") {
-                auto h = JsonToObjectWrapper<FxSwapRateHelper>(helper, priceGetter, curveGetter);
-                h->unregisterWith(Settings::instance().evaluationDate());
-                rateHelpers.push_back(h);
-            }
-            else if (type == "BOND") {
-                auto h = JsonToObjectWrapper<FixedRateBondHelper>(helper, priceGetter);
-                h->unregisterWith(Settings::instance().evaluationDate());
-                rateHelpers.push_back(h);
-            }
-            else if (type == "SWAP") {
-                auto h = JsonToObjectWrapper<SwapRateHelper>(helper, priceGetter, indexGetter, curveGetter);
-                h->unregisterWith(Settings::instance().evaluationDate());
-                rateHelpers.push_back(h);
-            }
-            else if (type == "OIS") {
-                auto h = JsonToObjectWrapper<OISRateHelper>(helper, priceGetter, indexGetter, curveGetter);
-                h->unregisterWith(Settings::instance().evaluationDate());
-                rateHelpers.push_back(h);
-            }
-            else if (type == "XCCY") {
-                auto h = JsonToObjectWrapper<CrossCcyFixFloatSwapHelper>(helper, priceGetter, indexGetter, curveGetter);
-                h->unregisterWith(Settings::instance().evaluationDate());
-                rateHelpers.push_back(h);
-            }
-            else if (type == "XCCYBASIS") {
-                auto h = JsonToObjectWrapper<CrossCcyBasisSwapHelper>(helper, priceGetter, indexGetter, curveGetter);
-                h->unregisterWith(Settings::instance().evaluationDate());
-                rateHelpers.push_back(h);
-            }
-            else if (type == "TENORBASIS") {
-                auto h = JsonToObjectWrapper<TenorBasisSwapHelper>(helper, priceGetter, indexGetter, curveGetter);
-                h->unregisterWith(Settings::instance().evaluationDate());
-                rateHelpers.push_back(h);
-            }
-            else {
-                throw std::runtime_error("Helper of type " + type + " not supported");
+            catch (std::exception& e) {
+                throw std::runtime_error("Error at curve " + currentCurve + ", rate helper pos " + std::to_string(rateHelperCount) + ":\n" +
+                                         e.what());
             }
         }
         return rateHelpers;

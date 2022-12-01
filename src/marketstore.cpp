@@ -1,16 +1,12 @@
-/*
- * Created on Sat Oct 29 2022
- *
- * Jose Melo - 2022
- */
 
-#include <qlp/schemas/requests/discountfactorsrequest.hpp>
-#include <qlp/schemas/requests/forwardratesrequest.hpp>
-#include <qlp/schemas/requests/zeroratesrequest.hpp>
 #include <curvemanager/marketstore.hpp>
+#include <curvemanager/schemas/all.hpp>
+#include <qlp/parser.hpp>
 
 namespace CurveManager
 {
+    using namespace QuantLibParser;
+
     MarketStore::MarketStore(){};
 
     boost::shared_ptr<YieldTermStructure> MarketStore::getCurve(const std::string& name) const {
@@ -99,13 +95,13 @@ namespace CurveManager
     json MarketStore::bootstrapResults() const {
         std::vector<Date> qlDates;
         json results = json::array();
-       
+
         for (const auto& [name, curve] : curveMap_) {
             auto ptr = boost::dynamic_pointer_cast<PiecewiseYieldCurve<Discount, LogLinear>>(curve);
             if (ptr) {
                 json data;
-                auto nodes     = ptr->nodes();
-                data["NAME"]   = name;				
+                auto nodes   = ptr->nodes();
+                data["NAME"] = name;
                 std::vector<double> values;
                 std::vector<std::string> dates;
                 for (const auto& pair : nodes) {
@@ -115,8 +111,8 @@ namespace CurveManager
                 data["DATES"]  = dates;
                 data["VALUES"] = values;
                 results.push_back(data);
-            }            
-        }	
+            }
+        }
         return results;
     }
 
@@ -128,12 +124,13 @@ namespace CurveManager
 
         auto curve = getCurve(data.at("CURVE"));
 
-        json response = R"({"DATES":[], "VALUES": []})"_json;
+        json response = json::array();
         for (const auto& date : data.at("DATES")) {
-            auto qlDate = parse<Date>(date);
-            response["VALUES"].push_back(curve->discount(qlDate));
+            json row;
+            row["DATE"]  = date;
+            row["VALUE"] = curve->discount(parse<Date>(date));
+            response.push_back(row);
         }
-        response["DATES"] = request["DATES"];
         return response;
     }
 
@@ -146,13 +143,13 @@ namespace CurveManager
         DayCounter dayCounter = parse<DayCounter>(data.at("DAYCOUNTER"));
         Compounding comp      = parse<Compounding>(data.at("COMPOUNDING"));
         Frequency freq        = parse<Frequency>(data.at("FREQUENCY"));
-        json response;
-        response["VALUES"] = json::array();
+        json response         = json::array();
         for (const auto& date : data.at("DATES")) {
-            auto qlDate = parse<Date>(date);
-            response["VALUES"].push_back(curve->zeroRate(qlDate, dayCounter, comp, freq).rate());
+            json row;
+            row["DATE"]  = date;
+            row["VALUE"] = curve->discount(parse<Date>(date));
+            response.push_back(row);
         }
-        response["DATES"] = request["DATES"];
         return response;
     }
 

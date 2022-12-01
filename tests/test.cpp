@@ -4,9 +4,9 @@
  * Jose Melo - 2022
  */
 
-#include "pch.h"
-#include <fstream>
 #include <curvemanager/curvemanager.hpp>
+#include "pch.hpp"
+#include <fstream>
 #include <iostream>
 
 using namespace CurveManager;
@@ -20,54 +20,30 @@ json readJSONFile(std::string filePath) {
     return data;
 }
 
-TEST(PiecewiseCurveBuild, CurveManager) {
+TEST(CurveManager, PiecewiseCurveBuild) {
     json curveData = readJSONFile("json/piecewise.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     EXPECT_NO_THROW(builder.build());
-
     auto curve = store.getCurve("SOFR");
     EXPECT_NO_THROW(curve->discount(1));
 }
 
-TEST(PiecewiseCurveFullBuild, CurveManager) {
+TEST(CurveManager, PiecewiseCurveFullBuild) {
     json curveData = readJSONFile("json/piecewisefull.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
-    try {
-        builder.build();
-    }
-    catch (const std::exception& e) {
-        std::cout << e.what() << std::endl;
-    }
-
     EXPECT_NO_THROW(builder.build());
 }
 
-TEST(PiecewiseCurveFullBuild2, CurveManager) {
+TEST(CurveManager, PiecewiseCurveFullBuild2) {
     json curveData = readJSONFile("json/piecewisefull2.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
-    try {
-        builder.build();
-    }
-    catch (const std::exception& e) {
-        std::cout << e.what() << std::endl;
-    }
     EXPECT_NO_THROW(builder.build());
-
-    auto curves = store.allCurves();
-    for (const auto& curve : curves) {
-        try {
-            std::cout << curve << ":\t" << store.getCurve(curve)->discount(1) << std::endl;
-        }
-        catch (const std::exception& e) {
-            std::cout << e.what() << std::endl;
-        }
-    }
 }
 
-TEST(FlatForwardCurveBuild, CurveManager) {
+TEST(CurveManager, FlatForwardCurveBuild) {
     json curveData = readJSONFile("json/flatforward.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
@@ -82,38 +58,24 @@ TEST(FlatForwardCurveBuild, CurveManager) {
     EXPECT_NO_THROW(curve->discount(1));
 }
 
-TEST(DiscountCurveBuild, CurveManager) {
+TEST(CurveManager, DiscountCurveBuild) {
     json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
-
-    try {
-        builder.build();
-    }
-    catch (const std::exception& e) {
-        std::cout << e.what() << "\n";
-    }
+    builder.build();
 
     auto curve = store.getCurve("SOFR");
     EXPECT_NO_THROW(curve->discount(1));
 }
 
-TEST(BootstrapResults, CurveManager) {
+TEST(CurveManager, BootstrapResults) {
     json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
-
-    try {
-        builder.build();
-    }
-    catch (const std::exception& e) {
-        std::cout << e.what() << "\n";
-    }
-
     EXPECT_NO_THROW(store.bootstrapResults(););
 }
 
-TEST(UpdateQuotes, CurveManager) {
+TEST(CurveManager, UpdateQuotes) {
     json curveData = readJSONFile("json/piecewise.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
@@ -136,27 +98,33 @@ TEST(UpdateQuotes, CurveManager) {
     EXPECT_NO_THROW(curve->discount(1));
 }
 
-TEST(DiscountFactorRequests, CurveManager) {
+TEST(CurveManager, DiscountFactorRequests) {
     json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     builder.build();
     json request = R"({"REFDATE":"28082022", "DATES":["29012026"], "CURVE":"SOFR"})"_json;
-
     EXPECT_NO_THROW(store.discountRequest(request));
 }
 
-TEST(ZeroRatesRequest, CurveManager) {
+TEST(CurveManager, ZeroRatesRequest) {
     json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     builder.build();
-    json request = R"({"REFDATE":"28082022","CURVE":"SOFR","DAYCOUNTER":"ACT360","COMPOUNDING":"SIMPLE","DATES":["24022023"]})"_json;
+    json request = R"({
+        "REFDATE":"28082022",
+        "CURVE":"SOFR",
+        "DAYCOUNTER":"ACT360",
+        "COMPOUNDING":"SIMPLE",
+        "FREQUENCY":"ANNUAL",
+        "DATES":["24022023"]
+    })"_json;
 
     EXPECT_NO_THROW(store.zeroRateRequest(request));
 }
 
-TEST(ForwardRatesRequests, CurveManager) {
+TEST(CurveManager, ForwardRatesRequests) {
     json curveData = readJSONFile("json/discount.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
@@ -168,11 +136,5 @@ TEST(ForwardRatesRequests, CurveManager) {
 		"COMPOUNDING":"SIMPLE",
 		"FREQUENCY":"ANNUAL"
 	})"_json;
-    try {
-        store.forwardRateRequest(request);
-    }
-    catch (const std::exception& e) {
-        std::cout << e.what() << std::endl;
-    }
     EXPECT_NO_THROW(store.forwardRateRequest(request));
 }

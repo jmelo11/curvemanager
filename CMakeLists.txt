@@ -10,9 +10,13 @@ set(CMAKE_CXX_STANDARD 20)
 set(BUILD_TESTS OFF)
 
 include(GNUInstallDirs) # despues de definir el proyecto
+<<<<<<< HEAD
 # target is curvemanager, and use include a src folders
+=======
+set(BUILD_TESTS ON)
+>>>>>>> cefc82b (changed jsonobject file for schema's makeObj)
 
-file(GLOB SOURCES "src/*.cpp" "src/utils/*.cpp")
+file(GLOB SOURCES "src/*.cpp" "src/utils/*.cpp" "src/schemas/*.cpp")
 
 file(GLOB INCLUDES "include/*.hpp" "include/curvemanager/*.hpp")
 

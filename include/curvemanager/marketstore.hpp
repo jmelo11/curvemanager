@@ -1,13 +1,7 @@
-/*
- * Created on Sat Oct 29 2022
- *
- * Jose Melo - 2022 
- */
 
 #ifndef BAB0CCE6_F3E6_4E00_8FCE_23361591F7DF
 #define BAB0CCE6_F3E6_4E00_8FCE_23361591F7DF
 
-#include <qlp/parser.hpp>
 #include <ql/handle.hpp>
 #include <ql/indexes/iborindex.hpp>
 #include <ql/quote.hpp>
@@ -15,13 +9,11 @@
 #include <ql/termstructures/yieldtermstructure.hpp>
 #include <map>
 #include <nlohmann/json.hpp>
-#include <string>
 #include <unordered_map>
 
 namespace CurveManager
 {
     using namespace QuantLib;
-    using namespace QuantLibParser;
     using json = nlohmann::json;
 
     class MarketStore {
