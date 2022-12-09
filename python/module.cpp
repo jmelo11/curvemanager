@@ -5,6 +5,7 @@
  */
 
 #include <curvemanager/curvemanager.hpp>
+#include <curvemanager/schemas/all.hpp>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11_json/pybind11_json.hpp>
@@ -12,6 +13,7 @@
 namespace py = pybind11;
 
 using namespace CurveManager;
+using namespace QuantLibParser;
 using namespace std;
 
 #define SchemaWithoutMaker(name)                                      \
@@ -25,7 +27,6 @@ using namespace std;
         .def("schema", &Schema<name>::schema)                         \
         .def("addRequired", &Schema<name>::addRequired)               \
         .def("removeRequired", &Schema<name>::removeRequired)
-
 
 PYBIND11_MODULE(CurveManager, m) {
     m.doc() = "CurveManager for python";  // optional module docstring
@@ -47,5 +48,4 @@ PYBIND11_MODULE(CurveManager, m) {
     SchemaWithoutMaker(DiscountFactorsRequest);
     SchemaWithoutMaker(ForwardRatesRequest);
     SchemaWithoutMaker(ZeroRatesRequests);
-    
 }

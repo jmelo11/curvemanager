@@ -31,7 +31,6 @@ namespace CurveManager
         Schema<BootstrapCurve> bootstrapCurveSchema;
         Schema<FlatForward> flatForwardSchema;
 
-        Schema<YieldTermStructure> termStructureSchema;
         for (auto& curve : data_.at("CURVES")) {
             try {
                 validator.set_root_schema(curveValidation);  // insert root-schema
@@ -59,7 +58,7 @@ namespace CurveManager
             RelinkableHandle<YieldTermStructure> handle;
             marketStore_.addCurveHandle(name, handle);
         }
-        Schema<InterestRateIndex> indexSchema;
+        Schema<IborIndex> indexSchema;
         for (auto& index : data_.at("INDEXES")) {
             indexSchema.validate(index);
             indexSchema.setDefaultValues(index);
