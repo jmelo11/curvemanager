@@ -100,16 +100,17 @@ namespace CurveManager
             auto ptr = boost::dynamic_pointer_cast<PiecewiseYieldCurve<Discount, LogLinear>>(curve);
             if (ptr) {
                 json data;
-                auto nodes   = ptr->nodes();
-                data["NAME"] = name;
+                auto nodes    = ptr->nodes();
+                data["NAME"]  = name;
+                data["NODES"] = json::array();
                 std::vector<double> values;
                 std::vector<std::string> dates;
                 for (const auto& pair : nodes) {
-                    dates.push_back(parseDate(pair.first, DateFormat::MIXED));
-                    values.push_back(pair.second);
+                    json node;
+                    node["DATE"]  = parseDate(pair.first, DateFormat::MIXED);
+                    node["VALUE"] = pair.second;
+                    data["NODES"].push_back(node);
                 }
-                data["DATES"]  = dates;
-                data["VALUES"] = values;
                 results.push_back(data);
             }
         }
@@ -117,7 +118,7 @@ namespace CurveManager
     }
 
     json MarketStore::discountRequest(const json& request) const {
-        //shoulnt require ref date (not the same for the microservice)
+        // shoulnt require ref date (not the same for the microservice)
         Schema<DiscountFactorsRequest> schema;
         schema.validate(request);
         json data = schema.setDefaultValues(request);
