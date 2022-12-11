@@ -27,8 +27,6 @@ namespace CurveManager
        private:
         void preprocessData();
         void buildCurve(const std::string& name, const json& curve);
-        boost::shared_ptr<YieldTermStructure> buildDiscountCurve(const std::string& name, const json& curve);
-        boost::shared_ptr<YieldTermStructure> buildFlatForwardCurve(const std::string& name, const json& curve);
         boost::shared_ptr<YieldTermStructure> buildPiecewiseCurve(const std::string& name, const json& curve);
         std::vector<boost::shared_ptr<RateHelper>> buildRateHelpers(const json& rateHelperVector, const std::string& currentCurve);
         boost::shared_ptr<IborIndex> buildIndex(const std::string& name);
@@ -38,7 +36,5 @@ namespace CurveManager
         std::unordered_map<std::string, json> curveConfigs_;
         std::unordered_map<std::string, json> indexConfigs_;
     };
-
 }  // namespace CurveManager
-
 #endif /* A02E616D_E693_447C_B341_9A3B4E69200A */

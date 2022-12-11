@@ -20,13 +20,52 @@ json readJSONFile(std::string filePath) {
     return data;
 }
 
-TEST(CurveManager, PiecewiseCurveBuild) {
+TEST(CurveManager, PiecewiseCurveBuildSingleCurve) {
     json curveData = readJSONFile("json/piecewise.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     EXPECT_NO_THROW(builder.build());
-    auto curve = store.getCurve("SOFR");
-    EXPECT_NO_THROW(curve->discount(1));
+  
+    auto f = [&](const std::string& curveName) {
+        try {
+            auto curve = store.getCurve(curveName);
+            curve->discount(1);
+        }
+        catch (std::exception& e) {
+            std::string error = "Error in curve " + curveName + ":\n" + e.what();
+            throw std::runtime_error(error);
+        }
+    };
+
+    for (const auto& curveName : store.allCurves()) {
+        EXPECT_NO_THROW(f(curveName));
+    }
+
+    auto curveHandle = store.getCurveHandle("SOFR");
+    EXPECT_FALSE(curveHandle.empty());
+}
+
+TEST(CurveManager, PiecewiseCurveBuildTwoCurves) {
+    json curveData = readJSONFile("json/piecewisetwocurves.json");
+    MarketStore store;
+    CurveBuilder builder(curveData, store);
+    EXPECT_NO_THROW(builder.build());
+    auto f = [&](const std::string& curveName) {
+        try {
+            auto curve = store.getCurve(curveName);
+            curve->discount(1);
+        }
+        catch (std::exception& e) {
+            std::string error = "Error in curve " + curveName + ":\n" + e.what();
+            throw std::runtime_error(error);
+        }
+    };
+
+    for (const auto& curveName : store.allCurves()) {
+        auto curveHandle = store.getCurveHandle(curveName);
+        EXPECT_FALSE(curveHandle.empty());
+        EXPECT_NO_THROW(f(curveName));
+    }
 }
 
 TEST(CurveManager, PiecewiseCurveFullBuild) {
@@ -34,6 +73,22 @@ TEST(CurveManager, PiecewiseCurveFullBuild) {
     MarketStore store;
     CurveBuilder builder(curveData, store);
     EXPECT_NO_THROW(builder.build());
+    auto f = [&](const std::string& curveName) {
+        try {
+            auto curve = store.getCurve(curveName);
+            curve->discount(1);
+        }
+        catch (std::exception& e) {
+            std::string error = "Error in curve " + curveName + ":\n" + e.what();
+            throw std::runtime_error(error);
+        }
+    };
+
+    for (const auto& curveName : store.allCurves()) {
+        auto curveHandle = store.getCurveHandle(curveName);
+        EXPECT_FALSE(curveHandle.empty());
+        EXPECT_NO_THROW(f(curveName));
+    }
 }
 
 TEST(CurveManager, PiecewiseCurveFullBuild2) {
@@ -41,6 +96,21 @@ TEST(CurveManager, PiecewiseCurveFullBuild2) {
     MarketStore store;
     CurveBuilder builder(curveData, store);
     EXPECT_NO_THROW(builder.build());
+
+    auto f = [&](const std::string& curveName) {
+        try {
+            auto curve = store.getCurve(curveName);
+            curve->discount(1);
+        }
+        catch (std::exception& e) {
+            std::string error = "Error in curve " + curveName + ":\n" + e.what();
+            throw std::runtime_error(error);
+        }
+    };
+
+    for (const auto& curveName : store.allCurves()) {
+        EXPECT_NO_THROW(f(curveName));
+    }
 }
 
 TEST(CurveManager, FlatForwardCurveBuild) {
