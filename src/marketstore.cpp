@@ -120,8 +120,8 @@ namespace CurveManager
     json MarketStore::discountRequest(const json& request) const {
         // shoulnt require ref date (not the same for the microservice)
         Schema<DiscountFactorsRequest> schema;
-        schema.validate(request);
         json data = schema.setDefaultValues(request);
+        schema.validate(data);
 
         auto curve = getCurve(data.at("CURVE"));
 
@@ -137,8 +137,8 @@ namespace CurveManager
 
     json MarketStore::zeroRateRequest(const json& request) const {
         Schema<ZeroRatesRequests> schema;
-        schema.validate(request);
         json data = schema.setDefaultValues(request);
+        schema.validate(data);
 
         auto curve            = getCurve(data.at("CURVE"));
         DayCounter dayCounter = parse<DayCounter>(data.at("DAYCOUNTER"));
@@ -156,8 +156,8 @@ namespace CurveManager
 
     json MarketStore::forwardRateRequest(const json& request) const {
         Schema<ForwardRatesRequest> schema;
-        schema.validate(request);
         json data = schema.setDefaultValues(request);
+        schema.validate(data);
 
         auto curve            = getCurve(data.at("CURVE"));
         DayCounter dayCounter = parse<DayCounter>(data.at("DAYCOUNTER"));
