@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Curve Builder Request Schema",
+    "properties": {
+        "refDate": {
+            "type": "string",
+            "format": "date"
+        },
+        "curves": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "curveName": {
+                        "type": "string"
+                    },
+                    "curveConfig": {
+                        "anyOf": [
+                            {
+                                "$ref": "bootstrapcurve.schema.json"
+                            },
+                            {
+                                "$ref": "discountcurve.schema.json"
+                            },
+                            {
+                                "$ref": "flatforwardcurve.schema.json"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "curveName",
+                    "curveConfig"
+                ]
+            }
+        },
+        "indexes": {
+            "type": "array",
+            "items": {
+                "$ref": "rateindex.schema.json"
+            }
+        }
+    },
+    "required": [
+        "refDate",
+        "curves",
+        "indexes"
+    ]
+}

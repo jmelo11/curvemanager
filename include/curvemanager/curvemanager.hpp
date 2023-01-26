@@ -29,7 +29,6 @@ namespace CurveManager
         void buildCurve(const std::string& name, const json& curve);
         boost::shared_ptr<YieldTermStructure> buildPiecewiseCurve(const std::string& name, const json& curve);
         std::vector<boost::shared_ptr<RateHelper>> buildRateHelpers(const json& rateHelperVector, const std::string& currentCurve);
-        boost::shared_ptr<IborIndex> buildIndex(const std::string& name);
 
         json data_;
         MarketStore& marketStore_;

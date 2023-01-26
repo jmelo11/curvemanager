@@ -26,6 +26,10 @@ set(gtest_force_shared_crt
 FetchContent_MakeAvailable(googletest)
 
 add_executable(curvemanagertests ${INCLUDES} ${SOURCES})
+
+install(DIRECTORY "json" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+#install(TARGETS curvemanagertests DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 target_link_libraries(curvemanagertests PUBLIC gtest_main)
 
 find_package(Boost REQUIRED)

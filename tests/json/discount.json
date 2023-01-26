@@ -1,36 +1,37 @@
 {
-  "REFDATE": "28082022",
-  "CURVES": [
+  "refDate": "2022-08-28",
+  "curves": [
     {
-      "TYPE": "DISCOUNT",
-      "NAME": "SOFR",
-      "DAYCOUNTER": "ACT360",
-      "ENABLEEXTRAPOLATION": true,
-      "NODES": [
-        {
-          "DATE": "28082022",
-          "VALUE": 1
-        },
-        {
-          "DATE": "28082023",
-          "VALUE": 0.99
-        },
-        {
-          "DATE": "28082024",
-          "VALUE": 0.98
-        }
-      ]
+      "curveName": "SOFR",
+      "curveConfig": {
+        "curveType": "Discount",
+        "dayCounter": "Act360",
+        "enableExtrapolation": true,
+        "nodes": [
+          {
+            "date": "2022-08-22",
+            "value": 1
+          },
+          {
+            "date": "2023-08-22",
+            "value": 0.99
+          },
+          {
+            "date": "2024-08-22",
+            "value": 0.98
+          }
+        ]
+      }
     }
   ],
-  "INDEXES": [
+  "indexes": [
     {
-      "NAME": "SOFR",
-      "TYPE": "OVERNIGHT",
-      "TENOR": "1D",
-      "DAYCOUNTER": "ACT360",
-      "CURRENCY": "USD",
-      "FIXINGDAYS": 0.0,
-      "CALENDAR": "USA"
+      "indexName": "SOFR",
+      "indexType": "OvernightIndex",
+      "dayCounter": "Act360",
+      "currency": "USD",
+      "fixingDays": 0,
+      "calendar": "UnitedStates"
     }
   ]
 }

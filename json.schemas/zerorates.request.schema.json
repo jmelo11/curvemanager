@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "API forward rate request",
+    "type": "object",
+    "properties": {
+        "curve": {
+            "type": "string",
+            "description": "Curve name"
+        },
+        "dates": {
+            "type": "array",
+            "description": "Requested dates",
+            "items": {
+                "type": "string",
+                "format": "date"
+            },
+            "minItems": 1
+        }
+    },
+    "required": [
+        "curve",
+        "dates"
+    ]
+}

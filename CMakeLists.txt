@@ -83,6 +83,11 @@ install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include
         DESTINATION ${CMAKE_INSTALL_PREFIX})
 
+file(GLOB SCHEMAS "json.schemas/*.json")
+set(QLP_SCHEMAPATH "${CMAKE_INSTALL_PREFIX}/include/json.schemas")
+install(FILES ${SCHEMAS} DESTINATION ${QLP_SCHEMAPATH})
+
+
 if(BUILD_TESTS)
   add_subdirectory(tests)
 endif()

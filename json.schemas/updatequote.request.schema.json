@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "API update quote request",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "ticker": {
+                "type": "string",
+                "description": "Ticker"
+            },
+            "value": {
+                "type": "number",
+                "description": "Value"
+            }
+        },
+        "required": [
+            "ticker",
+            "value"
+        ]
+    },
+    "minItems": 1
+}

@@ -7,39 +7,14 @@ namespace QuantLibParser
 
     template <>
     void Schema<ForwardRatesRequest>::initSchema() {
-        json base = R"({
-            "title": "Discounts Request Schema",
-            "type": "object",            
-            "properties": {
-                "CURVE": {
-                    "type": "string"
-                }                
-            },
-            "required": ["REFDATE", "CURVE", "DATES"]              
-        })"_json;
-
-        base["properties"]["FREQUENCY"]   = frequencySchema;
-        base["properties"]["COMPOUNDING"] = compoundingSchema;
-        base["properties"]["DAYCOUNTER"]  = dayCounterSchema;
-        base["properties"]["REFDATE"]     = dateSchema;
-
-        json dates                  = R"({
-            "type": "array",
-            "items": {
-                "type": "array",
-                "maxItems": 2                
-            }
-        })"_json;
-        dates["items"]["items"]     = dateSchema;
-        base["properties"]["DATES"] = dates;
-        mySchema_                   = base;
+        mySchema_ = readJSONFile("forwardrates.request.schema.json");
     };
 
     template <>
     void Schema<ForwardRatesRequest>::initDefaultValues() {
-        myDefaultValues_["DAYCOUNTER"]  = "ACT360";
-        myDefaultValues_["COMPOUNDING"] = "SIMPLE";
-        myDefaultValues_["FREQUENCY"]   = "ANNUAL";
+        myDefaultValues_["dayCounter"]  = "Act360";
+        myDefaultValues_["compounding"] = "Simple";
+        myDefaultValues_["frequency"]   = "Annual";
     };
 
 }  // namespace QuantLibParser

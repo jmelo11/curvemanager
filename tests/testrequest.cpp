@@ -6,9 +6,15 @@ using json    = nlohmann::json;
 
 TEST(Requests, CurveBuilderRequest) {
     json data = R"({
-		"REFDATE":"28022022",
-		"CURVES": [{}],
-		"INDEXES":[{}]
+		"refDate":"2022-08-24",
+		"curves": [{
+			"curveName": "ICP_ICAP",			
+			"curveConfig": {
+				"curveType": "FlatForward",
+				"rate": 0.01
+			}
+		}],
+		"indexes":[]
 	})"_json;
     QLP::Schema<QLP::CurveBuilderRequest> schema;
     EXPECT_NO_THROW(schema.validate(data));
@@ -17,8 +23,8 @@ TEST(Requests, CurveBuilderRequest) {
 TEST(Requests, UpdateQuoteRequest) {
     json data = R"([		
 		{
-			"NAME": "CLP CURRENCY",
-			"VALUE": 800
+			"ticker": "CLP CURRENCY",
+			"value": 800
 		}		
 	])"_json;
 
@@ -28,9 +34,9 @@ TEST(Requests, UpdateQuoteRequest) {
 
 TEST(Requests, DiscountFactorsRequest) {
     json data = R"({
-		"REFDATE":"24082022",
-		"CURVE":"ICP_ICAP",		
-		"DATES":["24022023"]
+		"refDate":"2022-08-24",
+		"curve":"ICP_ICAP",		
+		"dates":["2022-08-24"]
 	})"_json;
 
     QLP::Schema<QLP::DiscountFactorsRequest> schema;
@@ -39,11 +45,11 @@ TEST(Requests, DiscountFactorsRequest) {
 
 TEST(Requests, ZeroRatesRequests) {
     json data = R"({
-		"REFDATE":"24082022",
-		"CURVE":"ICP_ICAP",
-		"DAYCOUNTER":"ACT360",
-		"COMPOUNDING":"SIMPLE",
-		"DATES":["24022023"]
+		"refDate":"2022-08-24",
+		"curve":"ICP_ICAP",
+		"dayCounter":"Act360",
+		"compounding":"Simple",
+		"dates":["2022-08-24"]
 	})"_json;
 
     QLP::Schema<QLP::ZeroRatesRequests> schema;
@@ -52,11 +58,14 @@ TEST(Requests, ZeroRatesRequests) {
 
 TEST(Requests, ForwardRatesRequest) {
     json data = R"({
-		"REFDATE":"24082022",
-		"CURVE":"ICP_ICAP",
-		"DAYCOUNTER":"ACT360",
-		"COMPOUNDING":"SIMPLE",
-		"DATES":[["24022023","24022024"]]
+		"refDate":"2022-08-24",
+		"curve":"ICP_ICAP",
+		"dayCounter":"Act360",
+		"compounding":"Simple",
+		"dates":[{
+			"startDate":"2022-08-24",
+			"endDate":"2022-08-24"
+		}]
 	})"_json;
 
     QLP::Schema<QLP::ForwardRatesRequest> schema;

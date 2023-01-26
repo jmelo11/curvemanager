@@ -101,15 +101,15 @@ namespace CurveManager
             if (ptr) {
                 json data;
                 auto nodes    = ptr->nodes();
-                data["NAME"]  = name;
-                data["NODES"] = json::array();
+                data["name"]  = name;
+                data["nodes"] = json::array();
                 std::vector<double> values;
                 std::vector<std::string> dates;
                 for (const auto& pair : nodes) {
                     json node;
-                    node["DATE"]  = parseDate(pair.first, DateFormat::MIXED);
-                    node["VALUE"] = pair.second;
-                    data["NODES"].push_back(node);
+                    node["date"]  = parseDate(pair.first);
+                    node["value"] = pair.second;
+                    data["nodes"].push_back(node);
                 }
                 results.push_back(data);
             }
@@ -123,13 +123,13 @@ namespace CurveManager
         json data = schema.setDefaultValues(request);
         schema.validate(data);
 
-        auto curve = getCurve(data.at("CURVE"));
+        auto curve = getCurve(data.at("curve"));
 
         json response = json::array();
-        for (const auto& date : data.at("DATES")) {
+        for (const auto& date : data.at("dates")) {
             json row;
-            row["DATE"]  = date;
-            row["VALUE"] = curve->discount(parse<Date>(date));
+            row["date"]  = date;
+            row["value"] = curve->discount(parse<Date>(date));
             response.push_back(row);
         }
         return response;
@@ -140,15 +140,15 @@ namespace CurveManager
         json data = schema.setDefaultValues(request);
         schema.validate(data);
 
-        auto curve            = getCurve(data.at("CURVE"));
-        DayCounter dayCounter = parse<DayCounter>(data.at("DAYCOUNTER"));
-        Compounding comp      = parse<Compounding>(data.at("COMPOUNDING"));
-        Frequency freq        = parse<Frequency>(data.at("FREQUENCY"));
+        auto curve            = getCurve(data.at("curve"));
+        DayCounter dayCounter = parse<DayCounter>(data.at("dayCounter"));
+        Compounding comp      = parse<Compounding>(data.at("compounding"));
+        Frequency freq        = parse<Frequency>(data.at("frequency"));
         json response         = json::array();
-        for (const auto& date : data.at("DATES")) {
+        for (const auto& date : data.at("dates")) {
             json row;
-            row["DATE"]  = date;
-            row["VALUE"] = curve->discount(parse<Date>(date));
+            row["date"]  = date;
+            row["value"] = curve->discount(parse<Date>(date));
             response.push_back(row);
         }
         return response;
@@ -159,18 +159,17 @@ namespace CurveManager
         json data = schema.setDefaultValues(request);
         schema.validate(data);
 
-        auto curve            = getCurve(data.at("CURVE"));
-        DayCounter dayCounter = parse<DayCounter>(data.at("DAYCOUNTER"));
-        Compounding comp      = parse<Compounding>(data.at("COMPOUNDING"));
-        Frequency freq        = parse<Frequency>(data.at("FREQUENCY"));
-        json response;
-        response["VALUES"] = json::array();
-        for (const auto& dates : data.at("DATES")) {
-            auto startDate = parse<Date>(dates[0]);
-            auto endDate   = parse<Date>(dates[1]);
-            response["VALUES"].push_back(curve->forwardRate(startDate, endDate, dayCounter, comp, freq).rate());
+        auto curve            = getCurve(data.at("curve"));
+        DayCounter dayCounter = parse<DayCounter>(data.at("dayCounter"));
+        Compounding comp      = parse<Compounding>(data.at("compounding"));
+        Frequency freq        = parse<Frequency>(data.at("frequency"));
+        json response = json::array();
+        for (auto pair : data.at("dates")) {
+            auto startDate = parse<Date>(pair.at("startDate"));
+            auto endDate   = parse<Date>(pair.at("endDate"));
+            pair["values"] = curve->forwardRate(startDate, endDate, dayCounter, comp, freq).rate();
+            response.push_back(pair);
         }
-        response["DATES"] = request["DATES"];
         return response;
     }
 }  // namespace CurveManager
