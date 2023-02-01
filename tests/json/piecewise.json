@@ -1,515 +1,847 @@
 {
-  "REFDATE": "28082022",
-  "CURVES": [
+  "refDate": "2023-01-31",
+  "curves": [
     {
-      "TYPE": "PIECEWISE",
-      "NAME": "SOFR",
-      "DAYCOUNTER": "ACT360",
-      "ENABLEEXTRAPOLATION": true,
-      "RATEHELPERS": [
-        {
-          "RATE": 0.0227,
-          "DAYCOUNTER": "ACT360",
-          "TENOR": "1D",
-          "CALENDAR": "USA",
-          "FIXINGDAYS": 0,
-          "ENDOFMONTH": true,
-          "CONVENTION": "MODIFIEDFOLLOWING",
-          "TYPE": "DEPOSIT",
-          "RATETICKER": "SOFRRATE CURNCY"
-        },
-        {
-          "RATE": 0.022930000000000002,
-          "TENOR": "1W",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR1Z CURNCY"
-        },
-        {
-          "RATE": 0.022886000000000004,
-          "TENOR": "2W",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR2Z CURNCY"
-        },
-        {
-          "RATE": 0.022895,
-          "TENOR": "3W",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR3Z CURNCY"
-        },
-        {
-          "RATE": 0.024350999999999998,
-          "TENOR": "1M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRA CURNCY"
-        },
-        {
-          "RATE": 0.02697,
-          "TENOR": "2M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRB CURNCY"
-        },
-        {
-          "RATE": 0.028994,
-          "TENOR": "3M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRC CURNCY"
-        },
-        {
-          "RATE": 0.030594,
-          "TENOR": "4M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRD CURNCY"
-        },
-        {
-          "RATE": 0.03167,
-          "TENOR": "5M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRE CURNCY"
-        },
-        {
-          "RATE": 0.03261,
-          "TENOR": "6M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRF CURNCY"
-        },
-        {
-          "RATE": 0.03323,
-          "TENOR": "7M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRG CURNCY"
-        },
-        {
-          "RATE": 0.033854999999999996,
-          "TENOR": "8M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRH CURNCY"
-        },
-        {
-          "RATE": 0.034390000000000004,
-          "TENOR": "9M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRI CURNCY"
-        },
-        {
-          "RATE": 0.034755,
-          "TENOR": "10M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRJ CURNCY"
-        },
-        {
-          "RATE": 0.035055,
-          "TENOR": "11M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFRK CURNCY"
-        },
-        {
-          "RATE": 0.035293,
-          "TENOR": "12M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR1 CURNCY"
-        },
-        {
-          "RATE": 0.03508,
-          "TENOR": "18M",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR1F CURNCY"
-        },
-        {
-          "RATE": 0.034296,
-          "TENOR": "2Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR2 CURNCY"
-        },
-        {
-          "RATE": 0.032275,
-          "TENOR": "3Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR3 CURNCY"
-        },
-        {
-          "RATE": 0.030591,
-          "TENOR": "4Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR4 CURNCY"
-        },
-        {
-          "RATE": 0.02944,
-          "TENOR": "5Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR5 CURNCY"
-        },
-        {
-          "RATE": 0.028845999999999997,
-          "TENOR": "6Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR6 CURNCY"
-        },
-        {
-          "RATE": 0.02848,
-          "TENOR": "7Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR7 CURNCY"
-        },
-        {
-          "RATE": 0.028285,
-          "TENOR": "8Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR8 CURNCY"
-        },
-        {
-          "RATE": 0.028233,
-          "TENOR": "9Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR9 CURNCY"
-        },
-        {
-          "RATE": 0.028290000000000003,
-          "TENOR": "10Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR10 CURNCY"
-        },
-        {
-          "RATE": 0.028565,
-          "TENOR": "12Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR12 CURNCY"
-        },
-        {
-          "RATE": 0.028865,
-          "TENOR": "15Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR15 CURNCY"
-        },
-        {
-          "RATE": 0.028579,
-          "TENOR": "20Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR20 CURNCY"
-        },
-        {
-          "RATE": 0.027662,
-          "TENOR": "25Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR25 CURNCY"
-        },
-        {
-          "RATE": 0.026723,
-          "TENOR": "30Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR30 CURNCY"
-        },
-        {
-          "RATE": 0.024620000000000003,
-          "TENOR": "40Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR40 CURNCY"
-        },
-        {
-          "RATE": 0.022531,
-          "TENOR": "50Y",
-          "DAYCOUNTER": "ACT360",
-          "CALENDAR": "USA",
-          "CONVENTION": "FOLLOWING",
-          "ENDOFMONTH": true,
-          "FREQUENCY": "ANNUAL",
-          "SETTLEMENTDAYS": 2.0,
-          "PAYMENTLAG": 2.0,
-          "TELESCOPICVALUEDATES": true,
-          "INDEX": "SOFR",
-          "TYPE": "OIS",
-          "RATETICKER": "USOSFR50 CURNCY"
-        }
-      ]
-    }
-  ],
-  "INDEXES": [
-    {
-      "NAME": "SOFR",
-      "TYPE": "OVERNIGHT",
-      "TENOR": "1D",
-      "DAYCOUNTER": "ACT360",
-      "CURRENCY": "USD",
-      "FIXINGDAYS": 0.0,
-      "CALENDAR": "USA"
+      "_id": 2,
+      "curveConfig": {
+        "curveType": "Piecewise",
+        "dayCounter": "Act360",
+        "enableExtrapolation": true,
+        "configDate": "2023-01-31",
+        "rateHelpers": [
+          {
+            "_id": 50,
+            "curveId": 2,
+            "helperType": "Deposit",
+            "helperConfig": {
+              "dayCounter": "Act360",
+              "tenor": "1D",
+              "calendar": "NullCalendar",
+              "settlementDays": 0,
+              "endOfMonth": false,
+              "convention": "Unadjusted",
+              "configDate": "2023-01-31",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 50,
+              "rate": {
+                "value": 0.043,
+                "ticker": "SOFRRATE CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 124,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "1W",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 124,
+              "rate": {
+                "value": 0.045695,
+                "ticker": "USOSFR1Z CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 125,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "2W",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 125,
+              "rate": {
+                "value": 0.045714,
+                "ticker": "USOSFR2Z CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 126,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "3W",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 126,
+              "rate": {
+                "value": 0.045736,
+                "ticker": "USOSFR3Z CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 127,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "1M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 127,
+              "rate": {
+                "value": 0.045744999999999994,
+                "ticker": "USOSFRA CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 128,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "2M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 128,
+              "rate": {
+                "value": 0.046191,
+                "ticker": "USOSFRB CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 129,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "3M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 129,
+              "rate": {
+                "value": 0.046824000000000005,
+                "ticker": "USOSFRC CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 130,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "4M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 130,
+              "rate": {
+                "value": 0.047474999999999996,
+                "ticker": "USOSFRD CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 131,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "5M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 131,
+              "rate": {
+                "value": 0.047934000000000004,
+                "ticker": "USOSFRE CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 132,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "6M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 132,
+              "rate": {
+                "value": 0.048272,
+                "ticker": "USOSFRF CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 133,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "7M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 133,
+              "rate": {
+                "value": 0.048505,
+                "ticker": "USOSFRG CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 134,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "8M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 134,
+              "rate": {
+                "value": 0.048643,
+                "ticker": "USOSFRH CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 135,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "9M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 135,
+              "rate": {
+                "value": 0.048735,
+                "ticker": "USOSFRI CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 136,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "10M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 136,
+              "rate": {
+                "value": 0.048706,
+                "ticker": "USOSFRJ CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 137,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "11M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 137,
+              "rate": {
+                "value": 0.048582,
+                "ticker": "USOSFRK CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 138,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "12M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 138,
+              "rate": {
+                "value": 0.048432,
+                "ticker": "USOSFR1 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 139,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "18M",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 139,
+              "rate": {
+                "value": 0.045439999999999994,
+                "ticker": "USOSFR1F CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 140,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "2Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 140,
+              "rate": {
+                "value": 0.042287,
+                "ticker": "USOSFR2 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 141,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "3Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 141,
+              "rate": {
+                "value": 0.037854,
+                "ticker": "USOSFR3 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 142,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "4Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 142,
+              "rate": {
+                "value": 0.035464999999999997,
+                "ticker": "USOSFR4 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 143,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "5Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 143,
+              "rate": {
+                "value": 0.034083999999999996,
+                "ticker": "USOSFR5 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 144,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "6Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 144,
+              "rate": {
+                "value": 0.033274,
+                "ticker": "USOSFR6 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 145,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "7Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 145,
+              "rate": {
+                "value": 0.032739,
+                "ticker": "USOSFR7 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 146,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "8Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 146,
+              "rate": {
+                "value": 0.032404999999999996,
+                "ticker": "USOSFR8 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 147,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "9Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 147,
+              "rate": {
+                "value": 0.032232,
+                "ticker": "USOSFR9 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 148,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "10Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 148,
+              "rate": {
+                "value": 0.032147999999999996,
+                "ticker": "USOSFR10 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 149,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "12Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 149,
+              "rate": {
+                "value": 0.032126999999999996,
+                "ticker": "USOSFR12 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 150,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "15Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 150,
+              "rate": {
+                "value": 0.032172,
+                "ticker": "USOSFR15 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 151,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "20Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 151,
+              "rate": {
+                "value": 0.03182,
+                "ticker": "USOSFR20 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 152,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "25Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 152,
+              "rate": {
+                "value": 0.030811,
+                "ticker": "USOSFR25 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 153,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "30Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 153,
+              "rate": {
+                "value": 0.029786,
+                "ticker": "USOSFR30 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 154,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "40Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 154,
+              "rate": {
+                "value": 0.027662,
+                "ticker": "USOSFR40 CURNCY"
+              }
+            }
+          },
+          {
+            "_id": 155,
+            "curveId": 2,
+            "helperType": "OIS",
+            "helperConfig": {
+              "tenor": "50Y",
+              "dayCounter": "Act360",
+              "calendar": "NullCalendar",
+              "convention": "Following",
+              "endOfMonth": true,
+              "frequency": "Annual",
+              "settlementDays": 2,
+              "paymentLag": 2,
+              "telescopicValueDates": true,
+              "index": "SOFR",
+              "source": "Bloomberg"
+            },
+            "marketConfig": {
+              "helperId": 155,
+              "rate": {
+                "value": 0.025522,
+                "ticker": "USOSFR50 CURNCY"
+              }
+            }
+          }
+        ]
+      },
+      "curveName": "SOFR",
+      "curveIndex": {
+        "curveId": 2.0,
+        "indexType": "OvernightIndex",
+        "tenor": "1D",
+        "dayCounter.1": "Act360",
+        "currency": "USD",
+        "fixingDays": 0.0
+      }
     }
   ]
 }

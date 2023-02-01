@@ -17,60 +17,59 @@ namespace CurveManager
     };
 
     void CurveBuilder::preprocessData() {
-        
         // build curves depending on the type
         Schema<DiscountCurve> discountCurveSchema;
         Schema<BootstrapCurve> bootstrapCurveSchema;
         Schema<FlatForward> flatForwardSchema;
+
+        Schema<IborIndex> iborSchema;
+        Schema<OvernightIndex> overnightIndexSchema;
+        CurveGetter curveGetter = [&](const std::string& name) { return marketStore_.getCurveHandle(name); };
+
         for (auto& curve : data_.at("curves")) {
-            const std::string& name = curve.at("curveName");
-            const auto& config      = curve.at("curveConfig");
-            curveConfigs_[name]     = config;
+            const std::string& curveName = curve.at("curveName");
+            const auto& config           = curve.at("curveConfig");
+            curveConfigs_[curveName]     = config;
 
             RelinkableHandle<YieldTermStructure> handle;
-            marketStore_.addCurveHandle(name, handle);
+            marketStore_.addCurveHandle(curveName, handle);
 
             if (config.at("curveType") == "Discount") {
                 auto curvePtr = boost::shared_ptr<YieldTermStructure>(new DiscountCurve(discountCurveSchema.makeObj(config)));
                 handle.linkTo(curvePtr);
                 curvePtr->unregisterWith(Settings::instance().evaluationDate());
-                marketStore_.addCurve(name, curvePtr);
+                marketStore_.addCurve(curveName, curvePtr);
             }
             else if (config.at("curveType") == "FlatForward") {
                 auto curvePtr = boost::shared_ptr<YieldTermStructure>(new FlatForward(flatForwardSchema.makeObj(config)));
                 handle.linkTo(curvePtr);
                 curvePtr->unregisterWith(Settings::instance().evaluationDate());
-                marketStore_.addCurve(name, curvePtr);
+                marketStore_.addCurve(curveName, curvePtr);
             }
             else if (config.at("curveType") == "Piecewise") {
                 bootstrapCurveSchema.setDefaultValues(config);
                 bootstrapCurveSchema.validate(config);
             }
-        }
 
-        // build indexes
-        Schema<IborIndex> iborSchema;
-        Schema<OvernightIndex> overnightIndexSchema;
-
-        CurveGetter curveGetter = [&](const std::string& name) { return marketStore_.getCurveHandle(name); };
-
-        // build index depending on the type
-        for (auto& indexParams : data_.at("indexes")) {
-            const std::string& name = indexParams.at("indexName");
-            if (!marketStore_.hasIndex(name)) {
-                const std::string& indexType = indexParams.at("indexType");
-                indexConfigs_[name]          = indexParams;
-                if (indexType == "OvernightIndex") {
-                    auto index = boost::shared_ptr<IborIndex>(new OvernightIndex(overnightIndexSchema.makeObj(indexParams, curveGetter)));
-                    marketStore_.addIndex(name, index);
-                }
-                else if (indexType == "IborIndex") {
-                    auto index = boost::make_shared<IborIndex>(iborSchema.makeObj(indexParams, curveGetter));
-                    marketStore_.addIndex(name, index);
-                }
-                else {
-                    std::string errorJson = indexParams.dump();
-                    throw std::runtime_error("Index type " + indexType + " not supported \n" + errorJson);
+            // if has related index, build it
+            if (curve.find("curveIndex") != curve.end()) {
+                auto indexParams = curve.at("curveIndex");
+                if (!marketStore_.hasIndex(curveName)) {
+                    const std::string& indexType = indexParams.at("indexType");
+                    indexParams["indexName"]     = curveName;
+                    indexConfigs_[curveName]     = indexParams;
+                    if (indexType == "OvernightIndex") {
+                        auto index = boost::shared_ptr<IborIndex>(new OvernightIndex(overnightIndexSchema.makeObj(indexParams, curveGetter)));
+                        marketStore_.addIndex(curveName, index);
+                    }
+                    else if (indexType == "IborIndex") {
+                        auto index = boost::make_shared<IborIndex>(iborSchema.makeObj(indexParams, curveGetter));
+                        marketStore_.addIndex(curveName, index);
+                    }
+                    else {
+                        std::string errorJson = indexParams.dump();
+                        throw std::runtime_error("Index type " + indexType + " not supported \n" + errorJson);
+                    }
                 }
             }
         }

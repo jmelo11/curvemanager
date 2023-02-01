@@ -26,6 +26,9 @@
                                 "$ref": "flatforwardcurve.schema.json"
                             }
                         ]
+                    },
+                    "curveIndex":{
+                        "$ref": "rateindex.schema.json"
                     }
                 },
                 "required": [
@@ -33,17 +36,10 @@
                     "curveConfig"
                 ]
             }
-        },
-        "indexes": {
-            "type": "array",
-            "items": {
-                "$ref": "rateindex.schema.json"
-            }
         }
     },
     "required": [
         "refDate",
-        "curves",
-        "indexes"
+        "curves"
     ]
 }

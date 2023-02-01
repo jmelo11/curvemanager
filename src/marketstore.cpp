@@ -101,7 +101,7 @@ namespace CurveManager
             if (ptr) {
                 json data;
                 auto nodes    = ptr->nodes();
-                data["name"]  = name;
+                data["curveName"]  = name;
                 data["nodes"] = json::array();
                 std::vector<double> values;
                 std::vector<std::string> dates;

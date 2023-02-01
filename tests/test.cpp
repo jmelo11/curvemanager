@@ -68,28 +68,29 @@ json readJSONFile(std::string filePath) {
 //     }
 // }
 
-// TEST(CurveManager, PiecewiseCurveFullBuild) {
-//     json curveData = readJSONFile("json/piecewisefull.json");
-//     MarketStore store;
-//     CurveBuilder builder(curveData, store);
-//     EXPECT_NO_THROW(builder.build());
-//     auto f = [&](const std::string& curveName) {
-//         try {
-//             auto curve = store.getCurve(curveName);
-//             curve->discount(1);
-//         }
-//         catch (std::exception& e) {
-//             std::string error = "Error in curve " + curveName + ":\n" + e.what();
-//             throw std::runtime_error(error);
-//         }
-//     };
+TEST(CurveManager, PiecewiseCurveFullBuild) {
+    json curveData = readJSONFile("json/piecewisefull.json");
+    MarketStore store;
+    CurveBuilder builder(curveData, store);
+    builder.build();
+    EXPECT_NO_THROW(builder.build());
+    auto f = [&](const std::string& curveName) {
+        try {
+            auto curve = store.getCurve(curveName);
+            curve->discount(1);
+        }
+        catch (std::exception& e) {
+            std::string error = "Error in curve " + curveName + ":\n" + e.what();
+            throw std::runtime_error(error);
+        }
+    };
 
-//     for (const auto& curveName : store.allCurves()) {
-//         auto curveHandle = store.getCurveHandle(curveName);
-//         EXPECT_FALSE(curveHandle.empty());
-//         EXPECT_NO_THROW(f(curveName));
-//     }
-// }
+    for (const auto& curveName : store.allCurves()) {
+        auto curveHandle = store.getCurveHandle(curveName);
+        EXPECT_FALSE(curveHandle.empty());
+        EXPECT_NO_THROW(f(curveName));
+    }
+}
 
 // TEST(CurveManager, PiecewiseCurveFullBuild2) {
 //     json curveData = readJSONFile("json/piecewisefull2.json");
@@ -210,4 +211,12 @@ TEST(CurveManager, ForwardRatesRequests) {
 		"frequency":"Annual"
 	})"_json;
     EXPECT_NO_THROW(store.forwardRateRequest(request));
+}
+
+TEST(CurveManager, Boostrap) {
+    json curveData = readJSONFile("json/piecewise.json");
+    MarketStore store;
+    CurveBuilder builder(curveData, store);
+    EXPECT_NO_THROW(builder.build(););
+    EXPECT_NO_THROW(store.getCurve("SOFR")->discount(1););
 }
