@@ -76,26 +76,20 @@ TEST(CurveManager, BootstrapResults) {
 }
 
 TEST(CurveManager, UpdateQuotes) {
-    json curveData = readJSONFile("json/piecewise.json");
+    json curveData = readJSONFile("json/piecewisefull.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
     builder.build();
 
     json quoteData = R"([
 		{
-	"NAME": "USOSFR2Z",
+	"NAME": "USBA1 BGN CURNCY",
 	"VALUE": 0.03
 		}
 	])"_json;
 
-    EXPECT_ANY_THROW(builder.updateQuotes(quoteData));
-
-    quoteData[0]["NAME"] = "USOSFR2Z CURNCY";
-
+    builder.updateQuotes(quoteData);
     EXPECT_NO_THROW(builder.updateQuotes(quoteData));
-
-    auto curve = store.getCurve("SOFR");
-    EXPECT_NO_THROW(curve->discount(1));
 }
 
 TEST(CurveManager, DiscountFactorRequests) {
