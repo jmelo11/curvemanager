@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(
   curvemanagertests
-  VERSION 1.0.0
+  VERSION 2.0.0
   LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -27,7 +27,6 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(curvemanagertests ${INCLUDES} ${SOURCES})
 
-install(DIRECTORY "json" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 #install(TARGETS curvemanagertests DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(curvemanagertests PUBLIC gtest_main)
@@ -45,12 +44,15 @@ target_link_libraries(curvemanagertests PUBLIC QuantLibParser::QuantLibParser)
 message(STATUS "Using this folder for test building: ${CMAKE_SOURCE_DIR}")
 target_include_directories(curvemanagertests PUBLIC "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/src")
 
+
+file(GLOB JSONTESTS "json/*.json")
 if(MSVC)
-  target_link_libraries(curvemanagertests PUBLIC "${CMAKE_SOURCE_DIR}/build/Debug/CurveManager.lib")
+  target_link_libraries(curvemanagertests PUBLIC "${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE}/CurveManager.lib")
+  install(FILES ${JSONTESTS} DESTINATION "${CMAKE_SOURCE_DIR}/build/tests/${CMAKE_BUILD_TYPE}/json")
 else()
   target_link_libraries(curvemanagertests PUBLIC "${CMAKE_SOURCE_DIR}/build/libcurvemanager.dylib")
+  install(FILES ${JSONTESTS} DESTINATION "${CMAKE_SOURCE_DIR}/build/tests/json")
 endif(MSVC)
-
 
 
 # external libs

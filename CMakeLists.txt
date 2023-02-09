@@ -11,7 +11,6 @@ include(GNUInstallDirs) # despues de definir el proyecto
 set(BUILD_TESTS ON)
 
 file(GLOB SOURCES "src/*.cpp" "src/utils/*.cpp" "src/schemas/*.cpp")
-
 file(GLOB INCLUDES "include/*.hpp" "include/curvemanager/*.hpp")
 
 if(MSVC)
