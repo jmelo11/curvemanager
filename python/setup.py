@@ -4,7 +4,7 @@ from setuptools import setup
 from pathlib import Path
 from sys import platform
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 
 BASE_DIR = Path(__file__).absolute().parent.resolve()
 
