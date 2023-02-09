@@ -92,6 +92,24 @@ TEST(CurveManager, UpdateQuotes) {
     EXPECT_NO_THROW(builder.updateQuotes(quoteData));
 }
 
+
+TEST(CurveManager, UpdateQuotes2) {
+    json curveData = readJSONFile("json/piecewisefull2.json");
+    MarketStore store;
+    CurveBuilder builder(curveData, store);
+    builder.build();
+
+    json quoteData = R"([
+		{
+	"NAME": "USBA1 BGN CURNCY",
+	"VALUE": 0.03
+		}
+	])"_json;
+
+    builder.updateQuotes(quoteData);
+    EXPECT_NO_THROW(builder.updateQuotes(quoteData));
+}
+
 TEST(CurveManager, DiscountFactorRequests) {
     json curveData = readJSONFile("json/discount.json");
     MarketStore store;
