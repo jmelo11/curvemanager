@@ -144,6 +144,9 @@ namespace CurveManager
         };
 
         CurveGetter curveGetter = [&](const std::string& curveName) {
+            if (!marketStore_.hasCurveHandle(curveName)) {
+                throw std::runtime_error("Curve " + curveName + " not found in the curve set.");
+            }
             if (currentCurve != curveName) buildCurve(curveName, curveConfigs_.at(curveName));
             if (marketStore_.getCurveHandle(curveName).empty())
                 throw std::runtime_error("An error happened: handle for curve " + curveName + " is still empty.");

@@ -540,7 +540,7 @@
             "curveIndex": {
                 "indexType": "OvernightIndex",
                 "tenor": "1D",
-                "dayCounter.1": "Act360",
+                "dayCounter": "Act360",
                 "currency": "CLP",
                 "fixingDays": 0
             }
