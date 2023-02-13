@@ -1,0 +1,549 @@
+{
+    "refDate": "2023-02-13",
+    "curves": [
+        {
+            "_id": "63ea4e4cd74390dd819e0bb7",
+            "curveConfig": {
+                "curveType": "Piecewise",
+                "dayCounter": "Act360",
+                "enableExtrapolation": true,
+                "rateHelpers": [
+                    {
+                        "_id": "63ea4e4cd74390dd819e0bf2",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "Deposit",
+                        "helperConfig": {
+                            "dayCounter": "Act360",
+                            "tenor": "1D",
+                            "calendar": "NullCalendar",
+                            "settlementDays": 0,
+                            "endOfMonth": false,
+                            "convention": "Unadjusted"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4cd74390dd819e0bf2",
+                            "rate": {
+                                "value": 0.1125,
+                                "ticker": "CHOVCHOV INDEX"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4cd74390dd819e0bfb",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "Deposit",
+                        "helperConfig": {
+                            "dayCounter": "Act360",
+                            "tenor": "2M",
+                            "calendar": "NullCalendar",
+                            "settlementDays": 0,
+                            "endOfMonth": false,
+                            "convention": "Unadjusted"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4cd74390dd819e0bfb",
+                            "rate": {
+                                "value": 0.11349999999999999,
+                                "ticker": "CHSWPB ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4cd74390dd819e0bfc",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "Deposit",
+                        "helperConfig": {
+                            "dayCounter": "Act360",
+                            "tenor": "3M",
+                            "calendar": "NullCalendar",
+                            "settlementDays": 0,
+                            "endOfMonth": false,
+                            "convention": "Unadjusted"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4cd74390dd819e0bfc",
+                            "rate": {
+                                "value": 0.11355,
+                                "ticker": "CHSWPC ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4cd74390dd819e0bfd",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "Deposit",
+                        "helperConfig": {
+                            "dayCounter": "Act360",
+                            "tenor": "6M",
+                            "calendar": "NullCalendar",
+                            "settlementDays": 0,
+                            "endOfMonth": false,
+                            "convention": "Unadjusted"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4cd74390dd819e0bfd",
+                            "rate": {
+                                "value": 0.11125,
+                                "ticker": "CHSWPF ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4cd74390dd819e0bfe",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "Deposit",
+                        "helperConfig": {
+                            "dayCounter": "Act360",
+                            "tenor": "9M",
+                            "calendar": "NullCalendar",
+                            "settlementDays": 0,
+                            "endOfMonth": false,
+                            "convention": "Unadjusted"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4cd74390dd819e0bfe",
+                            "rate": {
+                                "value": 0.10565,
+                                "ticker": "CHSWPI ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4cd74390dd819e0bff",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "Deposit",
+                        "helperConfig": {
+                            "dayCounter": "Act360",
+                            "tenor": "12M",
+                            "calendar": "NullCalendar",
+                            "settlementDays": 0,
+                            "endOfMonth": false,
+                            "convention": "Unadjusted"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4cd74390dd819e0bff",
+                            "rate": {
+                                "value": 0.0999,
+                                "ticker": "CHSWP1 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4cd74390dd819e0c00",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "Deposit",
+                        "helperConfig": {
+                            "dayCounter": "Act360",
+                            "tenor": "18M",
+                            "calendar": "NullCalendar",
+                            "settlementDays": 0,
+                            "endOfMonth": false,
+                            "convention": "Unadjusted"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4cd74390dd819e0c00",
+                            "rate": {
+                                "value": 0.08965,
+                                "ticker": "CHSWP1F ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c5d",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "2Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c5d",
+                            "rate": {
+                                "value": 0.07844999999999999,
+                                "ticker": "CHSWP2 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c5e",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "3Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c5e",
+                            "rate": {
+                                "value": 0.06855,
+                                "ticker": "CHSWP3 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c5f",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "4Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c5f",
+                            "rate": {
+                                "value": 0.0629,
+                                "ticker": "CHSWP4 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c60",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "5Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c60",
+                            "rate": {
+                                "value": 0.05975,
+                                "ticker": "CHSWP5 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c61",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "6Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c61",
+                            "rate": {
+                                "value": 0.05795,
+                                "ticker": "CHSWP6 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c62",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "7Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c62",
+                            "rate": {
+                                "value": 0.056600000000000004,
+                                "ticker": "CHSWP7 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c63",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "8Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c63",
+                            "rate": {
+                                "value": 0.0558,
+                                "ticker": "CHSWP8 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c64",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "9Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c64",
+                            "rate": {
+                                "value": 0.055,
+                                "ticker": "CHSWP9 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c65",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "10Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c65",
+                            "rate": {
+                                "value": 0.055,
+                                "ticker": "CHSWP10 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c66",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "15Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c66",
+                            "rate": {
+                                "value": 0.05545,
+                                "ticker": "CHSWP15 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c67",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "20Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c67",
+                            "rate": {
+                                "value": 0.05545,
+                                "ticker": "CHSWP20 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c68",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "25Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c68",
+                            "rate": {
+                                "value": 0.0553,
+                                "ticker": "CHSWP25 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    },
+                    {
+                        "_id": "63ea4e4dd74390dd819e0c69",
+                        "curveId": "63ea4e4cd74390dd819e0bb7",
+                        "helperType": "OIS",
+                        "helperConfig": {
+                            "tenor": "30Y",
+                            "dayCounter": "Act360",
+                            "calendar": "NullCalendar",
+                            "convention": "ModifiedFollowing",
+                            "endOfMonth": true,
+                            "frequency": "Semiannual",
+                            "settlementDays": 2,
+                            "paymentLag": 0,
+                            "telescopicValueDates": true,
+                            "discountCurve": "CLP_COLLUSD",
+                            "index": "ICP"
+                        },
+                        "marketConfig": {
+                            "createdAt": "2023-02-13T14:51:04.969Z",
+                            "helperId": "63ea4e4dd74390dd819e0c69",
+                            "rate": {
+                                "value": 0.05545,
+                                "ticker": "CHSWP30 ICCH CURNCY"
+                            }
+                        },
+                        "source": "Bloomberg",
+                        "createdAt": "2023-02-13T11:50:25.810Z"
+                    }
+                ]
+            },
+            "curveName": "ICP",
+            "createdAt": "2023-02-13T11:50:25.810Z",
+            "curveIndex": {
+                "indexType": "OvernightIndex",
+                "tenor": "1D",
+                "dayCounter.1": "Act360",
+                "currency": "CLP",
+                "fixingDays": 0
+            }
+        }
+    ]
+}

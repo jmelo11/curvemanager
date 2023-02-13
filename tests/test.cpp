@@ -92,27 +92,27 @@ TEST(CurveManager, PiecewiseCurveFullBuild) {
     }
 }
 
-// TEST(CurveManager, PiecewiseCurveFullBuild2) {
-//     json curveData = readJSONFile("json/piecewisefull2.json");
-//     MarketStore store;
-//     CurveBuilder builder(curveData, store);
-//     EXPECT_NO_THROW(builder.build());
+TEST(CurveManager, PiecewiseCurveFullBuild2) {
+    json curveData = readJSONFile("json/piecewisefull3.json");
+    MarketStore store;
+    CurveBuilder builder(curveData, store);
+    EXPECT_NO_THROW(builder.build());
 
-//     auto f = [&](const std::string& curveName) {
-//         try {
-//             auto curve = store.getCurve(curveName);
-//             curve->discount(1);
-//         }
-//         catch (std::exception& e) {
-//             std::string error = "Error in curve " + curveName + ":\n" + e.what();
-//             throw std::runtime_error(error);
-//         }
-//     };
+    auto f = [&](const std::string& curveName) {
+        try {
+            auto curve = store.getCurve(curveName);
+            curve->discount(1);
+        }
+        catch (std::exception& e) {
+            std::string error = "Error in curve " + curveName + ":\n" + e.what();
+            throw std::runtime_error(error);
+        }
+    };
 
-//     for (const auto& curveName : store.allCurves()) {
-//         EXPECT_NO_THROW(f(curveName));
-//     }
-// }
+    for (const auto& curveName : store.allCurves()) {
+        EXPECT_NO_THROW(f(curveName));
+    }
+}
 
 TEST(CurveManager, FlatForwardCurveBuild) {
     json curveData = readJSONFile("json/flatforward.json");
