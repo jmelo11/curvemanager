@@ -2,10 +2,11 @@
   "refDate": "2023-02-14",
   "curves": [
       {
-          "_id": "63ea64efd74390dd819e0dc7",
           "curveName": "ICP",
           "curveConfig": {
               "curveType": "Piecewise",
+              "dayCounter": "Act360",
+              "enableExtrapolation": true,
               "rateHelpers": [
                   {
                       "helperType": "Deposit",
@@ -512,10 +513,11 @@
           }
       },
       {
-          "_id": "63ea64efd74390dd819e0dc8",
           "curveName": "SOFR",
           "curveConfig": {
               "curveType": "Piecewise",
+              "dayCounter": "Act360",
+              "enableExtrapolation": true,
               "rateHelpers": [
                   {
                       "helperType": "Deposit",
@@ -1383,10 +1385,11 @@
           }
       },
       {
-          "_id": "63ea64efd74390dd819e0dc9",
           "curveName": "UF_COLLUSD",
           "curveConfig": {
               "curveType": "Piecewise",
+              "dayCounter": "Act360",
+              "enableExtrapolation": true,
               "rateHelpers": [
                   {
                       "helperType": "FxSwap",
@@ -2286,10 +2289,11 @@
           }
       },
       {
-          "_id": "63ea64efd74390dd819e0dca",
           "curveName": "CLP_COLLUSD",
           "curveConfig": {
               "curveType": "Piecewise",
+              "dayCounter": "Act360",
+              "enableExtrapolation": true,
               "rateHelpers": [
                   {
                       "helperType": "FxSwap",
@@ -2981,10 +2985,11 @@
           }
       },
       {
-          "_id": "63ea64efd74390dd819e0dce",
           "curveName": "LIBOR1M",
           "curveConfig": {
               "curveType": "Piecewise",
+              "dayCounter": "Act360",
+              "enableExtrapolation": true,
               "rateHelpers": [
                   {
                       "helperType": "Deposit",
@@ -3377,10 +3382,11 @@
           }
       },
       {
-          "_id": "63ea64efd74390dd819e0dcf",
           "curveName": "LIBOR3M",
           "curveConfig": {
               "curveType": "Piecewise",
+              "dayCounter": "Act360",
+              "enableExtrapolation": true,
               "rateHelpers": [
                   {
                       "helperType": "Deposit",
@@ -3918,10 +3924,11 @@
           }
       },
       {
-          "_id": "63ea64efd74390dd819e0dd0",
           "curveName": "LIBOR6M",
           "curveConfig": {
               "curveType": "Piecewise",
+              "dayCounter": "Act360",
+              "enableExtrapolation": true,
               "rateHelpers": [
                   {
                       "helperType": "Deposit",
@@ -4230,10 +4237,11 @@
           }
       },
       {
-          "_id": "63ea64efd74390dd819e0dd1",
           "curveName": "LIBOR12M",
           "curveConfig": {
               "curveType": "Piecewise",
+              "dayCounter": "Act360",
+              "enableExtrapolation": true,
               "rateHelpers": [
                   {
                       "helperType": "Deposit",
