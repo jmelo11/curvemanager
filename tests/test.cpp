@@ -48,6 +48,7 @@ TEST(CurveManager, PiecewiseCurveFullBuild2) {
     json curveData = readJSONFile("json/piecewisefull2.json");
     MarketStore store;
     CurveBuilder builder(curveData, store);
+    builder.build();
     EXPECT_NO_THROW(builder.build());
 }
 
