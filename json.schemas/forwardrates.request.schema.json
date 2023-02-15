@@ -14,14 +14,10 @@
                 "type": "object",
                 "properties": {
                     "startDate": {
-                        "type": "string",
-                        "format": "date",
-                        "description": "Date in format yyyy-MM-dd"
+                        "$ref": "common.schema.json#/definitions/date"
                     },
                     "endDate": {
-                        "type": "string",
-                        "format": "date",
-                        "description": "Date in format yyyy-MM-dd"
+                        "$ref": "common.schema.json#/definitions/date"
                     }
                 },
                 "required": [

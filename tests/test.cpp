@@ -20,54 +20,6 @@ json readJSONFile(std::string filePath) {
     return data;
 }
 
-// TEST(CurveManager, PiecewiseCurveBuildSingleCurve) {
-//     json curveData = readJSONFile("json/piecewise.json");
-//     MarketStore store;
-//     CurveBuilder builder(curveData, store);
-//     EXPECT_NO_THROW(builder.build());
-  
-//     auto f = [&](const std::string& curveName) {
-//         try {
-//             auto curve = store.getCurve(curveName);
-//             curve->discount(1);
-//         }
-//         catch (std::exception& e) {
-//             std::string error = "Error in curve " + curveName + ":\n" + e.what();
-//             throw std::runtime_error(error);
-//         }
-//     };
-
-//     for (const auto& curveName : store.allCurves()) {
-//         EXPECT_NO_THROW(f(curveName));
-//     }
-
-//     auto curveHandle = store.getCurveHandle("SOFR");
-//     EXPECT_FALSE(curveHandle.empty());
-// }
-
-// TEST(CurveManager, PiecewiseCurveBuildTwoCurves) {
-//     json curveData = readJSONFile("json/piecewisetwocurves.json");
-//     MarketStore store;
-//     CurveBuilder builder(curveData, store);
-//     EXPECT_NO_THROW(builder.build());
-//     auto f = [&](const std::string& curveName) {
-//         try {
-//             auto curve = store.getCurve(curveName);
-//             curve->discount(1);
-//         }
-//         catch (std::exception& e) {
-//             std::string error = "Error in curve " + curveName + ":\n" + e.what();
-//             throw std::runtime_error(error);
-//         }
-//     };
-
-//     for (const auto& curveName : store.allCurves()) {
-//         auto curveHandle = store.getCurveHandle(curveName);
-//         EXPECT_FALSE(curveHandle.empty());
-//         EXPECT_NO_THROW(f(curveName));
-//     }
-// }
-
 TEST(CurveManager, PiecewiseCurveFullBuild) {
     json curveData = readJSONFile("json/piecewisefull.json");
     MarketStore store;
@@ -130,36 +82,6 @@ TEST(CurveManager, DiscountCurveBuild) {
     auto curve = store.getCurve("SOFR");
     EXPECT_NO_THROW(curve->discount(1));
 }
-
-// TEST(CurveManager, BootstrapResults) {
-//     json curveData = readJSONFile("json/discount.json");
-//     MarketStore store;
-//     CurveBuilder builder(curveData, store);
-//     EXPECT_NO_THROW(store.bootstrapResults(););
-// }
-
-// TEST(CurveManager, UpdateQuotes) {
-//     json curveData = readJSONFile("json/piecewise.json");
-//     MarketStore store;
-//     CurveBuilder builder(curveData, store);
-//     builder.build();
-
-//     json quoteData = R"([
-// 		{
-// 	"ticker": "USOSFR2Z",
-// 	"value": 0.03
-// 		}
-// 	])"_json;
-
-//     EXPECT_ANY_THROW(builder.updateQuotes(quoteData));
-
-//     quoteData[0]["ticker"] = "USOSFR2Z CURNCY";
-
-//     EXPECT_NO_THROW(builder.updateQuotes(quoteData));
-
-//     auto curve = store.getCurve("SOFR");
-//     EXPECT_NO_THROW(curve->discount(1));
-// }
 
 TEST(CurveManager, DiscountFactorRequests) {
     json curveData = readJSONFile("json/discount.json");

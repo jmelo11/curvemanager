@@ -12,8 +12,7 @@
             "type": "array",
             "description": "Requested dates",
             "items": {
-                "type": "string",
-                "format": "date"
+                "$ref": "common.schema.json#/definitions/date"
             },
             "minItems": 1
         }

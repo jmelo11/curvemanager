@@ -3,8 +3,7 @@
     "description": "Curve Builder Request Schema",
     "properties": {
         "refDate": {
-            "type": "string",
-            "format": "date"
+            "$ref": "common.schema.json#/definitions/date"
         },
         "curves": {
             "type": "array",
